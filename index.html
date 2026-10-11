@@ -842,8 +842,22 @@
       <div class="step-item">
         <div class="step-num">1</div>
         <div class="step-details">
-          <h4>VM Settings</h4>
-          <p>Image: <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong> (Make sure architecture is <strong>x64</strong>, not ARM64).</p>
+          <h4>Select Region & Image</h4>
+          <p>
+            • <strong>Region:</strong> Select <strong>(Asia Pacific) East Asia</strong> (Hong Kong).<br>
+            • <strong>Image:</strong> Choose <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong>.<br>
+            • <strong>VM Architecture:</strong> Select <strong>x64</strong> (do <em>not</em> select ARM64).
+          </p>
+
+          <div class="callout callout-warning" style="margin: 10px 0 0;">
+            <div class="callout-icon">🌏</div>
+            <div class="callout-content">
+              <strong>Why East Asia instead of Southeast Asia?</strong>
+              Trial and student subscriptions often encounter the error: <br>
+              <code>This size is currently unavailable in southeastasia for this subscription: NotAvailableForSubscription</code>.<br>
+              Selecting <strong>East Asia</strong> avoids data center capacity restrictions while providing optimal low-latency (~30–40ms ping) for the Philippines.
+            </div>
+          </div>
         </div>
       </div>
       <div class="step-item">
@@ -908,6 +922,13 @@
         <div class="card-title">Q: Why did Azure charge $1.01 USD (~₱60 PHP) on my card?</div>
         <p class="card-desc">
           That is a standard temporary authorization hold to verify your card is active. It is completely reversed/refunded back to your balance shortly after verification.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Why does Azure say "This size is currently unavailable in southeastasia"?</div>
+        <p class="card-desc">
+          Southeast Asia (Singapore) often has high data center utilization, causing quota restrictions for trial subscriptions. Simply switch your Region to <strong>East Asia</strong> (Hong Kong) and confirm architecture is <strong>x64</strong> to unlock instant availability.
         </p>
       </div>
 

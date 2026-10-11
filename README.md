@@ -11,7 +11,7 @@ Deployable with 1-click to **Azure Static Web Apps** or **GitHub Pages**.
 
 ## 📖 What's Included
 * **Prerequisites & Verification Guide**: Step-by-step instructions on applying for the GitHub Student Pack and activating Azure. Includes key tips on bank card verification (MariBank, Maya, GCash) requiring **₱60 – ₱70 PHP** for the temporary **$1.01 USD** authorization hold (which is refunded immediately).
-* **12 Months Free Services Guide**: Deep-dive on B1s VMs (750 hrs/month), 2x 64 GB SSDs, MySQL & PostgreSQL Flexible Servers.
+* **12 Months Free Services Guide**: Deep-dive on B1s VMs (750 hrs/month), 2x 64 GB SSDs, MySQL & PostgreSQL Flexible Servers. Includes crucial tips on selecting **East Asia** (Hong Kong) and **x64** architecture to bypass Southeast Asia quota limits.
 * **Always-Free Tiers (55+ Services)**: Azure Static Web Apps with custom domains, Cosmos DB (25 GB), and App Service.
 * **Zero-Cost Protection**: Budget alert setup to prevent any debit card charges.
 * **$0 Student Production Blueprint**: Complete architecture for React, Laravel, Expo, and databases.
