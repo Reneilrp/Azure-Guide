@@ -443,6 +443,47 @@
       margin-bottom: 6px;
     }
 
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 16px 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0078d4, #0284c7);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(0, 120, 212, 0.35);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #1e293b;
+      color: #f1f5f9;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+
     footer {
       border-top: 1px solid var(--border);
       padding: 32px 0 16px;
@@ -504,6 +545,7 @@
     <nav>
       <div class="nav-group-title">Overview</div>
       <a href="#intro" class="nav-link active">🌟 Welcome & Perks</a>
+      <a href="#prerequisites" class="nav-link">📋 Eligibility & Activation</a>
       <a href="#budget" class="nav-link">🛡️ Budget Alert Setup</a>
 
       <div class="nav-group-title">Free Allowances</div>
@@ -555,9 +597,87 @@
       </div>
     </section>
 
+    <!-- SECTION: PREREQUISITES & ACTIVATION -->
+    <section id="prerequisites">
+      <h2><span>📋</span> Prerequisites & Student Eligibility</h2>
+      <p>
+        <strong>Important:</strong> These benefits are exclusively available to students who have an <strong>active GitHub Student Developer Pack</strong> or a verifiable university email address (e.g. <code>.edu</code> or <code>.edu.ph</code>).
+      </p>
+
+      <!-- DIRECT QUICK LINKS -->
+      <div class="btn-group">
+        <a href="https://education.github.com/pack" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <span>🎓</span> Apply for GitHub Student Pack
+        </a>
+        <a href="https://azure.microsoft.com/en-us/free/students?WT.mc_id=academic-9938-cxa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>☁️</span> Claim Azure for Students ($100 Free)
+        </a>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">ℹ️</div>
+        <div class="callout-content">
+          <strong>No Credit Card Required for Azure for Students!</strong>
+          If you activate strictly through the student portal using your university email, Microsoft will <strong>not</strong> ask for a credit or debit card. Services simply pause if credits reach zero, ensuring 100% peace of mind.
+        </div>
+      </div>
+
+      <h3>Step-by-Step Activation Process:</h3>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Activate Your GitHub Student Developer Pack</h4>
+          <p>
+            Go to <a href="https://education.github.com/pack" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">GitHub Education</a>. Sign in with your GitHub account, submit proof of enrollment (Student ID, registration form, or school email), and wait for approval.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Go to Azure for Students Portal</h4>
+          <p>
+            Visit <a href="https://azure.microsoft.com/en-us/free/students?WT.mc_id=academic-9938-cxa" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">azure.microsoft.com/en-us/free/students</a> and click the green <strong>"Start free"</strong> button.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Sign in with your University Email</h4>
+          <p>
+            Log in using your school email (e.g. <code>@wmsu.edu.ph</code>). When prompted by Microsoft, choose <strong>"Work or school account"</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-details">
+          <h4>Academic Verification Complete</h4>
+          <p>
+            Microsoft verifies your academic status via institutional email or your GitHub Student Pack. Your subscription will be provisioned with <strong>$100 annual credits</strong> and 12 months of free popular services!
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-details">
+          <h4>What if Azure asks for a card (Free Trial $200)?</h4>
+          <p>
+            If your student quota was already used or you choose the standard 30-day $200 Free Trial, Azure will require a debit card for identity verification. Keep at least <strong>₱100 – ₱150 PHP</strong> in your digital bank (like <strong>MariBank</strong>, GCash Card, or Maya) to pass the temporary ~$1.00 USD authorization check.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- SECTION: BUDGET ALERT -->
     <section id="budget">
-      <h2><span>🛡️</span> Step 1: Protect Your Card (Set Budget Alert)</h2>
+      <h2><span>🛡️</span> Step 2: Protect Your Card (Set Budget Alert)</h2>
       <p>
         Before launching any VM or database, always create a Cost Budget. This guarantees Microsoft alerts you before your credits run low.
       </p>
