@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azure Student Cloud Guide | Step-by-Step Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --sidebar-bg: #0d1322;
+      --card-bg: #131b2e;
+      --card-hover: #18233c;
+      --border: #1e293b;
+      --border-focus: #38bdf8;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #0078d4;
+      --accent: #38bdf8;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    aside {
+      width: 300px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      padding: 24px 20px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #0078d4, #38bdf8);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      font-size: 0.7rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+      font-weight: 600;
+    }
+
+    .search-box {
+      margin: 16px 20px 10px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #090d16;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px 10px 36px;
+      color: #fff;
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    nav {
+      padding: 12px 14px;
+      flex: 1;
+    }
+
+    .nav-group-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      font-weight: 700;
+      padding: 14px 10px 6px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background: rgba(56, 189, 248, 0.1);
+      color: #fff;
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      padding: 40px 60px;
+      max-width: 960px;
+      overflow-x: hidden;
+    }
+
+    .hero {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #34d399;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-p {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      max-width: 720px;
+    }
+
+    section {
+      margin-bottom: 56px;
+      scroll-margin-top: 40px;
+    }
+
+    h2 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 24px 0 12px;
+      color: #e2e8f0;
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 0.98rem;
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: all 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: var(--card-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+
+    /* TABLES */
+    .table-wrapper {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(9, 13, 22, 0.7);
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+
+    td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    .badge-green {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-blue {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* CALLOUTS */
+    .callout {
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin: 24px 0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .callout-warning {
+      background: rgba(245, 158, 11, 0.1);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fef3c7;
+    }
+
+    .callout-info {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #e0f2fe;
+    }
+
+    .callout-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .callout-content {
+      font-size: 0.92rem;
+    }
+
+    .callout-content strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.98rem;
+    }
+
+    /* CODE BLOCKS */
+    .code-box {
+      background: #060911;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin: 16px 0;
+      overflow: hidden;
+      font-family: var(--font-mono);
+    }
+
+    .code-header {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 8px 16px;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-body {
+      padding: 14px 16px;
+      font-size: 0.88rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .copy-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      font-family: var(--font);
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    /* STEPS LIST */
+    .step-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0078d4, #38bdf8);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 4px 10px rgba(0, 120, 212, 0.3);
+    }
+
+    .step-details h4 {
+      font-size: 1.05rem;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0 16px;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    /* MOBILE TOGGLE */
+    .mobile-menu-btn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.4rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      z-index: 1000;
+      cursor: pointer;
+    }
+
+    @media (max-width: 860px) {
+      aside {
+        position: fixed;
+        left: -320px;
+        z-index: 999;
+        transition: left 0.3s ease;
+      }
+      aside.open { left: 0; }
+      main { padding: 32px 20px; }
+      .mobile-menu-btn { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <a href="#" class="brand">
+        <div class="brand-logo">☁</div>
+        <div>
+          <div class="brand-title">Azure Student Guide</div>
+          <span class="brand-badge">Documentation</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search" placeholder="Search topics..." oninput="filterTopics()">
+    </div>
+
+    <nav>
+      <div class="nav-group-title">Overview</div>
+      <a href="#intro" class="nav-link active">🌟 Welcome & Perks</a>
+      <a href="#budget" class="nav-link">🛡️ Budget Alert Setup</a>
+
+      <div class="nav-group-title">Free Allowances</div>
+      <a href="#twelve-months" class="nav-link">⏱️ 12 Months Free</a>
+      <a href="#free-forever" class="nav-link">♾️ Free Forever (55+)</a>
+
+      <div class="nav-group-title">Deployment Guides</div>
+      <a href="#vm-setup" class="nav-link">💻 Virtual Machine Setup</a>
+      <a href="#stack-blueprint" class="nav-link">🏗️ $0 Production Stack</a>
+      <a href="#faq" class="nav-link">❓ Student FAQ</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main>
+    <div class="hero">
+      <div class="hero-badge">
+        <span>🎓</span> GitHub Student Developer Pack Verified
+      </div>
+      <h1>Microsoft Azure for Students</h1>
+      <p class="hero-p">
+        Complete step-by-step handbook to deploy your capstone, thesis, or web systems on Microsoft Azure without accidental billing charges.
+      </p>
+    </div>
+
+    <!-- SECTION: INTRO -->
+    <section id="intro">
+      <h2><span>🌟</span> Welcome & What You Get</h2>
+      <p>
+        As students with the <strong>GitHub Student Developer Pack</strong> or an official university email (e.g., <code>@wmsu.edu.ph</code>), Microsoft provides cloud benefits to host production-ready applications.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">💵</div>
+          <div class="card-title">$100 - $200 Free Credits</div>
+          <p class="card-desc">Platform credit to spend on fast virtual machines, managed databases, or container apps.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⏱️</div>
+          <div class="card-title">12 Months Free Compute</div>
+          <p class="card-desc">750 hours/month of Linux & Windows B1s VMs + 64 GB SSDs running 24/7.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <div class="card-title">Free Static Web Apps</div>
+          <p class="card-desc">Free custom domains, unlimited apps, and automatic SSL (HTTPS) certificates forever.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: BUDGET ALERT -->
+    <section id="budget">
+      <h2><span>🛡️</span> Step 1: Protect Your Card (Set Budget Alert)</h2>
+      <p>
+        Before launching any VM or database, always create a Cost Budget. This guarantees Microsoft alerts you before your credits run low.
+      </p>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-content">
+          <strong>Never Skip This Step!</strong>
+          If you linked a debit card (such as MariBank, GCash, or Maya), a budget alert ensures you never get billed unexpected charges after trial credits expire.
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Open Cost Management</h4>
+          <p>Search for <strong>Cost Management + Billing</strong> in the top search bar of the Azure Portal.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Create New Budget</h4>
+          <p>Go to <strong>Budgets</strong> ➔ Click <strong>+ Add</strong>. Set Budget Name as <code>StudentBudget</code> and Amount to <code>$50.00</code> or <code>$100.00</code>.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Add Email Notifications</h4>
+          <p>Enter your student or personal email address so Azure emails you when spend reaches 50%, 75%, and 90%.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: 12 MONTHS FREE -->
+    <section id="twelve-months">
+      <h2><span>⏱️</span> 12 Months Free Services</h2>
+      <p>
+        These heavy-lifting resources are included free every month for your first 12 months:
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Monthly Free Quota</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Linux VM (Ubuntu)</strong></td>
+              <td><span class="badge badge-green">750 hrs/month</span> Standard_B1s</td>
+              <td>Run 1 Ubuntu server continuously 24/7 all month.</td>
+            </tr>
+            <tr>
+              <td><strong>Windows VM</strong></td>
+              <td><span class="badge badge-green">750 hrs/month</span> Standard_B1s</td>
+              <td>Windows Server instance 24/7 all month.</td>
+            </tr>
+            <tr>
+              <td><strong>Managed Disks</strong></td>
+              <td><span class="badge badge-blue">2 × 64 GB SSDs</span> (P6 disks)</td>
+              <td>High-speed OS and database storage.</td>
+            </tr>
+            <tr>
+              <td><strong>PostgreSQL Flexible Server</strong></td>
+              <td><span class="badge badge-green">750 hrs/mo</span> B1ms + 32 GB</td>
+              <td>Managed relational PostgreSQL database.</td>
+            </tr>
+            <tr>
+              <td><strong>MySQL Flexible Server</strong></td>
+              <td><span class="badge badge-green">750 hrs/mo</span> B1ms + 32 GB</td>
+              <td>Managed relational MySQL database.</td>
+            </tr>
+            <tr>
+              <td><strong>Azure SQL Database</strong></td>
+              <td><span class="badge badge-blue">100,000 vCore-sec</span> + 32 GB</td>
+              <td>Managed Microsoft SQL Server.</td>
+            </tr>
+            <tr>
+              <td><strong>Blob Storage</strong></td>
+              <td><span class="badge badge-blue">5 GB</span> + 20k read ops</td>
+              <td>Cloud asset / media storage (like AWS S3).</td>
+            </tr>
+            <tr>
+              <td><strong>Outbound Bandwidth</strong></td>
+              <td><span class="badge badge-green">15 GB/month</span></td>
+              <td>Global internet egress to web visitors.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">💡</div>
+        <div class="callout-content">
+          <strong>Understanding 750 Hours:</strong>
+          A 31-day month has $31 \times 24 = 744$ hours. 750 hours allows you to run <strong>exactly 1 instance</strong> running 24/7 for the whole month without incurring costs.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FREE FOREVER -->
+    <section id="free-forever">
+      <h2><span>♾️</span> Free Forever (Always Free Tiers)</h2>
+      <p>
+        Even after your first 12 months end, Microsoft provides over 55+ services that stay permanently free:
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Permanent Free Quota</th>
+              <th>Best Use Case</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Azure Static Web Apps</strong></td>
+              <td><span class="badge badge-green">Unlimited Apps</span> + 100 GB BW</td>
+              <td>Host React, Vite, Vue, HTML frontend with free SSL & custom domain.</td>
+            </tr>
+            <tr>
+              <td><strong>Azure Cosmos DB</strong></td>
+              <td><span class="badge badge-green">1,000 RU/s</span> + 25 GB Storage</td>
+              <td>Ultra-fast NoSQL database (MongoDB & SQL API compatible).</td>
+            </tr>
+            <tr>
+              <td><strong>Azure App Service</strong></td>
+              <td><span class="badge badge-blue">Up to 10 Apps</span> (F1 Free tier)</td>
+              <td>PaaS backend hosting for APIs (1 GB RAM, 60 CPU mins/day).</td>
+            </tr>
+            <tr>
+              <td><strong>Azure Functions</strong></td>
+              <td><span class="badge badge-green">1,000,000 requests/month</span></td>
+              <td>Serverless event-driven APIs and scheduled cron tasks.</td>
+            </tr>
+            <tr>
+              <td><strong>Azure DevOps</strong></td>
+              <td><span class="badge badge-blue">5 Users</span> + Unlimited Git</td>
+              <td>CI/CD pipelines with 1,800 free build minutes/month.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION: VM SETUP -->
+    <section id="vm-setup">
+      <h2><span>💻</span> Creating Your Ubuntu Virtual Machine</h2>
+      <p>
+        For projects that use Laravel, WebSockets (Reverb), queue workers, or multiple APIs, deploying an Ubuntu VM gives total control.
+      </p>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>VM Settings</h4>
+          <p>Image: <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong> (Make sure architecture is <strong>x64</strong>, not ARM64).</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Recommended Sizing</h4>
+          <p>
+            • <code>Standard_B1s</code> (1 vCPU, 1 GB RAM) ➔ 100% Free for 12 months.<br>
+            • <code>Standard_B2as_v2</code> (2 vCPU, 8 GB RAM) ➔ ~$38/month (Covered by your $200 trial credits).
+          </p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Open Inbound Ports</h4>
+          <p>In Networking / Firewall rules, allow: <strong>Port 22 (SSH)</strong>, <strong>Port 80 (HTTP)</strong>, <strong>Port 443 (HTTPS)</strong>, and <strong>Port 8080 (WebSockets)</strong>.</p>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>CONNECT VIA SSH</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">ssh -i /path/to/your_key.pem azureuser@&lt;YOUR_PUBLIC_IP&gt;</div>
+      </div>
+    </section>
+
+    <!-- SECTION: ARCHITECTURE -->
+    <section id="stack-blueprint">
+      <h2><span>🏗️</span> Recommended $0 Student Production Blueprint</h2>
+      <p>The cleanest way to present thesis or capstone projects to advisers without spending a dime:</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">1. Frontend (Static Web Apps)</div>
+          <p class="card-desc">
+            Deploy your React/Vite web dashboard on <strong>Azure Static Web Apps</strong>. Global CDN, fast loading, zero cold starts.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">2. Backend (Ubuntu VM)</div>
+          <p class="card-desc">
+            Host your Laravel / Node / Python API on an <strong>Ubuntu VM</strong> with Nginx reverse proxy and SSL via Certbot.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">3. Mobile Client (Expo)</div>
+          <p class="card-desc">
+            Configure your React Native Expo mobile app's <code>API_BASE_URL</code> to point to your Azure VM public IP or custom domain.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2><span>❓</span> Frequently Asked Questions</h2>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Will my debit card be charged automatically?</div>
+        <p class="card-desc">
+          Only if you exceed your $200 credit and free-tier quotas on a Pay-As-You-Go subscription. Having a Budget Alert ensures you get warned before charges occur.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Do I need to buy a custom domain?</div>
+        <p class="card-desc">
+          No! Azure provides free <code>*.azurestaticapps.net</code> domains with HTTPS. You also get free <code>.me</code> domains from the GitHub Student Developer Pack via Namecheap.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Q: Can multiple students share one VM?</div>
+        <p class="card-desc">
+          Yes! An 8 GB RAM Ubuntu VM can host multiple Laravel APIs, React frontends, and databases using Nginx subdomains.
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      Crafted with ❤️ for Computer Science & IT Students • Powered by Microsoft Azure & GitHub Education
+    </footer>
+  </main>
+
+  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function copyCode(btn) {
+      const text = btn.parentElement.nextElementSibling.innerText;
+      navigator.clipboard.writeText(text);
+      btn.innerText = 'Copied!';
+      setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+    }
+
+    function filterTopics() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const links = document.querySelectorAll('nav .nav-link');
+      links.forEach(l => {
+        const text = l.innerText.toLowerCase();
+        l.style.display = text.includes(q) ? 'flex' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
