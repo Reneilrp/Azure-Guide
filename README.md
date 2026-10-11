@@ -4,7 +4,7 @@
 
 ## 🎓 Prerequisites & Eligibility Links
 * [GitHub Student Developer Pack](https://education.github.com/pack) - Apply with your student ID or school email.
-* [Azure for Students Sign-Up Portal](https://azure.microsoft.com/en-us/free/students?WT.mc_id=academic-9938-cxa) - Direct claim link for $100 annual credits with no credit card required.
+* [Azure Sign-Up Portal](https://azure.microsoft.com/en-us/free/students?WT.mc_id=academic-9938-cxa) - Direct claim link for $200 free credits + 12 months free services.
 
 ## 🚀 Live Demo
 Deployable with 1-click to **Azure Static Web Apps** or **GitHub Pages**.
