@@ -537,11 +537,6 @@
       </a>
     </div>
 
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" class="search-input" id="search" placeholder="Search topics..." oninput="filterTopics()">
-    </div>
-
     <nav>
       <div class="nav-group-title">Overview</div>
       <a href="#intro" class="nav-link active">🌟 Welcome & Perks</a>
@@ -941,15 +936,6 @@
       navigator.clipboard.writeText(text);
       btn.innerText = 'Copied!';
       setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
-    }
-
-    function filterTopics() {
-      const q = document.getElementById('search').value.toLowerCase();
-      const links = document.querySelectorAll('nav .nav-link');
-      links.forEach(l => {
-        const text = l.innerText.toLowerCase();
-        l.style.display = text.includes(q) ? 'flex' : 'none';
-      });
     }
   </script>
 </body>
