@@ -40,8 +40,9 @@ Deployable with 1-click to **Azure Static Web Apps**, **Vercel**, or **GitHub Pa
 * **Production Blueprints**: Dual architectural blueprints comparing the **Rapid Junior Stack** vs. the **Full Senior Capstone Stack**.
 * **Student FAQ**: Real answers to common student hosting questions and presentation day troubleshooting.
 
-## 🛠️ Tech Stack
+## 🛠️ Tech Stack & UX Design
 * Pure HTML5, CSS3 (Modern Glassmorphism & Plus Jakarta Sans), and Vanilla JavaScript.
 * Zero build steps — ready to deploy instantly.
-* Interactive search bar to filter topics dynamically.
-* Automatic scrollspy navigation for fast reading.
+* **Collapsible Navigation Menu**: Left sidebar collapses smoothly to the left edge (via the top menu button, edge dock pill, or `Ctrl+B` / `Cmd+B` keyboard shortcut), allowing the main reading and diagram content to expand dynamically across the full screen.
+* Interactive omnibar search (`/` or `Ctrl+K`) to filter topics instantly.
+* Automatic scrollspy navigation and dynamic breadcrumb tracking for fast reading.
