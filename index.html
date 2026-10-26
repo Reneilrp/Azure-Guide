@@ -334,6 +334,24 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
+    .badge-purple {
+      background: rgba(168, 85, 247, 0.15);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+    }
+
+    .badge-amber {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-teal {
+      background: rgba(20, 184, 166, 0.15);
+      color: #2dd4bf;
+      border: 1px solid rgba(20, 184, 166, 0.3);
+    }
+
     /* CALLOUTS */
     .callout {
       border-radius: 12px;
@@ -532,25 +550,37 @@
       <a href="#" class="brand">
         <div class="brand-logo">☁</div>
         <div>
-          <div class="brand-title">Azure Student Guide</div>
-          <span class="brand-badge">Documentation</span>
+          <div class="brand-title">Student Cloud Guide</div>
+          <span class="brand-badge">Azure & Free PaaS</span>
         </div>
       </a>
     </div>
 
-    <nav>
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search guides, Render, Supabase..." oninput="filterNav(this.value)">
+    </div>
+
+    <nav id="navLinks">
       <div class="nav-group-title">Overview</div>
       <a href="#intro" class="nav-link active">🌟 Welcome & Perks</a>
       <a href="#prerequisites" class="nav-link">📋 Eligibility & Activation</a>
       <a href="#budget" class="nav-link">🛡️ Budget Alert Setup</a>
 
-      <div class="nav-group-title">Free Allowances</div>
+      <div class="nav-group-title">⚡ Quick & Cardless (Juniors)</div>
+      <a href="#junior-quickstart" class="nav-link">🚀 Quick Free Stack Overview</a>
+      <a href="#supabase-guide" class="nav-link">🟢 Supabase (Postgres & Auth)</a>
+      <a href="#render-guide" class="nav-link">🟣 Render (Free Backend APIs)</a>
+      <a href="#frontend-guide" class="nav-link">▲ Vercel & Netlify (Frontend)</a>
+      <a href="#cors-guide" class="nav-link">🔌 Connecting Stack & CORS</a>
+
+      <div class="nav-group-title">Azure & Free Allowances</div>
       <a href="#twelve-months" class="nav-link">⏱️ 12 Months Free</a>
       <a href="#free-forever" class="nav-link">♾️ Free Forever (55+)</a>
 
-      <div class="nav-group-title">Deployment Guides</div>
-      <a href="#vm-setup" class="nav-link">💻 Virtual Machine Setup</a>
-      <a href="#stack-blueprint" class="nav-link">🏗️ $0 Production Stack</a>
+      <div class="nav-group-title">Full Production & Capstone</div>
+      <a href="#vm-setup" class="nav-link">💻 Azure Ubuntu VM Setup</a>
+      <a href="#stack-blueprint" class="nav-link">🏗️ Production Blueprints</a>
       <a href="#faq" class="nav-link">❓ Student FAQ</a>
     </nav>
   </aside>
@@ -559,11 +589,11 @@
   <main>
     <div class="hero">
       <div class="hero-badge">
-        <span>🎓</span> GitHub Student Developer Pack Verified
+        <span>🎓</span> Student Cloud & Rapid Deployment Guide
       </div>
-      <h1>Microsoft Azure for Students</h1>
+      <h1>Student Cloud & Free Deployment Handbook</h1>
       <p class="hero-p">
-        Complete step-by-step handbook to deploy your capstone, thesis, or web systems on Microsoft Azure without accidental billing charges.
+        The ultimate zero-cost reference for students and junior developers: whether you need <strong>instant, cardless deployments for temporary class activities and demos</strong> (Supabase, Render, Vercel) or a <strong>12-month Azure cloud infrastructure</strong> for your thesis and capstone.
       </p>
     </div>
 
@@ -833,7 +863,362 @@
       </div>
     </section>
 
-    <!-- SECTION: VM SETUP -->
+    <!-- ============================================== -->
+    <!-- SECTION: JUNIOR QUICKSTART & FREE PAAS STACK   -->
+    <!-- ============================================== -->
+    <section id="junior-quickstart">
+      <h2><span>🚀</span> Quick Free Stack (Zero Credit Card for Juniors)</h2>
+      <p>
+        If your juniors or team members only need to deploy a class assignment, temporary prototype, or project for a professor to grade, setting up an Azure VM with SSH keys, security firewall rules, and a bank card verification hold is often overkill.
+      </p>
+      <p>
+        These 100% cardless free-tier platforms let you deploy a full-stack web application in less than 5 minutes directly from GitHub.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🟢</div>
+          <div class="card-title">Supabase (Database & Auth)</div>
+          <p class="card-desc">PostgreSQL database with visual table editor, instant REST API, and built-in user authentication. 500 MB free, no credit card required.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🟣</div>
+          <div class="card-title">Render (Backend APIs)</div>
+          <p class="card-desc">Deploy Express/Node, Python (FastAPI/Flask/Django), or Go directly from GitHub with automatic HTTPS and free CI/CD.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">▲</div>
+          <div class="card-title">Vercel & Netlify (Frontend)</div>
+          <p class="card-desc">Instant React, Vite, Next.js, or HTML/CSS/JS hosting with global CDN, custom subdomains, and zero build setup.</p>
+        </div>
+      </div>
+
+      <h3>Quick Decision Matrix: When to Use Which?</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Layer</th>
+              <th>Credit Card?</th>
+              <th>Inactivity / Sleep</th>
+              <th>Free Allowance</th>
+              <th>Ideal For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Render</strong></td>
+              <td>Backend Web Service</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Sleeps after 15m idle (~45s wake)</td>
+              <td>750 free instance hours / month</td>
+              <td>Express, FastAPI, Flask, NestJS APIs</td>
+            </tr>
+            <tr>
+              <td><strong>Supabase</strong></td>
+              <td>Postgres DB & Auth</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Pauses after 7 days without queries</td>
+              <td>500 MB DB, 50,000 Monthly Users</td>
+              <td>SQL Database, User Authentication, Admin UI</td>
+            </tr>
+            <tr>
+              <td><strong>Vercel</strong></td>
+              <td>Frontend (React / Vite)</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td><span class="badge badge-blue">Always Awake</span> (Edge CDN)</td>
+              <td>100 GB bandwidth / month</td>
+              <td>React, Vite, Next.js, Vue frontends</td>
+            </tr>
+            <tr>
+              <td><strong>Netlify</strong></td>
+              <td>Frontend & Static Drop</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td><span class="badge badge-blue">Always Awake</span> (Edge CDN)</td>
+              <td>100 GB bandwidth, Drag & drop deploy</td>
+              <td>Quick static drops, HTML/CSS/JS, Vite</td>
+            </tr>
+            <tr>
+              <td><strong>Neon</strong></td>
+              <td>Serverless PostgreSQL</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Compute suspends in 5m (&lt;1s wake)</td>
+              <td>0.5 GB storage, instant branching</td>
+              <td>Alternative Postgres when Supabase is paused</td>
+            </tr>
+            <tr>
+              <td><strong>Azure Student</strong></td>
+              <td>Full Cloud / VPS / DB</td>
+              <td><span class="badge badge-amber">💳 $1.01 Hold (Refunded)</span></td>
+              <td><span class="badge badge-blue">24/7 Dedicated VM</span></td>
+              <td>$200 credit + 12 months B1s VM</td>
+              <td>Capstone, Thesis, WebSockets, Docker, Nginx</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION: SUPABASE -->
+    <section id="supabase-guide">
+      <h2><span>🟢</span> Supabase — Free PostgreSQL Database & Auth</h2>
+      <p>
+        Supabase gives you a production-grade PostgreSQL database with a beginner-friendly spreadsheet-like table editor (no SQL CLI needed), built-in user authentication, and instant connection strings for any backend framework.
+      </p>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Sign up with GitHub (Zero Card Required)</h4>
+          <p>
+            Go to <a href="https://supabase.com" target="_blank" style="color: var(--accent);">supabase.com</a>, click <strong>Start your project</strong>, and sign in with your GitHub account. No credit card or billing information is required.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Create a New Project & Database</h4>
+          <p>
+            Click <strong>New Project</strong>. Choose your free organization, assign a project name (e.g., <code>student-capstone-db</code>), and generate a strong <strong>Database Password</strong> (keep this password saved!).
+          </p>
+          <div class="callout callout-info" style="margin-top: 10px;">
+            <div class="callout-icon">💡</div>
+            <div class="callout-content">
+              <strong>Region Recommendation:</strong> Select <strong>Singapore (ap-southeast-1)</strong> or the region geographically closest to you to minimize database query latency.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Grab Your Connection String for Render / Backend</h4>
+          <p>
+            To connect Prisma, TypeORM, Mongoose/Postgres, Sequelize, or Python SQLAlchemy to Supabase:
+          </p>
+          <p>
+            Go to <strong>Project Settings</strong> (gear icon at the bottom left) ➡️ <strong>Database</strong> ➡️ scroll down to <strong>Connection string</strong> ➡️ select <strong>URI</strong>:
+          </p>
+          <div class="code-box">
+            <div class="code-header">
+              <span>PostgreSQL URI Connection String</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">postgresql://postgres.[PROJECT-REF]:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres</div>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">
+            💡 <em>Replace <code>[YOUR-PASSWORD]</code> with the password you set during step 2.</em>
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-details">
+          <h4>Visual Table Editor & Mock Data</h4>
+          <p>
+            Click the <strong>Table Editor</strong> (grid icon) in the Supabase sidebar. You can create tables, define columns (<code>text</code>, <code>int8</code>, <code>boolean</code>, <code>uuid</code>), add primary keys, and insert rows manually without writing raw SQL.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-content">
+          <strong>Crucial Junior Gotcha: The 7-Day Inactivity Pause</strong>
+          Supabase pauses free-tier databases if no queries occur for <strong>7 consecutive days</strong> to preserve shared server capacity.
+          <br><br>
+          <strong>Presentation Hack:</strong> If you haven't opened your project in a week, log into the Supabase dashboard <strong>15 minutes before your demo</strong>. If your project status shows <em>"Paused"</em>, simply click <strong>Restore Project</strong>. It will be back online in about 60 to 90 seconds with zero data loss!
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: RENDER -->
+    <section id="render-guide">
+      <h2><span>🟣</span> Render — Free Backend APIs (Node / Python / Go)</h2>
+      <p>
+        Render allows juniors to host backend servers (Express, NestJS, FastAPI, Flask, Django) directly from a GitHub repository without configuring Linux servers, Nginx, or SSL certificates.
+      </p>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Prepare Your Code (Dynamic Port & 0.0.0.0 Binding)</h4>
+          <p>
+            Render injects a dynamic <code>PORT</code> environment variable into your container. Your code <strong>must</strong> read this variable and listen on all interfaces (<code>0.0.0.0</code>):
+          </p>
+          <div class="code-box">
+            <div class="code-header">
+              <span>Node.js / Express — server.js or index.js</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 5000;
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date() });
+});
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server listening on port ${PORT}`);
+});</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Create a New Web Service on Render</h4>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li>Go to <a href="https://render.com" target="_blank" style="color: var(--accent);">render.com</a> and sign in with GitHub (no card required).</li>
+            <li>Click <strong>New +</strong> at the top right and select <strong>Web Service</strong>.</li>
+            <li>Connect your GitHub backend repository.</li>
+            <li>Set up the build parameters:
+              <ul style="margin-left: 20px; margin-top: 6px;">
+                <li><strong>Runtime:</strong> Node (or Python 3)</li>
+                <li><strong>Build Command:</strong> <code>npm install</code> (or <code>pip install -r requirements.txt</code>)</li>
+                <li><strong>Start Command:</strong> <code>npm start</code> (or <code>uvicorn main:app --host 0.0.0.0 --port $PORT</code>)</li>
+                <li><strong>Instance Type:</strong> Select <span class="badge badge-green">Free</span></li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Configure Environment Variables (Link Supabase)</h4>
+          <p>
+            In the <strong>Environment</strong> section, add your secrets:
+          </p>
+          <ul style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li><code>DATABASE_URL</code> = Paste your Supabase URI connection string</li>
+            <li><code>JWT_SECRET</code> = Any private secret key</li>
+            <li><code>NODE_ENV</code> = <code>production</code></li>
+          </ul>
+          <p>
+            Click <strong>Deploy Web Service</strong>. In 2 to 3 minutes, Render issues a free live HTTPS URL:
+            <br>
+            <code>https://&lt;your-app&gt;.onrender.com</code>
+          </p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-icon">⚡</div>
+        <div class="callout-content">
+          <strong>The Render "Cold Start" Wake-up Hack (Must Read for Juniors)</strong>
+          Free Render instances automatically spin down to sleep mode after <strong>15 minutes of inactivity</strong>. When a new request arrives, Render needs <strong>40 to 50 seconds</strong> to spin the container back up.
+          <br><br>
+          <strong>Presentation Hack:</strong> Open your backend health URL (e.g. <code>https://my-api.onrender.com/api/health</code>) in your browser or phone <strong>2 minutes before your professor tests the project</strong>. Once woken, the API responds with zero lag throughout your presentation!
+        </div>
+      </div>
+
+      <div class="callout callout-info">
+        <div class="callout-icon">📁</div>
+        <div class="callout-content">
+          <strong>Warning on File Uploads (Ephemeral Filesystem):</strong>
+          Render free instances have ephemeral disks. If your app saves uploaded images to a local folder like <code>./uploads</code> with Multer, those files will disappear on redeploy or spin-down.
+          <br>
+          <strong>Cardless Free Solution:</strong> Use <strong>Supabase Storage</strong> (1 GB free bucket) or <strong>Cloudinary</strong> (25 GB free tier) to store uploaded images and keep only image URLs in your database.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: FRONTEND -->
+    <section id="frontend-guide">
+      <h2><span>▲</span> Vercel & Netlify — Free Frontend Hosting</h2>
+      <p>
+        For Single Page Applications (React, Vite, Next.js, Vue, or vanilla HTML/CSS/JS), Vercel and Netlify offer instant global CDN hosting with automatic SSL certificates and continuous deployment.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">Option A: Vercel (Recommended for React & Vite)</div>
+          <p class="card-desc">
+            1. Visit <a href="https://vercel.com" target="_blank" style="color: var(--accent);">vercel.com</a> and sign in with GitHub.<br>
+            2. Click <strong>Add New... ➡️ Project</strong> and select your frontend repo.<br>
+            3. In <strong>Environment Variables</strong>, add your Render API URL:
+            <br><code>VITE_API_URL = https://your-backend.onrender.com</code><br>
+            4. Click <strong>Deploy</strong>. Live in ~30 seconds with automatic preview URLs on every git push.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Option B: Netlify Drop (Emergency 60-Second Deploy)</div>
+          <p class="card-desc">
+            Need to deploy immediately without setting up Git?<br>
+            1. Run <code>npm run build</code> locally to create the production <code>dist</code> or <code>build</code> folder.<br>
+            2. Open <a href="https://app.netlify.com/drop" target="_blank" style="color: var(--accent);">app.netlify.com/drop</a>.<br>
+            3. Drag the folder directly into the browser. Your site is live with HTTPS in under 15 seconds!
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CORS -->
+    <section id="cors-guide">
+      <h2><span>🔌</span> Connecting the Stack & Fixing CORS Errors</h2>
+      <p>
+        The #1 issue junior developers face when deploying frontend (Vercel) and backend (Render) on different domains is the infamous <strong>Cross-Origin Resource Sharing (CORS)</strong> error in the browser console:
+      </p>
+
+      <div class="callout callout-warning" style="margin-top: 10px;">
+        <div class="callout-icon">🚫</div>
+        <div class="callout-content">
+          <strong>The Classic Junior Error:</strong>
+          <code>Access to XMLHttpRequest at 'https://my-api.onrender.com/api/users' from origin 'https://my-app.vercel.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.</code>
+        </div>
+      </div>
+
+      <h3>The Copy-Paste Fix for Node.js / Express:</h3>
+      <div class="code-box">
+        <div class="code-header">
+          <span>server.js (Install: npm install cors)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">const express = require('express');
+const cors = require('cors');
+const app = express();
+
+// Allow frontend domains to call this backend API
+app.use(cors({
+  origin: '*', // For student prototypes/demos; or specify: ['https://my-frontend.vercel.app']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.use(express.json());</div>
+      </div>
+
+      <h3>The Copy-Paste Fix for Python / FastAPI:</h3>
+      <div class="code-box">
+        <div class="code-header">
+          <span>main.py (FastAPI CORSMiddleware)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Or specify ["https://my-frontend.vercel.app"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)</div>
+      </div>
+    </section>
     <section id="vm-setup">
       <h2><span>💻</span> Creating Your Ubuntu Virtual Machine</h2>
       <p>
@@ -890,26 +1275,51 @@
 
     <!-- SECTION: ARCHITECTURE -->
     <section id="stack-blueprint">
-      <h2><span>🏗️</span> Recommended $0 Student Production Blueprint</h2>
-      <p>The cleanest way to present thesis or capstone projects to advisers without spending a dime:</p>
+      <h2><span>🏗️</span> Production Blueprints: Which Stack to Choose?</h2>
+      <p>Compare the two recommended $0 architectures depending on whether your priority is zero-friction instant demo vs. full-scale capstone control:</p>
 
+      <h3 style="color: #38bdf8;">Blueprint A: ⚡ The Rapid Junior Stack ($0, Zero Card, 5-Minute Setup)</h3>
+      <p>Best for temporary assignments, hackathons, and quick grading demos where students have no credit cards:</p>
       <div class="card-grid">
         <div class="card">
-          <div class="card-title">1. Frontend (Static Web Apps)</div>
+          <div class="card-title">1. Frontend: Vercel or Netlify</div>
           <p class="card-desc">
-            Deploy your React/Vite web dashboard on <strong>Azure Static Web Apps</strong>. Global CDN, fast loading, zero cold starts.
+            Deploy React/Vite/Next.js straight from GitHub. Global CDN, instant SSL, <code>*.vercel.app</code> domain, continuous zero-config deploys.
           </p>
         </div>
         <div class="card">
-          <div class="card-title">2. Backend (Ubuntu VM)</div>
+          <div class="card-title">2. Backend API: Render Web Service</div>
           <p class="card-desc">
-            Host your Laravel / Node / Python API on an <strong>Ubuntu VM</strong> with Nginx reverse proxy and SSL via Certbot.
+            Host your Express or FastAPI backend with automatic HTTPS. Configure <code>DATABASE_URL</code> in environment variables.
           </p>
         </div>
         <div class="card">
-          <div class="card-title">3. Mobile Client (Expo)</div>
+          <div class="card-title">3. Database: Supabase PostgreSQL</div>
           <p class="card-desc">
-            Configure your React Native Expo mobile app's <code>API_BASE_URL</code> to point to your Azure VM public IP or custom domain.
+            500 MB hosted Postgres with visual table editor, instant REST API, and built-in Auth. Unpause in 1-click if inactive.
+          </p>
+        </div>
+      </div>
+
+      <h3 style="color: #38bdf8; margin-top: 32px;">Blueprint B: 🏛️ Full Capstone & Thesis Stack ($0 with Azure Student Pack)</h3>
+      <p>Best for senior capstone systems requiring background queues, WebSockets (Reverb), persistent disks, and 24/7 dedicated servers:</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">1. Frontend: Azure Static Web Apps</div>
+          <p class="card-desc">
+            React / Vite dashboard hosted on Microsoft's global edge network with custom domain mapping and automatic GitHub Action builds.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">2. Backend Server: Azure Ubuntu VM</div>
+          <p class="card-desc">
+            Host Laravel, Node, or Python with Nginx reverse proxy, Certbot Let's Encrypt SSL, and systemd daemons for queue workers.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">3. Mobile / Client: React Native Expo</div>
+          <p class="card-desc">
+            Connect iOS/Android Expo apps via public IP or your free Namecheap <code>.me</code> domain with SSL.
           </p>
         </div>
       </div>
@@ -918,6 +1328,34 @@
     <!-- FAQ -->
     <section id="faq">
       <h2><span>❓</span> Frequently Asked Questions</h2>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Can juniors deploy to Supabase and Render without entering any credit or debit card?</div>
+        <p class="card-desc">
+          <strong>Yes, 100%!</strong> Neither Render, Supabase, Vercel, nor Netlify ask for card details on their free tiers. Students can sign up with their standard GitHub accounts and deploy immediately.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Why did my Render backend take 50 seconds to respond on presentation day?</div>
+        <p class="card-desc">
+          Free Render instances spin down after 15 minutes of inactivity. When a request hits a sleeping container, Render takes 40–50 seconds to wake it up (cold start). <strong>Tip:</strong> Simply open your backend URL in your phone or browser tab 2 minutes before demonstrating to your instructor.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Why is my Supabase database throwing connection errors after a week of not using it?</div>
+        <p class="card-desc">
+          Supabase automatically pauses inactive free projects after 7 days without queries. Log into your Supabase dashboard and click <strong>Restore Project</strong>. It restores all tables and data within 1–2 minutes.
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom: 12px;">
+        <div class="card-title">Q: Why is my Vercel frontend getting "CORS blocked" errors when calling my Render backend?</div>
+        <p class="card-desc">
+          Browsers block cross-domain requests unless your backend explicitly authorizes them. In your Express backend, install <code>cors</code> and add <code>app.use(cors())</code> before your routes (see the <a href="#cors-guide" style="color: var(--accent);">CORS guide</a> above).
+        </p>
+      </div>
 
       <div class="card" style="margin-bottom: 12px;">
         <div class="card-title">Q: Why did Azure charge $1.01 USD (~₱60 PHP) on my card?</div>
@@ -934,7 +1372,7 @@
       </div>
 
       <div class="card" style="margin-bottom: 12px;">
-        <div class="card-title">Q: Will my debit card be charged automatically?</div>
+        <div class="card-title">Q: Will my debit card be charged automatically on Azure?</div>
         <p class="card-desc">
           Only if you exceed your $200 credit and free-tier quotas on a Pay-As-You-Go subscription. Having a Budget Alert ensures you get warned before charges occur.
         </p>
@@ -943,12 +1381,12 @@
       <div class="card" style="margin-bottom: 12px;">
         <div class="card-title">Q: Do I need to buy a custom domain?</div>
         <p class="card-desc">
-          No! Azure provides free <code>*.azurestaticapps.net</code> domains with HTTPS. You also get free <code>.me</code> domains from the GitHub Student Developer Pack via Namecheap.
+          No! Vercel gives you free <code>*.vercel.app</code>, Render gives <code>*.onrender.com</code>, and Azure gives <code>*.azurestaticapps.net</code> (all with automatic HTTPS). You also get free <code>.me</code> domains from the GitHub Student Developer Pack via Namecheap.
         </p>
       </div>
 
       <div class="card">
-        <div class="card-title">Q: Can multiple students share one VM?</div>
+        <div class="card-title">Q: Can multiple students share one Azure VM?</div>
         <p class="card-desc">
           Yes! An 8 GB RAM Ubuntu VM can host multiple Laravel APIs, React frontends, and databases using Nginx subdomains.
         </p>
@@ -956,7 +1394,7 @@
     </section>
 
     <footer>
-      Crafted with ❤️ for Computer Science & IT Students • Powered by Microsoft Azure & GitHub Education
+      Crafted with ❤️ for Computer Science & IT Students • Powered by Microsoft Azure, Supabase, Render & GitHub Education
     </footer>
   </main>
 
@@ -973,6 +1411,40 @@
       btn.innerText = 'Copied!';
       setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
     }
+
+    function filterNav(query) {
+      const q = query.toLowerCase().trim();
+      const links = document.querySelectorAll('#navLinks .nav-link');
+      links.forEach(link => {
+        const text = link.innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          link.style.display = 'flex';
+        } else {
+          link.style.display = 'none';
+        }
+      });
+    }
+
+    // Auto highlight nav links on scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+      let current = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 120;
+        if (pageYOffset >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (current && link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
   </script>
 </body>
 </html>
