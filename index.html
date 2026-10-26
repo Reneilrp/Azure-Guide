@@ -36,21 +36,159 @@
       font-family: var(--font);
       line-height: 1.6;
       display: flex;
+      flex-direction: column;
       min-height: 100vh;
+    }
+
+    /* TOP NAVBAR & PLATFORM SWITCHER */
+    .top-navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 62px;
+      background: rgba(13, 19, 34, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .mobile-menu-btn-top {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 1.2rem;
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .top-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .platform-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 4px 0;
+      flex-wrap: nowrap;
+    }
+    .platform-tabs::-webkit-scrollbar { display: none; }
+
+    .platform-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 15px;
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      font-family: var(--font);
+    }
+
+    .platform-tab:hover {
+      background: var(--card-hover);
+      color: #fff;
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .platform-tab.active {
+      background: linear-gradient(135deg, rgba(0, 120, 212, 0.3), rgba(56, 189, 248, 0.3));
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+
+    .platform-tab[data-platform="render"].active {
+      background: rgba(168, 85, 247, 0.25);
+      border-color: #c084fc;
+      box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
+    }
+
+    .platform-tab[data-platform="supabase"].active {
+      background: rgba(16, 185, 129, 0.25);
+      border-color: #34d399;
+      box-shadow: 0 0 14px rgba(16, 185, 129, 0.25);
+    }
+
+    .platform-tab[data-platform="frontend"].active {
+      background: rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+
+    .platform-tab[data-platform="architecture"].active {
+      background: rgba(245, 158, 11, 0.25);
+      border-color: #fbbf24;
+      box-shadow: 0 0 14px rgba(245, 158, 11, 0.25);
+    }
+
+    /* APP LAYOUT WRAPPER */
+    .app-layout {
+      display: flex;
+      flex: 1;
+      width: 100%;
+      min-height: calc(100vh - 62px);
     }
 
     /* SIDEBAR */
     aside {
-      width: 300px;
+      width: 290px;
       background: var(--sidebar-bg);
       border-right: 1px solid var(--border);
       position: sticky;
-      top: 0;
-      height: 100vh;
+      top: 62px;
+      height: calc(100vh - 62px);
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
       overflow-y: auto;
+    }
+
+    .sidebar-category-header {
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 13, 22, 0.4);
+    }
+
+    .category-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .sidebar-header {
@@ -530,60 +668,122 @@
     }
 
     @media (max-width: 860px) {
+      .mobile-menu-btn-top { display: inline-flex; }
       aside {
         position: fixed;
+        top: 62px;
         left: -320px;
+        height: calc(100vh - 62px);
         z-index: 999;
         transition: left 0.3s ease;
       }
       aside.open { left: 0; }
-      main { padding: 32px 20px; }
-      .mobile-menu-btn { display: block; }
+      main { padding: 24px 16px; }
+      .top-brand .brand-title { display: none; }
+      .top-brand .brand-badge { display: none; }
+      .mobile-menu-btn { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- SIDEBAR NAVIGATION -->
-  <aside id="sidebar">
-    <div class="sidebar-header">
-      <a href="#" class="brand">
+  <!-- TOP PLATFORM SWITCHER NAVBAR -->
+  <header class="top-navbar">
+    <div class="top-nav-left">
+      <button class="mobile-menu-btn-top" onclick="toggleSidebar()" aria-label="Toggle Menu">☰</button>
+      <a href="#" class="top-brand" onclick="switchPlatform('all'); return false;">
         <div class="brand-logo">☁</div>
         <div>
           <div class="brand-title">Student Cloud Guide</div>
-          <span class="brand-badge">Azure & Free PaaS</span>
+          <span class="brand-badge">2026 Edition</span>
         </div>
       </a>
     </div>
 
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search guides, Render, Supabase..." oninput="filterNav(this.value)">
+    <div class="platform-tabs" id="platformTabs">
+      <button class="platform-tab active" data-platform="all" onclick="switchPlatform('all')">
+        <span>🌐</span> All Guides
+      </button>
+      <button class="platform-tab" data-platform="azure" onclick="switchPlatform('azure')">
+        <span>☁️</span> Azure
+      </button>
+      <button class="platform-tab" data-platform="render" onclick="switchPlatform('render')">
+        <span>🟣</span> Render
+      </button>
+      <button class="platform-tab" data-platform="supabase" onclick="switchPlatform('supabase')">
+        <span>🟢</span> Supabase
+      </button>
+      <button class="platform-tab" data-platform="frontend" onclick="switchPlatform('frontend')">
+        <span>▲</span> Vercel & Netlify
+      </button>
+      <button class="platform-tab" data-platform="architecture" onclick="switchPlatform('architecture')">
+        <span>🏗️</span> Blueprints & FAQ
+      </button>
     </div>
+  </header>
 
-    <nav id="navLinks">
-      <div class="nav-group-title">Overview</div>
-      <a href="#intro" class="nav-link active">🌟 Welcome & Perks</a>
-      <a href="#prerequisites" class="nav-link">📋 Eligibility & Activation</a>
-      <a href="#budget" class="nav-link">🛡️ Budget Alert Setup</a>
+  <!-- APP LAYOUT WRAPPER -->
+  <div class="app-layout">
+    <!-- DYNAMIC SIDEBAR -->
+    <aside id="sidebar">
+      <div class="sidebar-category-header">
+        <span class="category-indicator" id="categoryIndicator">🌐 Showing: All Guides</span>
+      </div>
 
-      <div class="nav-group-title">⚡ Quick & Cardless (Juniors)</div>
-      <a href="#junior-quickstart" class="nav-link">🚀 Quick Free Stack Overview</a>
-      <a href="#supabase-guide" class="nav-link">🟢 Supabase (Postgres & Auth)</a>
-      <a href="#render-guide" class="nav-link">🟣 Render (Free Backend APIs)</a>
-      <a href="#frontend-guide" class="nav-link">▲ Vercel & Netlify (Frontend)</a>
-      <a href="#cors-guide" class="nav-link">🔌 Connecting Stack & CORS</a>
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search guides..." oninput="filterNav(this.value)">
+      </div>
 
-      <div class="nav-group-title">Azure & Free Allowances</div>
-      <a href="#twelve-months" class="nav-link">⏱️ 12 Months Free</a>
-      <a href="#free-forever" class="nav-link">♾️ Free Forever (55+)</a>
+      <nav id="navLinks">
+        <!-- AZURE GROUP -->
+        <div class="nav-group" data-platform-group="azure">
+          <div class="nav-group-title">☁️ Microsoft Azure</div>
+          <a href="#intro" class="nav-link" onclick="handleNavLinkClick(event, 'azure', '#intro')">🌟 Welcome & Perks</a>
+          <a href="#prerequisites" class="nav-link" onclick="handleNavLinkClick(event, 'azure', '#prerequisites')">📋 Eligibility & Card Hold</a>
+          <a href="#budget" class="nav-link" onclick="handleNavLinkClick(event, 'azure', '#budget')">🛡️ Budget Alert Setup</a>
+          <a href="#twelve-months" class="nav-link" onclick="handleNavLinkClick(event, 'azure', '#twelve-months')">⏱️ 12 Months Free</a>
+          <a href="#free-forever" class="nav-link" onclick="handleNavLinkClick(event, 'azure', '#free-forever')">♾️ Free Forever (55+)</a>
+          <a href="#vm-setup" class="nav-link" onclick="handleNavLinkClick(event, 'azure', '#vm-setup')">💻 Ubuntu VM Setup</a>
+        </div>
 
-      <div class="nav-group-title">Full Production & Capstone</div>
-      <a href="#vm-setup" class="nav-link">💻 Azure Ubuntu VM Setup</a>
-      <a href="#stack-blueprint" class="nav-link">🏗️ Production Blueprints</a>
-      <a href="#faq" class="nav-link">❓ Student FAQ</a>
-    </nav>
-  </aside>
+        <!-- RENDER GROUP -->
+        <div class="nav-group" data-platform-group="render">
+          <div class="nav-group-title">🟣 Render Backend</div>
+          <a href="#render-guide" class="nav-link" onclick="handleNavLinkClick(event, 'render', '#render-guide')">🚀 Render Deploy</a>
+          <a href="#render-ports" class="nav-link" onclick="handleNavLinkClick(event, 'render', '#render-ports')">⚙️ Dynamic Port Binding</a>
+          <a href="#render-env" class="nav-link" onclick="handleNavLinkClick(event, 'render', '#render-env')">🔑 Environment Variables</a>
+          <a href="#render-coldstart" class="nav-link" onclick="handleNavLinkClick(event, 'render', '#render-coldstart')">⚡ Cold-Start Demo Hack</a>
+          <a href="#render-storage" class="nav-link" onclick="handleNavLinkClick(event, 'render', '#render-storage')">📁 Ephemeral Disk & Storage</a>
+        </div>
+
+        <!-- SUPABASE GROUP -->
+        <div class="nav-group" data-platform-group="supabase">
+          <div class="nav-group-title">🟢 Supabase DB & Auth</div>
+          <a href="#supabase-guide" class="nav-link" onclick="handleNavLinkClick(event, 'supabase', '#supabase-guide')">🌟 Free Postgres Overview</a>
+          <a href="#supabase-setup" class="nav-link" onclick="handleNavLinkClick(event, 'supabase', '#supabase-setup')">🗄️ Database & Region Setup</a>
+          <a href="#supabase-connection" class="nav-link" onclick="handleNavLinkClick(event, 'supabase', '#supabase-connection')">🔑 URI Connection Strings</a>
+          <a href="#supabase-tables" class="nav-link" onclick="handleNavLinkClick(event, 'supabase', '#supabase-tables')">📊 Visual Table Editor</a>
+          <a href="#supabase-pause" class="nav-link" onclick="handleNavLinkClick(event, 'supabase', '#supabase-pause')">⚠️ 7-Day Inactivity Hack</a>
+        </div>
+
+        <!-- FRONTEND GROUP -->
+        <div class="nav-group" data-platform-group="frontend">
+          <div class="nav-group-title">▲ Vercel & Netlify</div>
+          <a href="#frontend-guide" class="nav-link" onclick="handleNavLinkClick(event, 'frontend', '#frontend-guide')">▲ Vercel React & Vite</a>
+          <a href="#netlify-drop" class="nav-link" onclick="handleNavLinkClick(event, 'frontend', '#netlify-drop')">📦 Netlify Drag & Drop</a>
+          <a href="#cors-guide" class="nav-link" onclick="handleNavLinkClick(event, 'frontend', '#cors-guide')">🔌 Connecting Stack & CORS</a>
+        </div>
+
+        <!-- BLUEPRINTS & FAQ GROUP -->
+        <div class="nav-group" data-platform-group="architecture">
+          <div class="nav-group-title">🏗️ Blueprints & FAQ</div>
+          <a href="#junior-quickstart" class="nav-link" onclick="handleNavLinkClick(event, 'architecture', '#junior-quickstart')">📊 Decision Matrix</a>
+          <a href="#stack-blueprint" class="nav-link" onclick="handleNavLinkClick(event, 'architecture', '#stack-blueprint')">🏗️ Production Blueprints</a>
+          <a href="#faq" class="nav-link" onclick="handleNavLinkClick(event, 'architecture', '#faq')">❓ Student FAQ</a>
+        </div>
+      </nav>
+    </aside>
 
   <!-- MAIN CONTENT AREA -->
   <main>
@@ -598,7 +798,7 @@
     </div>
 
     <!-- SECTION: INTRO -->
-    <section id="intro">
+    <section id="intro" data-platform="azure">
       <h2><span>🌟</span> Welcome & What You Get</h2>
       <p>
         As students with the <strong>GitHub Student Developer Pack</strong> or an official university email (e.g., <code>@wmsu.edu.ph</code>), Microsoft provides cloud benefits to host production-ready applications.
@@ -624,7 +824,7 @@
     </section>
 
     <!-- SECTION: PREREQUISITES & ACTIVATION -->
-    <section id="prerequisites">
+    <section id="prerequisites" data-platform="azure">
       <h2><span>📋</span> Prerequisites & Student Eligibility</h2>
       <p>
         <strong>Important:</strong> These benefits are exclusively available to students who have an <strong>active GitHub Student Developer Pack</strong> or a verifiable university email address (e.g. <code>.edu</code> or <code>.edu.ph</code>).
@@ -709,7 +909,7 @@
     </section>
 
     <!-- SECTION: BUDGET ALERT -->
-    <section id="budget">
+    <section id="budget" data-platform="azure">
       <h2><span>🛡️</span> Step 2: Protect Your Card (Set Budget Alert)</h2>
       <p>
         Before launching any VM or database, always create a Cost Budget. This guarantees Microsoft alerts you before your credits run low.
@@ -747,7 +947,7 @@
     </section>
 
     <!-- SECTION: 12 MONTHS FREE -->
-    <section id="twelve-months">
+    <section id="twelve-months" data-platform="azure">
       <h2><span>⏱️</span> 12 Months Free Services</h2>
       <p>
         These heavy-lifting resources are included free every month for your first 12 months:
@@ -817,7 +1017,7 @@
     </section>
 
     <!-- SECTION: FREE FOREVER -->
-    <section id="free-forever">
+    <section id="free-forever" data-platform="azure">
       <h2><span>♾️</span> Free Forever (Always Free Tiers)</h2>
       <p>
         Even after your first 12 months end, Microsoft provides over 55+ services that stay permanently free:
@@ -863,10 +1063,65 @@
       </div>
     </section>
 
+    <!-- SECTION: VM SETUP -->
+    <section id="vm-setup" data-platform="azure">
+      <h2><span>💻</span> Creating Your Ubuntu Virtual Machine</h2>
+      <p>
+        For projects that use Laravel, WebSockets (Reverb), queue workers, or multiple APIs, deploying an Ubuntu VM gives total control.
+      </p>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Select Region & Image</h4>
+          <p>
+            • <strong>Region:</strong> Select <strong>(Asia Pacific) East Asia</strong> (Hong Kong).<br>
+            • <strong>Image:</strong> Choose <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong>.<br>
+            • <strong>VM Architecture:</strong> Select <strong>x64</strong> (do <em>not</em> select ARM64).
+          </p>
+
+          <div class="callout callout-warning" style="margin: 10px 0 0;">
+            <div class="callout-icon">🌏</div>
+            <div class="callout-content">
+              <strong>Why East Asia instead of Southeast Asia?</strong>
+              Trial and student subscriptions often encounter the error: <br>
+              <code>This size is currently unavailable in southeastasia for this subscription: NotAvailableForSubscription</code>.<br>
+              Selecting <strong>East Asia</strong> avoids data center capacity restrictions while providing optimal low-latency (~30–40ms ping) for the Philippines.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Recommended Sizing</h4>
+          <p>
+            • <code>Standard_B1s</code> (1 vCPU, 1 GB RAM) ➔ 100% Free for 12 months.<br>
+            • <code>Standard_B2as_v2</code> (2 vCPU, 8 GB RAM) ➔ <strong>$0.1050 USD/hr (~$76 – $78/month in East Asia)</strong>. Fully deducted from your $200 credit with ~$122+ leftover!
+          </p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Open Inbound Ports</h4>
+          <p>In Networking / Firewall rules, allow: <strong>Port 22 (SSH)</strong>, <strong>Port 80 (HTTP)</strong>, <strong>Port 443 (HTTPS)</strong>, and <strong>Port 8080 (WebSockets)</strong>.</p>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>CONNECT VIA SSH</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">ssh -i /path/to/your_key.pem azureuser@&lt;YOUR_PUBLIC_IP&gt;</div>
+      </div>
+    </section>
+
     <!-- ============================================== -->
     <!-- SECTION: JUNIOR QUICKSTART & FREE PAAS STACK   -->
     <!-- ============================================== -->
-    <section id="junior-quickstart">
+    <section id="junior-quickstart" data-platform="architecture">
       <h2><span>🚀</span> Quick Free Stack (Zero Credit Card for Juniors)</h2>
       <p>
         If your juniors or team members only need to deploy a class assignment, temporary prototype, or project for a professor to grade, setting up an Azure VM with SSH keys, security firewall rules, and a bank card verification hold is often overkill.
@@ -961,7 +1216,7 @@
     </section>
 
     <!-- SECTION: SUPABASE -->
-    <section id="supabase-guide">
+    <section id="supabase-guide" data-platform="supabase">
       <h2><span>🟢</span> Supabase — Free PostgreSQL Database & Auth</h2>
       <p>
         Supabase gives you a production-grade PostgreSQL database with a beginner-friendly spreadsheet-like table editor (no SQL CLI needed), built-in user authentication, and instant connection strings for any backend framework.
@@ -977,7 +1232,7 @@
         </div>
       </div>
 
-      <div class="step-item">
+      <div class="step-item" id="supabase-setup">
         <div class="step-num">2</div>
         <div class="step-details">
           <h4>Create a New Project & Database</h4>
@@ -993,7 +1248,7 @@
         </div>
       </div>
 
-      <div class="step-item">
+      <div class="step-item" id="supabase-connection">
         <div class="step-num">3</div>
         <div class="step-details">
           <h4>Grab Your Connection String for Render / Backend</h4>
@@ -1016,7 +1271,7 @@
         </div>
       </div>
 
-      <div class="step-item">
+      <div class="step-item" id="supabase-tables">
         <div class="step-num">4</div>
         <div class="step-details">
           <h4>Visual Table Editor & Mock Data</h4>
@@ -1026,7 +1281,7 @@
         </div>
       </div>
 
-      <div class="callout callout-warning">
+      <div class="callout callout-warning" id="supabase-pause">
         <div class="callout-icon">⚠️</div>
         <div class="callout-content">
           <strong>Crucial Junior Gotcha: The 7-Day Inactivity Pause</strong>
@@ -1038,13 +1293,13 @@
     </section>
 
     <!-- SECTION: RENDER -->
-    <section id="render-guide">
+    <section id="render-guide" data-platform="render">
       <h2><span>🟣</span> Render — Free Backend APIs (Node / Python / Go)</h2>
       <p>
         Render allows juniors to host backend servers (Express, NestJS, FastAPI, Flask, Django) directly from a GitHub repository without configuring Linux servers, Nginx, or SSL certificates.
       </p>
 
-      <div class="step-item">
+      <div class="step-item" id="render-ports">
         <div class="step-num">1</div>
         <div class="step-details">
           <h4>Prepare Your Code (Dynamic Port & 0.0.0.0 Binding)</h4>
@@ -1092,7 +1347,7 @@ app.listen(PORT, '0.0.0.0', () => {
         </div>
       </div>
 
-      <div class="step-item">
+      <div class="step-item" id="render-env">
         <div class="step-num">3</div>
         <div class="step-details">
           <h4>Configure Environment Variables (Link Supabase)</h4>
@@ -1112,7 +1367,7 @@ app.listen(PORT, '0.0.0.0', () => {
         </div>
       </div>
 
-      <div class="callout callout-warning">
+      <div class="callout callout-warning" id="render-coldstart">
         <div class="callout-icon">⚡</div>
         <div class="callout-content">
           <strong>The Render "Cold Start" Wake-up Hack (Must Read for Juniors)</strong>
@@ -1122,7 +1377,7 @@ app.listen(PORT, '0.0.0.0', () => {
         </div>
       </div>
 
-      <div class="callout callout-info">
+      <div class="callout callout-info" id="render-storage">
         <div class="callout-icon">📁</div>
         <div class="callout-content">
           <strong>Warning on File Uploads (Ephemeral Filesystem):</strong>
@@ -1134,14 +1389,14 @@ app.listen(PORT, '0.0.0.0', () => {
     </section>
 
     <!-- SECTION: FRONTEND -->
-    <section id="frontend-guide">
+    <section id="frontend-guide" data-platform="frontend">
       <h2><span>▲</span> Vercel & Netlify — Free Frontend Hosting</h2>
       <p>
         For Single Page Applications (React, Vite, Next.js, Vue, or vanilla HTML/CSS/JS), Vercel and Netlify offer instant global CDN hosting with automatic SSL certificates and continuous deployment.
       </p>
 
       <div class="card-grid">
-        <div class="card">
+        <div class="card" id="vercel-setup">
           <div class="card-title">Option A: Vercel (Recommended for React & Vite)</div>
           <p class="card-desc">
             1. Visit <a href="https://vercel.com" target="_blank" style="color: var(--accent);">vercel.com</a> and sign in with GitHub.<br>
@@ -1152,7 +1407,7 @@ app.listen(PORT, '0.0.0.0', () => {
           </p>
         </div>
 
-        <div class="card">
+        <div class="card" id="netlify-drop">
           <div class="card-title">Option B: Netlify Drop (Emergency 60-Second Deploy)</div>
           <p class="card-desc">
             Need to deploy immediately without setting up Git?<br>
@@ -1165,7 +1420,7 @@ app.listen(PORT, '0.0.0.0', () => {
     </section>
 
     <!-- SECTION: CORS -->
-    <section id="cors-guide">
+    <section id="cors-guide" data-platform="frontend">
       <h2><span>🔌</span> Connecting the Stack & Fixing CORS Errors</h2>
       <p>
         The #1 issue junior developers face when deploying frontend (Vercel) and backend (Render) on different domains is the infamous <strong>Cross-Origin Resource Sharing (CORS)</strong> error in the browser console:
@@ -1219,62 +1474,9 @@ app.add_middleware(
 )</div>
       </div>
     </section>
-    <section id="vm-setup">
-      <h2><span>💻</span> Creating Your Ubuntu Virtual Machine</h2>
-      <p>
-        For projects that use Laravel, WebSockets (Reverb), queue workers, or multiple APIs, deploying an Ubuntu VM gives total control.
-      </p>
-
-      <div class="step-item">
-        <div class="step-num">1</div>
-        <div class="step-details">
-          <h4>Select Region & Image</h4>
-          <p>
-            • <strong>Region:</strong> Select <strong>(Asia Pacific) East Asia</strong> (Hong Kong).<br>
-            • <strong>Image:</strong> Choose <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong>.<br>
-            • <strong>VM Architecture:</strong> Select <strong>x64</strong> (do <em>not</em> select ARM64).
-          </p>
-
-          <div class="callout callout-warning" style="margin: 10px 0 0;">
-            <div class="callout-icon">🌏</div>
-            <div class="callout-content">
-              <strong>Why East Asia instead of Southeast Asia?</strong>
-              Trial and student subscriptions often encounter the error: <br>
-              <code>This size is currently unavailable in southeastasia for this subscription: NotAvailableForSubscription</code>.<br>
-              Selecting <strong>East Asia</strong> avoids data center capacity restrictions while providing optimal low-latency (~30–40ms ping) for the Philippines.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">2</div>
-        <div class="step-details">
-          <h4>Recommended Sizing</h4>
-          <p>
-            • <code>Standard_B1s</code> (1 vCPU, 1 GB RAM) ➔ 100% Free for 12 months.<br>
-            • <code>Standard_B2as_v2</code> (2 vCPU, 8 GB RAM) ➔ <strong>$0.1050 USD/hr (~$76 – $78/month in East Asia)</strong>. Fully deducted from your $200 credit with ~$122+ leftover!
-          </p>
-        </div>
-      </div>
-      <div class="step-item">
-        <div class="step-num">3</div>
-        <div class="step-details">
-          <h4>Open Inbound Ports</h4>
-          <p>In Networking / Firewall rules, allow: <strong>Port 22 (SSH)</strong>, <strong>Port 80 (HTTP)</strong>, <strong>Port 443 (HTTPS)</strong>, and <strong>Port 8080 (WebSockets)</strong>.</p>
-        </div>
-      </div>
-
-      <div class="code-box">
-        <div class="code-header">
-          <span>CONNECT VIA SSH</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-body">ssh -i /path/to/your_key.pem azureuser@&lt;YOUR_PUBLIC_IP&gt;</div>
-      </div>
-    </section>
 
     <!-- SECTION: ARCHITECTURE -->
-    <section id="stack-blueprint">
+    <section id="stack-blueprint" data-platform="architecture">
       <h2><span>🏗️</span> Production Blueprints: Which Stack to Choose?</h2>
       <p>Compare the two recommended $0 architectures depending on whether your priority is zero-friction instant demo vs. full-scale capstone control:</p>
 
@@ -1326,7 +1528,7 @@ app.add_middleware(
     </section>
 
     <!-- FAQ -->
-    <section id="faq">
+    <section id="faq" data-platform="architecture">
       <h2><span>❓</span> Frequently Asked Questions</h2>
 
       <div class="card" style="margin-bottom: 12px;">
@@ -1397,54 +1599,146 @@ app.add_middleware(
       Crafted with ❤️ for Computer Science & IT Students • Powered by Microsoft Azure, Supabase, Render & GitHub Education
     </footer>
   </main>
+</div> <!-- app-layout -->
 
-  <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+<script>
+  let currentPlatform = 'all';
 
-  <script>
-    function toggleSidebar() {
-      document.getElementById('sidebar').classList.toggle('open');
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+  }
+
+  function closeSidebarOnMobile() {
+    if (window.innerWidth <= 860) {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+  }
+
+  function copyCode(btn) {
+    const text = btn.parentElement.nextElementSibling.innerText;
+    navigator.clipboard.writeText(text);
+    btn.innerText = 'Copied!';
+    setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+  }
+
+  function filterNav(query) {
+    const q = query.toLowerCase().trim();
+    const links = document.querySelectorAll('#navLinks .nav-link');
+    links.forEach(link => {
+      const text = link.innerText.toLowerCase();
+      if (!q || text.includes(q)) {
+        link.style.display = 'flex';
+      } else {
+        link.style.display = 'none';
+      }
+    });
+  }
+
+  function switchPlatform(platform, targetHash) {
+    currentPlatform = platform;
+
+    // 1. Update top platform tabs
+    document.querySelectorAll('.platform-tab').forEach(tab => {
+      tab.classList.toggle('active', tab.getAttribute('data-platform') === platform);
+    });
+
+    // 2. Update category indicator in sidebar
+    const indicator = document.getElementById('categoryIndicator');
+    const labels = {
+      all: '🌐 Showing: All Guides',
+      azure: '☁️ Showing: Microsoft Azure',
+      render: '🟣 Showing: Render Backend',
+      supabase: '🟢 Showing: Supabase DB & Auth',
+      frontend: '▲ Showing: Vercel & Netlify',
+      architecture: '🏗️ Showing: Blueprints & FAQ'
+    };
+    if (indicator) indicator.innerText = labels[platform] || 'Documentation';
+
+    // 3. Show/hide sidebar nav groups
+    document.querySelectorAll('.nav-group').forEach(group => {
+      const gPlatform = group.getAttribute('data-platform-group');
+      if (platform === 'all' || gPlatform === platform) {
+        group.style.display = 'block';
+      } else {
+        group.style.display = 'none';
+      }
+    });
+
+    // 4. Show/hide main sections
+    document.querySelectorAll('main section').forEach(sec => {
+      const secPlatform = sec.getAttribute('data-platform');
+      if (platform === 'all' || secPlatform === platform) {
+        sec.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+
+    // 5. Scroll behavior
+    if (targetHash) {
+      const el = document.querySelector(targetHash);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 60);
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function copyCode(btn) {
-      const text = btn.parentElement.nextElementSibling.innerText;
-      navigator.clipboard.writeText(text);
-      btn.innerText = 'Copied!';
-      setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+    closeSidebarOnMobile();
+  }
+
+  function handleNavLinkClick(event, platform, targetId) {
+    event.preventDefault();
+    if (currentPlatform !== 'all' && currentPlatform !== platform) {
+      switchPlatform(platform, targetId);
+    } else {
+      const el = document.querySelector(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    history.pushState(null, null, targetId);
+    closeSidebarOnMobile();
+  }
 
-    function filterNav(query) {
-      const q = query.toLowerCase().trim();
-      const links = document.querySelectorAll('#navLinks .nav-link');
-      links.forEach(link => {
-        const text = link.innerText.toLowerCase();
-        if (!q || text.includes(q)) {
-          link.style.display = 'flex';
-        } else {
-          link.style.display = 'none';
-        }
-      });
-    }
+  // Auto highlight nav links on scroll
+  window.addEventListener('scroll', () => {
+    const sections = Array.from(document.querySelectorAll('section')).filter(s => s.style.display !== 'none');
+    const navLinks = document.querySelectorAll('.nav-link');
+    let current = '';
 
-    // Auto highlight nav links on scroll
-    window.addEventListener('scroll', () => {
-      const sections = document.querySelectorAll('section');
-      const navLinks = document.querySelectorAll('.nav-link');
-      let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 140;
+      if (window.pageYOffset >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
 
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop - 120;
-        if (pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
-        }
-      });
-
+    if (current) {
       navLinks.forEach(link => {
         link.classList.remove('active');
-        if (current && link.getAttribute('href') === `#${current}`) {
+        if (link.getAttribute('href') === `#${current}`) {
           link.classList.add('active');
         }
       });
-    });
-  </script>
+    }
+  });
+
+  // Handle deep-links on initial load
+  window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const target = document.querySelector(hash);
+      if (target) {
+        const sec = target.closest('section');
+        if (sec && sec.getAttribute('data-platform')) {
+          switchPlatform(sec.getAttribute('data-platform'), hash);
+          return;
+        }
+      }
+    }
+    switchPlatform('all');
+  });
+</script>
 </body>
 </html>
