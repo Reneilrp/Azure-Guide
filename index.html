@@ -68,69 +68,64 @@
       flex-shrink: 0;
     }
 
-    /* TOP RIGHT 3-LINE MENU TOGGLE */
-    .nav-menu-btn {
+    /* 3-LAYER MENU BUTTONS */
+    .sidebar-burger-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      color: #f1f5f9;
+      border-radius: 7px;
+      color: var(--text-muted);
       cursor: pointer;
       transition: all 0.2s ease;
-      margin-left: 6px;
       flex-shrink: 0;
     }
 
-    .nav-menu-btn:hover {
+    .sidebar-burger-btn:hover {
       background: rgba(56, 189, 248, 0.12);
       border-color: rgba(56, 189, 248, 0.45);
       color: var(--accent);
-      transform: translateY(-1px);
+      transform: scale(1.05);
     }
 
-    .nav-menu-btn.active {
-      background: rgba(56, 189, 248, 0.18);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .nav-menu-btn svg {
-      transition: transform 0.2s ease;
-    }
-
-    .nav-menu-btn:hover svg {
-      transform: scale(1.08);
-    }
-
-    .sidebar-action-buttons {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .sidebar-collapse-edge-btn {
+    /* COLLAPSED 3-LAYER BUTTON (Below the Logo) */
+    .collapsed-burger-btn {
+      position: fixed;
+      top: 72px;
+      left: 24px;
+      z-index: 920;
+      width: 38px;
+      height: 38px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 26px;
-      height: 24px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      color: var(--text-dim);
+      background: var(--sidebar-bg);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 9px;
+      color: #38bdf8;
       cursor: pointer;
-      transition: all 0.15s ease;
-      padding: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.9);
     }
 
-    .sidebar-collapse-edge-btn:hover {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
-      border-color: rgba(56, 189, 248, 0.35);
+    body.sidebar-collapsed .collapsed-burger-btn {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .collapsed-burger-btn:hover {
+      background: #1e293b;
+      border-color: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+      transform: scale(1.08);
     }
 
     .do-brand {
@@ -420,7 +415,7 @@
 
     body.sidebar-collapsed .do-main-content {
       max-width: 100%;
-      padding: 32px 56px 64px 44px;
+      padding: 32px 56px 64px 80px;
     }
 
     /* BREADCRUMBS (DigitalOcean / PHP Style) */
@@ -956,6 +951,15 @@
     }
 
     @media (max-width: 860px) {
+      .collapsed-burger-btn {
+        opacity: 1;
+        pointer-events: auto;
+        transform: scale(1);
+        top: 68px;
+        left: 16px;
+        width: 36px;
+        height: 36px;
+      }
       .do-sidebar {
         position: fixed;
         top: 60px;
@@ -973,7 +977,7 @@
         transform: translateX(320px);
       }
       .do-main-content {
-        padding: 24px 16px 56px;
+        padding: 24px 16px 56px 64px;
         max-width: 100%;
       }
       .do-search-box {
@@ -1028,16 +1032,17 @@
       <a href="https://github.com/Reneilrp/Azure-Guide" target="_blank" rel="noopener noreferrer" class="do-header-link">
         <span>🐙</span> <span class="link-text">GitHub</span>
       </a>
-      <!-- 3 HORIZONTAL LINES MENU BUTTON (Top Right Edge Navigation) -->
-      <button class="nav-menu-btn" id="navMenuBtn" onclick="toggleSidebarCollapse()" title="Toggle Menu Bar (Ctrl+B)" aria-label="Toggle Menu Bar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
     </div>
   </header>
+
+  <!-- 3-LAYER MENU BUTTON (Positioned below the Logo when MenuBar is collapsed) -->
+  <button class="collapsed-burger-btn" id="collapsedBurgerBtn" onclick="toggleSidebarCollapse()" title="Open Menu Bar (Ctrl+B)" aria-label="Open Menu Bar">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </button>
 
   <!-- MOBILE BACKDROP OVERLAY -->
   <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="closeSidebarOnMobile()"></div>
@@ -1048,14 +1053,13 @@
     <aside class="do-sidebar" id="sidebar">
       <div class="do-sidebar-actions">
         <span class="sidebar-section-title">Navigation Menu</span>
-        <div class="sidebar-action-buttons">
-          <button class="sidebar-toggle-all" id="toggleAllBtn" onclick="toggleAllGroups()" title="Expand / Collapse all tree sections">Collapse All</button>
-          <button class="sidebar-collapse-edge-btn" onclick="toggleSidebarCollapse()" title="Collapse menu bar to left edge (Ctrl+B)" aria-label="Collapse Menu">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-          </button>
-        </div>
+        <button class="sidebar-burger-btn" id="sidebarBurgerBtn" onclick="toggleSidebarCollapse()" title="Collapse Menu Bar (Ctrl+B)" aria-label="Collapse Menu Bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
       </div>
 
       <nav class="do-tree" id="doTree">
@@ -2089,13 +2093,17 @@ app.add_middleware(
       // Mobile Drawer Mode
       const sidebar = document.getElementById('sidebar');
       const backdrop = document.getElementById('sidebarBackdrop');
+      const collapsedBtn = document.getElementById('collapsedBurgerBtn');
       const isOpen = sidebar.classList.toggle('open');
       if (backdrop) backdrop.classList.toggle('active', isOpen);
+      if (collapsedBtn) {
+        collapsedBtn.style.opacity = isOpen ? '0' : '1';
+        collapsedBtn.style.pointerEvents = isOpen ? 'none' : 'auto';
+      }
     } else {
       // Desktop Collapsible Left Edge Mode
       const isCollapsed = document.body.classList.toggle('sidebar-collapsed');
       localStorage.setItem('docs_sidebar_collapsed', isCollapsed ? 'true' : 'false');
-      updateSidebarToggleBtn(isCollapsed);
     }
   }
 
@@ -2103,24 +2111,17 @@ app.add_middleware(
     toggleSidebarCollapse();
   }
 
-  function updateSidebarToggleBtn(isCollapsed) {
-    const btn = document.getElementById('navMenuBtn');
-    if (!btn) return;
-    if (isCollapsed) {
-      btn.classList.add('active');
-      btn.setAttribute('title', 'Expand Menu Bar (Ctrl+B)');
-    } else {
-      btn.classList.remove('active');
-      btn.setAttribute('title', 'Collapse Menu Bar (Ctrl+B)');
-    }
-  }
-
   function closeSidebarOnMobile() {
     if (window.innerWidth <= 860) {
       const sidebar = document.getElementById('sidebar');
       const backdrop = document.getElementById('sidebarBackdrop');
+      const collapsedBtn = document.getElementById('collapsedBurgerBtn');
       if (sidebar) sidebar.classList.remove('open');
       if (backdrop) backdrop.classList.remove('active');
+      if (collapsedBtn) {
+        collapsedBtn.style.opacity = '1';
+        collapsedBtn.style.pointerEvents = 'auto';
+      }
     }
   }
 
@@ -2130,9 +2131,6 @@ app.add_middleware(
       const saved = localStorage.getItem('docs_sidebar_collapsed');
       if (saved === 'true') {
         document.body.classList.add('sidebar-collapsed');
-        window.addEventListener('DOMContentLoaded', () => {
-          updateSidebarToggleBtn(true);
-        });
       }
     }
   })();
