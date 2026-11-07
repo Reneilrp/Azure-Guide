@@ -1021,7 +1021,7 @@
     <!-- GLOBAL OMNIBAR SEARCH (DigitalOcean & PHP style) -->
     <div class="do-search-box">
       <span class="do-search-icon">🔍</span>
-      <input type="text" id="searchInput" class="do-search-input" placeholder="Search topics, Render, Supabase, CORS... (Press / to focus)" oninput="filterTree(this.value)">
+      <input type="text" id="searchInput" class="do-search-input" placeholder="Search topics, B1s Fallback, Supabase, CORS... (Press / to focus)" oninput="filterTree(this.value)">
       <span class="do-search-kbd">/</span>
     </div>
 
@@ -1076,6 +1076,7 @@
             <a href="#twelve-months" class="do-tree-link"><span>⏱️</span> 12 Months Free</a>
             <a href="#free-forever" class="do-tree-link"><span>♾️</span> Free Forever (55+)</a>
             <a href="#vm-setup" class="do-tree-link"><span>💻</span> Ubuntu VM Setup</a>
+            <a href="#azure-fallback" class="do-tree-link"><span>⚡</span> B1s Fallback & Hybrid Setup</a>
           </div>
         </div>
 
@@ -1483,6 +1484,392 @@
           <span class="chapter-card-label">← Previous Topic</span>
           <span class="chapter-card-title">Azure Free Forever (55+)</span>
         </a>
+        <a href="#azure-fallback" class="chapter-card next">
+          <span class="chapter-card-label">Next Topic →</span>
+          <span class="chapter-card-title">B1s Fallback & Hybrid Setup</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SECTION: B1S FALLBACK & HYBRID ARCHITECTURE    -->
+    <!-- ============================================== -->
+    <section id="azure-fallback" data-platform="azure">
+      <h2><span>⚡</span> Fallback Guide: When <code>Standard_B1s</code> is Unavailable</h2>
+      <p>
+        During capstone, thesis, or major project development, students often encounter unexpected roadblocks when trying to launch the default <code>Standard_B1s</code> Ubuntu virtual machine. If your initial VM creation fails, do not panic—use this complete troubleshooting guide and the battle-tested <strong>Hybrid Architecture</strong>.
+      </p>
+
+      <!-- BOTTLENECK ANALYSIS CALLOUT -->
+      <div class="callout callout-warning">
+        <div class="callout-icon">🚨</div>
+        <div class="callout-content">
+          <strong>The 4 Common "B1s Unavailable" Bottlenecks:</strong>
+          <ul style="margin: 8px 0 0; padding-left: 18px; line-height: 1.6;">
+            <li><strong>Capacity Depletion:</strong> In regions like <code>eastasia</code> (Hong Kong), <code>southeastasia</code> (Singapore), and <code>japaneast</code>, <code>Standard_B1s</code> is frequently grayed out or displays <em>"Size not available in this region"</em> due to high global cloud demand.</li>
+            <li><strong>Student Quota Limits (0 vCPUs):</strong> Certain student subscriptions have their regional vCPU quota set to <code>0</code> specifically for the classic <code>Standard BS Family</code>.</li>
+            <li><strong>Portal Pricing Display Confusion:</strong> The VM catalog displays retail pricing (e.g., <code>~$10.40/month</code>) instead of <code>$0.00</code>. Azure deducts the 750 free hours credit automatically on your monthly statement rather than zeroing out catalog cards.</li>
+            <li><strong>1 GiB Memory Bottleneck:</strong> Even when successfully deployed, 1 GiB of RAM frequently runs out of memory (OOM) under multi-process stacks (Nginx + PHP 8.3-FPM + MySQL + Laravel Reverb WebSockets + Queue Workers).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FALLBACK 1: NEWER 12-MONTH FREE VM SIZES -->
+      <h3 style="color: #38bdf8; margin-top: 36px;">Option 1: Newer 12-Month Free Cloud VM Sizes</h3>
+      <p>
+        If you require a 100% cloud-hosted virtual machine, Microsoft officially expanded the 12-month free compute tier beyond <code>Standard_B1s</code> to include newer modern architectures:
+      </p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>VM Size</th>
+              <th>Processor Architecture</th>
+              <th>vCPUs</th>
+              <th>RAM</th>
+              <th>12-Month Free Quota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Standard_B2ats_v2</code></td>
+              <td><span class="badge badge-purple">AMD EPYC 7763v (x86_64)</span></td>
+              <td>2 vCPUs</td>
+              <td>1 GiB</td>
+              <td><span class="badge badge-green">750 hrs / month Free</span></td>
+            </tr>
+            <tr>
+              <td><code>Standard_B2pts_v2</code></td>
+              <td><span class="badge badge-amber">Ampere Altra (ARM64)</span></td>
+              <td>2 vCPUs</td>
+              <td>1 GiB</td>
+              <td><span class="badge badge-green">750 hrs / month Free</span></td>
+            </tr>
+            <tr>
+              <td><code>Standard_B1s</code></td>
+              <td><span class="badge badge-blue">Intel Xeon (x86_64)</span></td>
+              <td>1 vCPU</td>
+              <td>1 GiB</td>
+              <td><span class="badge badge-green">750 hrs / month Free</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-info" style="margin-top: 14px;">
+        <div class="callout-icon">💡</div>
+        <div class="callout-content">
+          <strong>Pro-Tip for Sizing Picker:</strong> If <code>Standard_B1s</code> is grayed out or unavailable in East Asia, search for <strong><code>B2ats_v2</code></strong> (AMD). It provides <strong>2 burstable vCPUs</strong> instead of 1, runs on standard x86_64 Linux, and qualifies for the exact same 750 free monthly hours.
+        </div>
+      </div>
+
+      <!-- FALLBACK 2: THE HYBRID ARCHITECTURE -->
+      <h3 style="color: #38bdf8; margin-top: 40px;">Option 2: The Recommended Solution — The Hybrid Architecture</h3>
+      <p>
+        When cloud VM capacity is completely saturated or your backend stack demands significantly more memory (8 GB – 16 GB+) for WebSockets, background queues, and concurrent traffic, adopt the high-performance <strong>Hybrid Architecture</strong>:
+      </p>
+      <blockquote style="margin: 16px 0; padding: 14px 20px; background: rgba(56, 189, 248, 0.08); border-left: 4px solid #38bdf8; border-radius: 0 10px 10px 0; color: #bae6fd; font-style: italic;">
+        <strong>"Laptop as Engine (CPU & RAM) + Azure as Vault (Database, Storage & CDN Edge)"</strong>
+      </blockquote>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>HYBRID ARCHITECTURE TOPOLOGY</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">                                  INTERNET / CLIENTS
+                     (Mobile Apps, Web Visitors, Teachers, Residents)
+                                         |
+            +----------------------------+----------------------------+
+            |                                                         |
+  [Azure Static Web Apps]                                   [Cloudflare Tunnel]
+  (Always Free Tier)                                        (100% Free Forever)
+  • Web App (React / Vite)                                  • api.yourdomain.app (HTTPS)
+  • Global CDN Edge + Free SSL                              • WebSocket support (Reverb)
+  • 100 GB Bandwidth / Month                                • Works behind any ISP / CGNAT
+            |                                                         |
+            |                                                         v
+            |                                              [Local Laptop / Hardware]
+            |                                              (WSL2 Ubuntu / Docker)
+            |                                              • PHP 8.3-FPM & Nginx
+            |                                              • Laravel Reverb (WebSockets)
+            |                                              • Laravel Queue Worker
+            |                                              • 8 GB – 16 GB+ Local RAM
+            |                                                         |
+            +----------------------------+----------------------------+
+                                         |
+                                         v
+                      [Azure Database for MySQL Flexible Server]
+                               (12 Months Free Tier)
+                               • 750 hours/month (Standard_B1ms)
+                               • 32 GB High-Speed SSD Storage
+                               • Enterprise Backups & Cloud Redundancy</div>
+      </div>
+
+      <!-- ZERO-STORAGE-BURDEN BREAKDOWN TABLE -->
+      <h4 style="margin-top: 28px; color: #fff;">Resource Allocation & Zero-Storage-Burden Breakdown</h4>
+      <p>Under this architecture, your local laptop carries <strong>zero storage or hosting burden</strong>. All heavy databases, static assets, and media remain entirely on Azure's cloud infrastructure:</p>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Responsibility</th>
+              <th>Hosting Resource</th>
+              <th>Azure Free Allowance</th>
+              <th>Practical Usage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Database Storage</strong></td>
+              <td><strong>Azure MySQL Flexible Server</strong></td>
+              <td><span class="badge badge-green">32 GB SSD</span> (12 Mos Free)</td>
+              <td>Relational tables for users, logs, and telemetry take &lt; 50 MB total.</td>
+            </tr>
+            <tr>
+              <td><strong>Web Frontend Serving</strong></td>
+              <td><strong>Azure Static Web Apps</strong></td>
+              <td><span class="badge badge-blue">100 GB Bandwidth</span> (Always Free)</td>
+              <td>Zero disk consumption locally; globally distributed via Microsoft Edge CDN.</td>
+            </tr>
+            <tr>
+              <td><strong>Mobile APKs & Uploads</strong></td>
+              <td><strong>Azure Blob Storage</strong></td>
+              <td><span class="badge badge-purple">5 GB Storage</span> + 20k reads (12 Mos)</td>
+              <td>Large <code>.apk</code> binaries (e.g. 80MB–150MB) and photos bypass local disk entirely.</td>
+            </tr>
+            <tr>
+              <td><strong>Backend Execution</strong></td>
+              <td><strong>Local Laptop (WSL2 / Linux)</strong></td>
+              <td><span class="badge badge-teal">Unlimited local CPU & RAM</span></td>
+              <td>Consumes ~300 MB of local RAM and &lt; 500 MB SSD for raw code repositories.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- STEP BY STEP HYBRID GUIDE -->
+      <h3 style="color: #38bdf8; margin-top: 36px;">Step-by-Step Hybrid Setup Guide</h3>
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Provision the Azure Database (MySQL Flexible Server)</h4>
+          <p>
+            1. In the Azure Portal, search for <strong>Azure Database for MySQL flexible servers</strong> and click <strong>Create</strong>.<br>
+            2. <strong>Compute Tier:</strong> Select <strong>Burstable</strong>.<br>
+            3. <strong>Compute Size:</strong> Choose <strong><code>Standard_B1ms</code></strong> (1 vCore, 2 GiB RAM — fully eligible for 12 months free).<br>
+            4. <strong>Storage:</strong> Set to <strong>32 GiB</strong>.<br>
+            5. <strong>Networking:</strong> Check <em>"Allow public access from any Azure service within Azure to this server"</em>. Add your local IP address, or allow <code>0.0.0.0 - 255.255.255.255</code> with a strong admin password for team/mobile development.<br>
+            6. In your Laravel backend <code>.env</code> file, connect with SSL enabled:
+          </p>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>LARAVEL .ENV (AZURE MYSQL FLEXIBLE SERVER)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">DB_CONNECTION=mysql
+DB_HOST=your-server-name.mysql.database.azure.com
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_admin_user
+DB_PASSWORD=your_secure_password
+MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt</div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Deploy Frontends to Azure Static Web Apps (Free Forever)</h4>
+          <p>
+            1. Push your React / Vite frontend repository to GitHub.<br>
+            2. In the Azure Portal, create an <strong>Azure Static Web App</strong>.<br>
+            3. Select the <strong>Free Plan</strong>.<br>
+            4. Under <strong>Deployment Details</strong>, connect your GitHub account, repository, and branch (<code>main</code>).<br>
+            5. Set <strong>Build Preset</strong> to <code>Vite</code> (App location: <code>frontend</code> or root, Output location: <code>dist</code>).<br>
+            6. Add your custom domain under the <strong>Custom domains</strong> blade; Azure automatically provisions and manages an edge SSL certificate at no charge.
+          </p>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Run the Backend on Local Hardware (WSL2 Ubuntu)</h4>
+          <p>
+            On your local development machine, install PHP 8.3, Composer, Nginx, and Supervisor inside WSL2:
+          </p>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>WSL2 / UBUNTU TERMINAL</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">sudo apt update
+sudo apt install -y php8.3-fpm php8.3-cli php8.3-mysql php8.3-xml php8.3-mbstring php8.3-curl nginx supervisor</div>
+      </div>
+
+      <p style="margin-top: 14px;">
+        To ensure WebSockets (Laravel Reverb) and queue workers stay running 24/7 without terminal window dependence, configure a <code>supervisord</code> daemon at <code>/etc/supervisor/conf.d/laravel-reverb.conf</code>:
+      </p>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>/etc/supervisor/conf.d/laravel-reverb.conf</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">[program:laravel-reverb]
+process_name=%(program_name)s_%(process_num)02d
+command=php /path/to/project/backend/artisan reverb:start
+autostart=true
+autorestart=true
+user=pheinz
+redirect_stderr=true
+stdout_logfile=/var/log/reverb.log</div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-details">
+          <h4>Expose Local APIs Using Cloudflare Tunnels (<code>cloudflared</code>)</h4>
+          <p>
+            To allow remote web visitors, judges, and mobile Expo apps to reach your local backend API without port forwarding, router configuration, or static public IPs, install Cloudflare Tunnel:
+          </p>
+        </div>
+      </div>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>INSTALL & CONFIGURE CLOUDFLARE TUNNEL (WSL2)</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body"># 1. Download and install cloudflared
+curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+sudo dpkg -i cloudflared.deb
+
+# 2. Authenticate and create your tunnel
+cloudflared tunnel login
+cloudflared tunnel create thesis-tunnel</div>
+      </div>
+
+      <p style="margin-top: 14px;">
+        Create your tunnel configuration file at <code>~/.cloudflared/config.yml</code>:
+      </p>
+
+      <div class="code-box">
+        <div class="code-header">
+          <span>~/.cloudflared/config.yml</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">tunnel: &lt;TUNNEL_UUID&gt;
+credentials-file: /home/pheinz/.cloudflared/&lt;TUNNEL_UUID&gt;.json
+
+ingress:
+  - hostname: api.yourdomain.app
+    service: http://localhost:8000
+  - hostname: ws.yourdomain.app
+    service: http://localhost:8080
+  - service: http_status:404</div>
+      </div>
+
+      <p style="margin-top: 14px;">Start the tunnel daemon:</p>
+      <div class="code-box">
+        <div class="code-header">
+          <span>RUN TUNNEL DAEMON</span>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+        </div>
+        <div class="code-body">cloudflared tunnel run thesis-tunnel</div>
+      </div>
+
+      <div class="callout callout-info" style="margin-top: 14px;">
+        <div class="callout-icon">🌐</div>
+        <div class="callout-content">
+          <strong>Why Cloudflare Tunnel Solves Student Internet Issues:</strong>
+          Philippine ISPs (Converge, PLDT, Globe) and mobile LTE/5G hotspots operate behind <strong>Carrier-Grade NAT (CGNAT)</strong>, which blocks traditional router port forwarding. Cloudflare Tunnel establishes an outbound TLS connection to Cloudflare's global edge network, delivering instant SSL termination and full WebSocket compatibility from anywhere.
+        </div>
+      </div>
+
+      <!-- COMPARISON MATRIX -->
+      <h3 style="color: #38bdf8; margin-top: 36px;">Comparison: Single B1s VM vs. Hybrid Setup</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Evaluation Metric</th>
+              <th>Single Cloud VM (Standard_B1s)</th>
+              <th>Hybrid Setup (Laptop + Azure Vault)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Monthly Cost</strong></td>
+              <td>Free 12 Months (when quota available)</td>
+              <td><span class="badge badge-green">$0.00 Forever</span></td>
+            </tr>
+            <tr>
+              <td><strong>Compute Power</strong></td>
+              <td>1 vCPU, 1 GB RAM (frequently OOM)</td>
+              <td><span class="badge badge-teal">Multi-core CPU, 8 GB – 16 GB+ Local RAM</span></td>
+            </tr>
+            <tr>
+              <td><strong>WebSocket / Queue Concurrency</strong></td>
+              <td>Bottlenecks under load</td>
+              <td><span class="badge badge-blue">Ultra-smooth, low latency execution</span></td>
+            </tr>
+            <tr>
+              <td><strong>Database Durability</strong></td>
+              <td>Stored on local single-VM disk</td>
+              <td><span class="badge badge-purple">Enterprise Azure Cloud SSD (32 GB)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Uptime Requirement</strong></td>
+              <td>24/7 Cloud Uptime</td>
+              <td>Laptop must be active during testing/defense</td>
+            </tr>
+            <tr>
+              <td><strong>Network Portability</strong></td>
+              <td>Fixed Azure Public IP</td>
+              <td><span class="badge badge-amber">Fully portable via Cloudflare Tunnel anywhere</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- DEFENSE BEST PRACTICES -->
+      <h3 style="color: #38bdf8; margin-top: 36px;">Best Practices for Presentation & Defense Day</h3>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">1. Prevent Laptop Sleep</div>
+          <p class="card-desc">
+            Use Windows PowerToys <strong>"Awake"</strong> utility or configure Windows Power & Sleep to <em>"Never sleep when plugged into AC power"</em> so your backend and tunnels never drop while presenting.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">2. Automated Cloud Backups</div>
+          <p class="card-desc">
+            Set up a cron job or scheduled script to run <code>mysqldump</code> from your laptop directly to Azure Blob Storage or a private GitHub repository to ensure zero data loss.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">3. Production Caching</div>
+          <p class="card-desc">
+            Before handing the demo to panelists, always run <code>php artisan config:cache</code>, <code>php artisan route:cache</code>, and <code>php artisan view:cache</code> to optimize response times.
+          </p>
+        </div>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#vm-setup" class="chapter-card prev">
+          <span class="chapter-card-label">← Previous Topic</span>
+          <span class="chapter-card-title">Ubuntu VM Setup</span>
+        </a>
         <a href="#junior-quickstart" class="chapter-card next">
           <span class="chapter-card-label">Next Topic →</span>
           <span class="chapter-card-title">Quick Free Stack for Juniors</span>
@@ -1587,9 +1974,9 @@
       </div>
 
       <div class="chapter-pagination">
-        <a href="#vm-setup" class="chapter-card prev">
+        <a href="#azure-fallback" class="chapter-card prev">
           <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Azure Ubuntu VM Setup</span>
+          <span class="chapter-card-title">B1s Fallback & Hybrid Setup</span>
         </a>
         <a href="#supabase-guide" class="chapter-card next">
           <span class="chapter-card-label">Next Topic →</span>
@@ -1942,6 +2329,35 @@ app.add_middleware(
         </div>
       </div>
 
+      <h3 style="color: #38bdf8; margin-top: 32px;">Blueprint C: ⚡ The Hybrid Presentation Stack (Laptop Engine + Azure Vault)</h3>
+      <p>Best for high-concurrency thesis defenses when <code>Standard_B1s</code> capacity is depleted or you need 8–16 GB RAM for Laravel Reverb and queue daemons without paying cloud fees:</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-title">1. Web & CDN: Azure Static Web Apps</div>
+          <p class="card-desc">
+            Always-free global edge hosting with 100 GB bandwidth and automated GitHub Actions deployments for React/Vite SPAs.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">2. Edge Tunnel: Cloudflare Tunnel</div>
+          <p class="card-desc">
+            Passes through CGNAT (mobile hotspots, Converge, PLDT) with zero port forwarding, automatic edge SSL, and full WebSocket support.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">3. Engine: Local WSL2 Ubuntu Laptop</div>
+          <p class="card-desc">
+            Utilize your laptop's multi-core CPU and 8–16+ GB RAM to power PHP 8.3-FPM, Nginx, and Supervisor background workers.
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">4. Vault: Azure MySQL Flexible Server</div>
+          <p class="card-desc">
+            32 GB cloud SSD with automatic backups and high-speed remote SSL access—relieving your laptop of all storage burden.
+          </p>
+        </div>
+      </div>
+
       <div class="chapter-pagination">
         <a href="#cors-guide" class="chapter-card prev">
           <span class="chapter-card-label">← Previous Topic</span>
@@ -2039,6 +2455,7 @@ app.add_middleware(
       <li class="do-toc-item"><a href="#twelve-months" class="do-toc-link">12 Months Free Services</a></li>
       <li class="do-toc-item"><a href="#free-forever" class="do-toc-link">Always-Free Tiers (55+)</a></li>
       <li class="do-toc-item"><a href="#vm-setup" class="do-toc-link">Ubuntu VM Setup</a></li>
+      <li class="do-toc-item"><a href="#azure-fallback" class="do-toc-link">B1s Fallback & Hybrid Setup</a></li>
       <li class="do-toc-item"><a href="#junior-quickstart" class="do-toc-link">Cardless Junior Quickstack</a></li>
       <li class="do-toc-item"><a href="#supabase-guide" class="do-toc-link">Supabase Database & Auth</a></li>
       <li class="do-toc-item"><a href="#render-guide" class="do-toc-link">Render Backend APIs</a></li>
@@ -2210,6 +2627,7 @@ app.add_middleware(
     'twelve-months': { cat: 'Microsoft Azure', topic: '12 Months Free Compute' },
     'free-forever': { cat: 'Microsoft Azure', topic: 'Free Forever Allowances' },
     'vm-setup': { cat: 'Microsoft Azure', topic: 'Ubuntu VM Setup' },
+    'azure-fallback': { cat: 'Microsoft Azure', topic: 'B1s Fallback & Hybrid Setup' },
     'junior-quickstart': { cat: 'Architecture & FAQ', topic: 'Decision Matrix' },
     'supabase-guide': { cat: 'Supabase DB & Auth', topic: 'PostgreSQL & Table Editor' },
     'render-guide': { cat: 'Render Backend', topic: 'Web Services & Port Binding' },

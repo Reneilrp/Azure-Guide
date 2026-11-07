@@ -36,9 +36,17 @@ Deployable with 1-click to **Azure Static Web Apps**, **Vercel**, or **GitHub Pa
 * **Prerequisites & Verification**: Step-by-step instructions on applying for the GitHub Student Pack and activating Azure. Includes key tips on bank card verification (MariBank, Maya, GCash) requiring **₱60 – ₱70 PHP** for the temporary **$1.01 USD** authorization hold (which is refunded immediately).
 * **12 Months Free Services Guide**: Deep-dive on B1s VMs (750 hrs/month), 2x 64 GB SSDs, MySQL & PostgreSQL Flexible Servers. Crucial tips on selecting **East Asia** (Hong Kong) and **x64** architecture to bypass Southeast Asia quota limits.
 * **Always-Free Tiers (55+ Services)**: Azure Static Web Apps with custom domains, Cosmos DB (25 GB), and App Service.
+* **🚨 Fallback Setup When `Standard_B1s` Fails or Quota is 0**:
+  * **Newer 12-Month Free VM Sizes**: Utilizing `Standard_B2ats_v2` (AMD EPYC, 2 vCPUs) or `Standard_B2pts_v2` (ARM64, 2 vCPUs) when `Standard_B1s` capacity is depleted.
+  * **The Hybrid Architecture ("Laptop as Engine + Azure as Vault")**:
+    * **Database**: Azure MySQL Flexible Server (`Standard_B1ms`, 32 GB SSD, 12 Months Free).
+    * **Frontend**: Azure Static Web Apps (Always Free, 100 GB Bandwidth, Global CDN & Auto SSL).
+    * **Storage**: Azure Blob Storage (5 GB Free for mobile APKs and user uploads).
+    * **Backend Execution**: Local Laptop (WSL2 Ubuntu) with 8–16+ GB RAM running PHP 8.3-FPM, Supervisor, Laravel Reverb (WebSockets), and queue workers.
+    * **Zero-Port-Forwarding Edge**: Cloudflare Tunnels (`cloudflared`) exposing APIs over HTTPS with WebSocket support, bypassing CGNAT on mobile hotspots, PLDT, Globe, and Converge.
 * **Zero-Cost Protection**: Budget alert setup to prevent any accidental debit card charges.
-* **Production Blueprints**: Dual architectural blueprints comparing the **Rapid Junior Stack** vs. the **Full Senior Capstone Stack**.
-* **Student FAQ**: Real answers to common student hosting questions and presentation day troubleshooting.
+* **Production Blueprints**: Dual architectural blueprints comparing the **Rapid Junior Stack** vs. the **Full Senior Capstone Stack** vs. the **Hybrid Presentation Stack**.
+* **Student FAQ & Defense Tips**: Real answers to common student hosting questions, presentation day troubleshooting, and keeping local machines awake with Windows PowerToys.
 
 ## 🛠️ Tech Stack & UX Design
 * Pure HTML5, CSS3 (Modern Glassmorphism & Plus Jakarta Sans), and Vanilla JavaScript.
