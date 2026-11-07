@@ -39,6 +39,49 @@ If you require a 100% cloud-hosted VM, Microsoft officially expanded the 12-mont
 If cloud VM capacity is exhausted or you need more than 1 GiB of RAM without paying cloud fees, use the **Hybrid Architecture**:
 > **"Laptop as Engine (CPU/RAM) + Azure as Vault (Storage/Database/CDN)"**
 
+### Visual Architecture Flowchart
+```mermaid
+flowchart TD
+    subgraph Clients["🌐 Clients & Users"]
+        Web["🖥️ Web Visitors & Evaluators<br/>(React / Vite Single Page App)"]
+        Mobile["📱 Mobile Apps & Residents<br/>(React Native Expo / Android APK)"]
+    end
+
+    subgraph Edge["☁️ Edge Delivery & Ingress Layer"]
+        SWA["⚡ Azure Static Web Apps<br/>(Always Free Tier)<br/>• Global Anycast CDN Edge<br/>• Auto Edge SSL Certificates<br/>• 100 GB Bandwidth/month"]
+        Tunnel["🛡️ Cloudflare Zero Trust Tunnel<br/>(100% Free Forever)<br/>• Edge SSL: api.yourdomain.app<br/>• Native WebSocket Protocol Passthrough<br/>• Bypasses ISP CGNAT & Firewalls"]
+    end
+
+    subgraph LocalEngine["💻 Local Laptop Engine (WSL2 Ubuntu / Docker)"]
+        Nginx["🌐 Nginx Reverse Proxy (Port 80/443)"]
+        PHP["⚙️ PHP 8.3-FPM Backend API"]
+        Supervisor["🔄 Supervisor Process Manager"]
+        Reverb["⚡ Laravel Reverb (WebSockets Port 8080)"]
+        Queue["📦 Laravel Queue Worker Daemons"]
+        LocalSpec["💪 8 GB – 16 GB+ Local RAM (Zero OOM Crashes)"]
+        
+        Nginx --> PHP
+        Supervisor --> Reverb
+        Supervisor --> Queue
+    end
+
+    subgraph AzureVault["🏛️ Azure Cloud Vault (12 Months Free)"]
+        MySQL["🗄️ Azure MySQL Flexible Server<br/>• Standard_B1ms (1 vCore, 2 GiB RAM)<br/>• 32 GB High-Speed Cloud SSD<br/>• Encrypted TLS (Port 3306) & Daily Backups"]
+        Blob["📦 Azure Blob Storage (5 GB Free)<br/>• Mobile APK Binaries (80MB–150MB)<br/>• User Uploads & Media Assets"]
+    end
+
+    Web -->|1. HTTPS Page Load| SWA
+    Web -.->|2. REST API & WebSockets| Tunnel
+    Mobile -->|REST API & WebSockets| Tunnel
+    Mobile -.->|Download APK Binaries| Blob
+
+    Tunnel -->|Encrypted Outbound WireGuard Tunnel (No Ports)| Nginx
+    PHP -->|SSL Encrypted Query (Port 3306)| MySQL
+    PHP -.->|Direct Media Upload Pipeline| Blob
+    Queue -->|Async DB Transactions| MySQL
+```
+
+### ASCII Topology Representation
 ```
                                       INTERNET / CLIENTS
                          (Mobile Apps, Web Visitors, Teachers, Residents)

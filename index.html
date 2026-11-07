@@ -1573,12 +1573,234 @@
         <strong>"Laptop as Engine (CPU & RAM) + Azure as Vault (Database, Storage & CDN Edge)"</strong>
       </blockquote>
 
-      <div class="code-box">
-        <div class="code-header">
-          <span>HYBRID ARCHITECTURE TOPOLOGY</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+      <!-- VISUAL VECTOR FLOWCHART -->
+      <div class="flowchart-wrapper" style="background: #090e1a; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 16px; padding: 22px; margin: 24px 0; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 1.3rem;">📊</span>
+            <div>
+              <div style="font-weight: 700; color: #fff; font-size: 1.05rem; letter-spacing: 0.01em;">Hybrid Architecture Topology Flowchart</div>
+              <div style="color: #94a3b8; font-size: 0.8rem;">Laptop as Engine (CPU/RAM) + Azure as Cloud Vault (Storage/Database/CDN)</div>
+            </div>
+          </div>
+          <span class="badge badge-green">Vector Flowchart</span>
         </div>
-        <div class="code-body">                                  INTERNET / CLIENTS
+
+        <svg viewBox="0 0 940 590" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="display: block; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;" role="img" aria-label="Hybrid Architecture Flowchart">
+          <defs>
+            <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#38bdf8"/>
+            </marker>
+            <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#fbbf24"/>
+            </marker>
+            <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#34d399"/>
+            </marker>
+            <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#c084fc"/>
+            </marker>
+
+            <filter id="glow-card" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4"/>
+            </filter>
+            
+            <linearGradient id="grad-client" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#1e293b"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="grad-swa" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgba(14, 116, 144, 0.35)"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="grad-tunnel" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgba(180, 83, 9, 0.35)"/>
+              <stop offset="100%" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="grad-laptop" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgba(16, 185, 129, 0.25)"/>
+              <stop offset="100%" stop-color="#0d1d1f"/>
+            </linearGradient>
+            <linearGradient id="grad-mysql" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgba(2, 132, 199, 0.35)"/>
+              <stop offset="100%" stop-color="#0b162c"/>
+            </linearGradient>
+            <linearGradient id="grad-blob" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgba(126, 34, 206, 0.35)"/>
+              <stop offset="100%" stop-color="#170c2c"/>
+            </linearGradient>
+          </defs>
+
+          <!-- TIER 1: USERS & CLIENTS -->
+          <g id="clients">
+            <g filter="url(#glow-card)">
+              <rect x="50" y="20" width="380" height="75" rx="12" fill="url(#grad-client)" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="72" y="48" font-size="20">🖥️</text>
+              <text x="106" y="46" fill="#ffffff" font-size="14" font-weight="700">Web Visitors &amp; Evaluators</text>
+              <text x="106" y="66" fill="#94a3b8" font-size="12">Single Page App (React / Vite in Browser)</text>
+              <rect x="330" y="32" width="86" height="22" rx="6" fill="rgba(56, 189, 248, 0.15)" stroke="rgba(56, 189, 248, 0.3)"/>
+              <text x="343" y="47" fill="#38bdf8" font-size="10" font-weight="600">HTTPS Client</text>
+            </g>
+
+            <g filter="url(#glow-card)">
+              <rect x="510" y="20" width="380" height="75" rx="12" fill="url(#grad-client)" stroke="#fbbf24" stroke-width="1.5"/>
+              <text x="532" y="48" font-size="20">📱</text>
+              <text x="566" y="46" fill="#ffffff" font-size="14" font-weight="700">Mobile Apps &amp; Field Residents</text>
+              <text x="566" y="66" fill="#94a3b8" font-size="12">React Native Expo App (Android / iOS)</text>
+              <rect x="786" y="32" width="90" height="22" rx="6" fill="rgba(245, 158, 11, 0.15)" stroke="rgba(245, 158, 11, 0.3)"/>
+              <text x="796" y="47" fill="#fbbf24" font-size="10" font-weight="600">REST &amp; WSS</text>
+            </g>
+          </g>
+
+          <!-- TIER 2: EDGE DELIVERY & TUNNEL -->
+          <g id="edge-ingress">
+            <g filter="url(#glow-card)">
+              <rect x="50" y="155" width="380" height="105" rx="12" fill="url(#grad-swa)" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="72" y="186" font-size="22">☁️</text>
+              <text x="106" y="183" fill="#ffffff" font-size="14" font-weight="700">Azure Static Web Apps</text>
+              <rect x="290" y="169" width="126" height="22" rx="6" fill="rgba(16, 185, 129, 0.2)" stroke="rgba(16, 185, 129, 0.4)"/>
+              <text x="300" y="184" fill="#34d399" font-size="10" font-weight="700">100% Free Forever</text>
+              <text x="72" y="214" fill="#cbd5e1" font-size="12">• Global Anycast CDN Edge + Auto Free SSL</text>
+              <text x="72" y="234" fill="#cbd5e1" font-size="12">• 100 GB Bandwidth/mo • Auto GitHub Actions Deploys</text>
+            </g>
+
+            <g filter="url(#glow-card)">
+              <rect x="510" y="155" width="380" height="105" rx="12" fill="url(#grad-tunnel)" stroke="#fbbf24" stroke-width="1.5"/>
+              <text x="532" y="186" font-size="22">🚇</text>
+              <text x="566" y="183" fill="#ffffff" font-size="14" font-weight="700">Cloudflare Zero Trust Tunnel</text>
+              <rect x="760" y="169" width="116" height="22" rx="6" fill="rgba(245, 158, 11, 0.2)" stroke="rgba(245, 158, 11, 0.4)"/>
+              <text x="772" y="184" fill="#fbbf24" font-size="10" font-weight="700">Free Edge Ingress</text>
+              <text x="532" y="214" fill="#cbd5e1" font-size="12">• Ingress: <tspan fill="#fde047">api.yourdomain.app</tspan> (HTTPS / SSL)</text>
+              <text x="532" y="234" fill="#cbd5e1" font-size="12">• Native WebSockets (Reverb) • Bypasses CGNAT</text>
+            </g>
+          </g>
+
+          <!-- TIER 3: LOCAL HARDWARE ENGINE -->
+          <g id="local-engine" filter="url(#glow-card)">
+            <rect x="470" y="310" width="420" height="125" rx="14" fill="url(#grad-laptop)" stroke="#34d399" stroke-width="2"/>
+            <text x="494" y="343" font-size="24">💻</text>
+            <text x="530" y="340" fill="#ffffff" font-size="15" font-weight="700">Local Laptop Engine (WSL2 Ubuntu / Linux)</text>
+            <rect x="758" y="324" width="118" height="22" rx="6" fill="rgba(16, 185, 129, 0.2)" stroke="rgba(16, 185, 129, 0.4)"/>
+            <text x="769" y="339" fill="#34d399" font-size="10" font-weight="700">8 GB – 16 GB+ RAM</text>
+            
+            <text x="494" y="373" fill="#e2e8f0" font-size="12">⚡ <tspan font-weight="600" fill="#a7f3d0">PHP 8.3-FPM &amp; Nginx</tspan> — High-throughput local REST API</text>
+            <text x="494" y="395" fill="#e2e8f0" font-size="12">🔄 <tspan font-weight="600" fill="#a7f3d0">Laravel Reverb Daemon</tspan> — Real-time WebSockets (:8080)</text>
+            <text x="494" y="417" fill="#e2e8f0" font-size="12">📦 <tspan font-weight="600" fill="#a7f3d0">Supervisor Worker</tspan> — Zero OOM crash queue execution</text>
+          </g>
+
+          <!-- TIER 4: AZURE CLOUD VAULT -->
+          <g id="azure-vault">
+            <g filter="url(#glow-card)">
+              <rect x="50" y="480" width="380" height="95" rx="12" fill="url(#grad-blob)" stroke="#c084fc" stroke-width="1.5"/>
+              <text x="72" y="512" font-size="22">📦</text>
+              <text x="106" y="508" fill="#ffffff" font-size="14" font-weight="700">Azure Blob Storage (Cloud Vault)</text>
+              <rect x="310" y="494" width="106" height="22" rx="6" fill="rgba(168, 85, 247, 0.2)" stroke="rgba(168, 85, 247, 0.4)"/>
+              <text x="320" y="509" fill="#c084fc" font-size="10" font-weight="700">5 GB Free Tier</text>
+              <text x="72" y="538" fill="#cbd5e1" font-size="12">• Mobile APK Direct Downloads (80MB – 150MB)</text>
+              <text x="72" y="558" fill="#cbd5e1" font-size="12">• Zero local disk storage bloat for media uploads</text>
+            </g>
+
+            <g filter="url(#glow-card)">
+              <rect x="470" y="480" width="420" height="95" rx="12" fill="url(#grad-mysql)" stroke="#38bdf8" stroke-width="1.5"/>
+              <text x="494" y="512" font-size="22">🗄️</text>
+              <text x="530" y="508" fill="#ffffff" font-size="14" font-weight="700">Azure MySQL Flexible Server</text>
+              <rect x="756" y="494" width="120" height="22" rx="6" fill="rgba(56, 189, 248, 0.2)" stroke="rgba(56, 189, 248, 0.4)"/>
+              <text x="768" y="509" fill="#38bdf8" font-size="10" font-weight="700">12 Mos Free (B1ms)</text>
+              <text x="494" y="538" fill="#cbd5e1" font-size="12">• 32 GB Enterprise Cloud SSD • Automated Backups</text>
+              <text x="494" y="558" fill="#cbd5e1" font-size="12">• Encrypted TLS Connection (Port 3306) with SSL CA Cert</text>
+            </g>
+          </g>
+
+          <!-- CONNECTING FLOW ARROWS -->
+          <g id="flow-lines" stroke-width="2" fill="none">
+            <!-- Web -> SWA -->
+            <path d="M 240 95 L 240 151" stroke="#38bdf8" marker-end="url(#arrow-blue)"/>
+            <rect x="175" y="112" width="130" height="18" rx="4" fill="#090d18" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1"/>
+            <text x="183" y="125" fill="#38bdf8" font-size="10" font-weight="600">1. HTTPS Page Load</text>
+
+            <!-- Web -> Cloudflare Tunnel -->
+            <path d="M 380 95 C 430 115, 520 125, 570 151" stroke="#fbbf24" stroke-dasharray="4 3" marker-end="url(#arrow-amber)"/>
+
+            <!-- Mobile -> Cloudflare Tunnel -->
+            <path d="M 700 95 L 700 151" stroke="#fbbf24" marker-end="url(#arrow-amber)"/>
+            <rect x="630" y="112" width="140" height="18" rx="4" fill="#090d18" stroke="rgba(245, 158, 11, 0.4)" stroke-width="1"/>
+            <text x="638" y="125" fill="#fbbf24" font-size="10" font-weight="600">2. REST API &amp; Reverb WS</text>
+
+            <!-- Cloudflare Tunnel -> Local Laptop Engine -->
+            <path d="M 700 260 L 700 306" stroke="#34d399" marker-end="url(#arrow-green)"/>
+            <rect x="615" y="272" width="170" height="18" rx="4" fill="#090d18" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1"/>
+            <text x="623" y="285" fill="#34d399" font-size="10" font-weight="600">Encrypted Tunnel (No Ports)</text>
+
+            <!-- Local Laptop -> Azure MySQL -->
+            <path d="M 700 435 L 700 476" stroke="#38bdf8" marker-end="url(#arrow-blue)"/>
+            <rect x="625" y="447" width="150" height="18" rx="4" fill="#090d18" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1"/>
+            <text x="635" y="460" fill="#38bdf8" font-size="10" font-weight="600">SSL CA Query (:3306)</text>
+
+            <!-- Local Laptop -> Azure Blob -->
+            <path d="M 470 375 C 320 375, 240 430, 240 476" stroke="#c084fc" stroke-dasharray="4 3" marker-end="url(#arrow-purple)"/>
+            <rect x="260" y="412" width="135" height="18" rx="4" fill="#090d18" stroke="rgba(168, 85, 247, 0.4)" stroke-width="1"/>
+            <text x="268" y="425" fill="#c084fc" font-size="10" font-weight="600">Offload Media Uploads</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- COLLAPSIBLE DIAGRAM CODE (MERMAID & ASCII) -->
+      <details style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin: 16px 0 24px;">
+        <summary style="cursor: pointer; font-weight: 600; color: #38bdf8; font-size: 0.9rem; user-select: none;">
+          <span>📋</span> View Mermaid.js &amp; ASCII Diagram Code (for your Thesis Paper &amp; GitHub README)
+        </summary>
+        <div style="margin-top: 14px;">
+          <div class="code-box">
+            <div class="code-header">
+              <span>MERMAID.JS FLOWCHART CODE</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">flowchart TD
+    subgraph Clients["🌐 Clients & Users"]
+        Web["🖥️ Web Visitors & Evaluators&lt;br/&gt;(React / Vite Single Page App)"]
+        Mobile["📱 Mobile Apps & Residents&lt;br/&gt;(React Native Expo / Android APK)"]
+    end
+
+    subgraph Edge["☁️ Edge Delivery & Ingress Layer"]
+        SWA["⚡ Azure Static Web Apps&lt;br/&gt;(Always Free Tier)&lt;br/&gt;• Global Anycast CDN Edge&lt;br/&gt;• Auto Edge SSL Certificates&lt;br/&gt;• 100 GB Bandwidth/month"]
+        Tunnel["🛡️ Cloudflare Zero Trust Tunnel&lt;br/&gt;(100% Free Forever)&lt;br/&gt;• Edge SSL: api.yourdomain.app&lt;br/&gt;• Native WebSocket Protocol Passthrough&lt;br/&gt;• Bypasses ISP CGNAT & Firewalls"]
+    end
+
+    subgraph LocalEngine["💻 Local Laptop Engine (WSL2 Ubuntu / Docker)"]
+        Nginx["🌐 Nginx Reverse Proxy (Port 80/443)"]
+        PHP["⚙️ PHP 8.3-FPM Backend API"]
+        Supervisor["🔄 Supervisor Process Manager"]
+        Reverb["⚡ Laravel Reverb (WebSockets Port 8080)"]
+        Queue["📦 Laravel Queue Worker Daemons"]
+        LocalSpec["💪 8 GB – 16 GB+ Local RAM (Zero OOM Crashes)"]
+        
+        Nginx --&gt; PHP
+        Supervisor --&gt; Reverb
+        Supervisor --&gt; Queue
+    end
+
+    subgraph AzureVault["🏛️ Azure Cloud Vault (12 Months Free)"]
+        MySQL["🗄️ Azure MySQL Flexible Server&lt;br/&gt;• Standard_B1ms (1 vCore, 2 GiB RAM)&lt;br/&gt;• 32 GB High-Speed Cloud SSD&lt;br/&gt;• Encrypted TLS (Port 3306) & Daily Backups"]
+        Blob["📦 Azure Blob Storage (5 GB Free)&lt;br/&gt;• Mobile APK Binaries (80MB–150MB)&lt;br/&gt;• User Uploads & Media Assets"]
+    end
+
+    Web --&gt;|1. HTTPS Page Load| SWA
+    Web -.-&gt;|2. REST API & WebSockets| Tunnel
+    Mobile --&gt;|REST API & WebSockets| Tunnel
+    Mobile -.-&gt;|Download APK Binaries| Blob
+
+    Tunnel --&gt;|Encrypted Outbound WireGuard Tunnel (No Ports)| Nginx
+    PHP --&gt;|SSL Encrypted Query (Port 3306)| MySQL
+    PHP -.-&gt;|Direct Media Upload Pipeline| Blob
+    Queue --&gt;|Async DB Transactions| MySQL</div>
+          </div>
+
+          <div class="code-box" style="margin-top: 14px;">
+            <div class="code-header">
+              <span>ASCII TOPOLOGY REPRESENTATION</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">                                  INTERNET / CLIENTS
                      (Mobile Apps, Web Visitors, Teachers, Residents)
                                          |
             +----------------------------+----------------------------+
@@ -1605,7 +1827,9 @@
                                • 750 hours/month (Standard_B1ms)
                                • 32 GB High-Speed SSD Storage
                                • Enterprise Backups & Cloud Redundancy</div>
-      </div>
+          </div>
+        </div>
+      </details>
 
       <!-- ZERO-STORAGE-BURDEN BREAKDOWN TABLE -->
       <h4 style="margin-top: 28px; color: #fff;">Resource Allocation & Zero-Storage-Burden Breakdown</h4>
