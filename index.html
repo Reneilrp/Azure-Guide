@@ -1080,22 +1080,7 @@
           </div>
         </div>
 
-        <!-- GROUP 2: RENDER -->
-        <div class="do-tree-group open" id="group-render">
-          <button class="do-tree-header" onclick="toggleGroup('group-render')">
-            <span class="do-tree-title"><span>🟣</span> Render Backend</span>
-            <span class="do-caret">▸</span>
-          </button>
-          <div class="do-tree-children">
-            <a href="#render-guide" class="do-tree-link"><span>🚀</span> Web Service Deploy</a>
-            <a href="#render-ports" class="do-tree-link"><span>⚙️</span> Dynamic Port Binding</a>
-            <a href="#render-env" class="do-tree-link"><span>🔑</span> Environment Variables</a>
-            <a href="#render-coldstart" class="do-tree-link"><span>⚡</span> Cold-Start Demo Hack</a>
-            <a href="#render-storage" class="do-tree-link"><span>📁</span> Ephemeral Storage</a>
-          </div>
-        </div>
-
-        <!-- GROUP 3: SUPABASE -->
+        <!-- GROUP 2: SUPABASE -->
         <div class="do-tree-group open" id="group-supabase">
           <button class="do-tree-header" onclick="toggleGroup('group-supabase')">
             <span class="do-tree-title"><span>🟢</span> Supabase DB & Auth</span>
@@ -1107,6 +1092,21 @@
             <a href="#supabase-connection" class="do-tree-link"><span>🔑</span> URI Connection Strings</a>
             <a href="#supabase-tables" class="do-tree-link"><span>📊</span> Visual Table Editor</a>
             <a href="#supabase-pause" class="do-tree-link"><span>⚠️</span> 7-Day Inactivity Hack</a>
+          </div>
+        </div>
+
+        <!-- GROUP 3: RENDER -->
+        <div class="do-tree-group open" id="group-render">
+          <button class="do-tree-header" onclick="toggleGroup('group-render')">
+            <span class="do-tree-title"><span>🟣</span> Render Backend</span>
+            <span class="do-caret">▸</span>
+          </button>
+          <div class="do-tree-children">
+            <a href="#render-guide" class="do-tree-link"><span>🚀</span> Web Service Deploy</a>
+            <a href="#render-ports" class="do-tree-link"><span>⚙️</span> Dynamic Port Binding</a>
+            <a href="#render-env" class="do-tree-link"><span>🔑</span> Environment Variables</a>
+            <a href="#render-coldstart" class="do-tree-link"><span>⚡</span> Cold-Start Demo Hack</a>
+            <a href="#render-storage" class="do-tree-link"><span>📁</span> Ephemeral Storage</a>
           </div>
         </div>
 
@@ -2094,114 +2094,6 @@ ingress:
           <span class="chapter-card-label">← Previous Topic</span>
           <span class="chapter-card-title">Ubuntu VM Setup</span>
         </a>
-        <a href="#junior-quickstart" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
-          <span class="chapter-card-title">Quick Free Stack for Juniors</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- ============================================== -->
-    <!-- SECTION: JUNIOR QUICKSTART & FREE PAAS STACK   -->
-    <!-- ============================================== -->
-    <section id="junior-quickstart" data-platform="architecture">
-      <h2><span>🚀</span> Quick Free Stack (Zero Credit Card for Juniors)</h2>
-      <p>
-        If your juniors or team members only need to deploy a class assignment, temporary prototype, or project for a professor to grade, setting up an Azure VM with SSH keys, security firewall rules, and a bank card verification hold is often overkill.
-      </p>
-      <p>
-        These 100% cardless free-tier platforms let you deploy a full-stack web application in less than 5 minutes directly from GitHub.
-      </p>
-
-      <div class="card-grid">
-        <div class="card">
-          <div class="card-icon">🟢</div>
-          <div class="card-title">Supabase (Database & Auth)</div>
-          <p class="card-desc">PostgreSQL database with visual table editor, instant REST API, and built-in user authentication. 500 MB free, no credit card required.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🟣</div>
-          <div class="card-title">Render (Backend APIs)</div>
-          <p class="card-desc">Deploy Express/Node, Python (FastAPI/Flask/Django), or Go directly from GitHub with automatic HTTPS and free CI/CD.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">▲</div>
-          <div class="card-title">Vercel & Netlify (Frontend)</div>
-          <p class="card-desc">Instant React, Vite, Next.js, or HTML/CSS/JS hosting with global CDN, custom subdomains, and zero build setup.</p>
-        </div>
-      </div>
-
-      <h3>Quick Decision Matrix: When to Use Which?</h3>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Platform</th>
-              <th>Layer</th>
-              <th>Credit Card?</th>
-              <th>Inactivity / Sleep</th>
-              <th>Free Allowance</th>
-              <th>Ideal For</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Render</strong></td>
-              <td>Backend Web Service</td>
-              <td><span class="badge badge-green">❌ No Card</span></td>
-              <td>Sleeps after 15m idle (~45s wake)</td>
-              <td>750 free instance hours / month</td>
-              <td>Express, FastAPI, Flask, NestJS APIs</td>
-            </tr>
-            <tr>
-              <td><strong>Supabase</strong></td>
-              <td>Postgres DB & Auth</td>
-              <td><span class="badge badge-green">❌ No Card</span></td>
-              <td>Pauses after 7 days without queries</td>
-              <td>500 MB DB, 50,000 Monthly Users</td>
-              <td>SQL Database, User Authentication, Admin UI</td>
-            </tr>
-            <tr>
-              <td><strong>Vercel</strong></td>
-              <td>Frontend (React / Vite)</td>
-              <td><span class="badge badge-green">❌ No Card</span></td>
-              <td><span class="badge badge-blue">Always Awake</span> (Edge CDN)</td>
-              <td>100 GB bandwidth / month</td>
-              <td>React, Vite, Next.js, Vue frontends</td>
-            </tr>
-            <tr>
-              <td><strong>Netlify</strong></td>
-              <td>Frontend & Static Drop</td>
-              <td><span class="badge badge-green">❌ No Card</span></td>
-              <td><span class="badge badge-blue">Always Awake</span> (Edge CDN)</td>
-              <td>100 GB bandwidth, Drag & drop deploy</td>
-              <td>Quick static drops, HTML/CSS/JS, Vite</td>
-            </tr>
-            <tr>
-              <td><strong>Neon</strong></td>
-              <td>Serverless PostgreSQL</td>
-              <td><span class="badge badge-green">❌ No Card</span></td>
-              <td>Compute suspends in 5m (&lt;1s wake)</td>
-              <td>0.5 GB storage, instant branching</td>
-              <td>Alternative Postgres when Supabase is paused</td>
-            </tr>
-            <tr>
-              <td><strong>Azure Student</strong></td>
-              <td>Full Cloud / VPS / DB</td>
-              <td><span class="badge badge-amber">💳 $1.01 Hold (Refunded)</span></td>
-              <td><span class="badge badge-blue">24/7 Dedicated VM</span></td>
-              <td>$200 credit + 12 months B1s VM</td>
-              <td>Capstone, Thesis, WebSockets, Docker, Nginx</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="chapter-pagination">
-        <a href="#azure-fallback" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">B1s Fallback & Hybrid Setup</span>
-        </a>
         <a href="#supabase-guide" class="chapter-card next">
           <span class="chapter-card-label">Next Topic →</span>
           <span class="chapter-card-title">Supabase Database & Auth</span>
@@ -2209,7 +2101,9 @@ ingress:
       </div>
     </section>
 
-    <!-- SECTION: SUPABASE -->
+    <!-- ============================================== -->
+    <!-- SECTION: SUPABASE DB & AUTH                    -->
+    <!-- ============================================== -->
     <section id="supabase-guide" data-platform="supabase">
       <h2><span>🟢</span> Supabase — Free PostgreSQL Database & Auth</h2>
       <p>
@@ -2286,9 +2180,9 @@ ingress:
       </div>
 
       <div class="chapter-pagination">
-        <a href="#junior-quickstart" class="chapter-card prev">
+        <a href="#azure-fallback" class="chapter-card prev">
           <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Junior Quickstack & Matrix</span>
+          <span class="chapter-card-title">B1s Fallback & Hybrid Setup</span>
         </a>
         <a href="#render-guide" class="chapter-card next">
           <span class="chapter-card-label">Next Topic →</span>
@@ -2491,9 +2385,117 @@ app.add_middleware(
       </div>
 
       <div class="chapter-pagination">
-        <a href="#render-guide" class="chapter-card prev">
+        <a href="#frontend-guide" class="chapter-card prev">
           <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Render Backend Web Services</span>
+          <span class="chapter-card-title">Vercel & Netlify Frontend</span>
+        </a>
+        <a href="#junior-quickstart" class="chapter-card next">
+          <span class="chapter-card-label">Next Topic →</span>
+          <span class="chapter-card-title">Cardless Stack & Decision Matrix</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============================================== -->
+    <!-- SECTION: JUNIOR QUICKSTART & DECISION MATRIX   -->
+    <!-- ============================================== -->
+    <section id="junior-quickstart" data-platform="architecture">
+      <h2><span>📊</span> Decision Matrix & Cardless Quick Stack</h2>
+      <p>
+        If your juniors or team members only need to deploy a class assignment, temporary prototype, or project for a professor to grade, setting up an Azure VM with SSH keys, security firewall rules, and a bank card verification hold is often overkill.
+      </p>
+      <p>
+        These 100% cardless free-tier platforms let you deploy a full-stack web application in less than 5 minutes directly from GitHub.
+      </p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🟢</div>
+          <div class="card-title">Supabase (Database & Auth)</div>
+          <p class="card-desc">PostgreSQL database with visual table editor, instant REST API, and built-in user authentication. 500 MB free, no credit card required.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🟣</div>
+          <div class="card-title">Render (Backend APIs)</div>
+          <p class="card-desc">Deploy Express/Node, Python (FastAPI/Flask/Django), or Go directly from GitHub with automatic HTTPS and free CI/CD.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">▲</div>
+          <div class="card-title">Vercel & Netlify (Frontend)</div>
+          <p class="card-desc">Instant React, Vite, Next.js, or HTML/CSS/JS hosting with global CDN, custom subdomains, and zero build setup.</p>
+        </div>
+      </div>
+
+      <h3>Quick Decision Matrix: When to Use Which?</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Layer</th>
+              <th>Credit Card?</th>
+              <th>Inactivity / Sleep</th>
+              <th>Free Allowance</th>
+              <th>Ideal For</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Render</strong></td>
+              <td>Backend Web Service</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Sleeps after 15m idle (~45s wake)</td>
+              <td>750 free instance hours / month</td>
+              <td>Express, FastAPI, Flask, NestJS APIs</td>
+            </tr>
+            <tr>
+              <td><strong>Supabase</strong></td>
+              <td>Postgres DB & Auth</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Pauses after 7 days without queries</td>
+              <td>500 MB DB, 50,000 Monthly Users</td>
+              <td>SQL Database, User Authentication, Admin UI</td>
+            </tr>
+            <tr>
+              <td><strong>Vercel</strong></td>
+              <td>Frontend (React / Vite)</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td><span class="badge badge-blue">Always Awake</span> (Edge CDN)</td>
+              <td>100 GB bandwidth / month</td>
+              <td>React, Vite, Next.js, Vue frontends</td>
+            </tr>
+            <tr>
+              <td><strong>Netlify</strong></td>
+              <td>Frontend & Static Drop</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td><span class="badge badge-blue">Always Awake</span> (Edge CDN)</td>
+              <td>100 GB bandwidth, Drag & drop deploy</td>
+              <td>Quick static drops, HTML/CSS/JS, Vite</td>
+            </tr>
+            <tr>
+              <td><strong>Neon</strong></td>
+              <td>Serverless PostgreSQL</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Compute suspends in 5m (&lt;1s wake)</td>
+              <td>0.5 GB storage, instant branching</td>
+              <td>Alternative Postgres when Supabase is paused</td>
+            </tr>
+            <tr>
+              <td><strong>Azure Student</strong></td>
+              <td>Full Cloud / VPS / DB</td>
+              <td><span class="badge badge-amber">💳 $1.01 Hold (Refunded)</span></td>
+              <td><span class="badge badge-blue">24/7 Dedicated VM</span></td>
+              <td>$200 credit + 12 months B1s VM</td>
+              <td>Capstone, Thesis, WebSockets, Docker, Nginx</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#cors-guide" class="chapter-card prev">
+          <span class="chapter-card-label">← Previous Topic</span>
+          <span class="chapter-card-title">Connecting Stack & CORS Fix</span>
         </a>
         <a href="#stack-blueprint" class="chapter-card next">
           <span class="chapter-card-label">Next Topic →</span>
@@ -2583,9 +2585,9 @@ app.add_middleware(
       </div>
 
       <div class="chapter-pagination">
-        <a href="#cors-guide" class="chapter-card prev">
+        <a href="#junior-quickstart" class="chapter-card prev">
           <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Connecting Stack & CORS Fix</span>
+          <span class="chapter-card-title">Cardless Stack & Decision Matrix</span>
         </a>
         <a href="#faq" class="chapter-card next">
           <span class="chapter-card-label">Next Topic →</span>
@@ -2680,11 +2682,11 @@ app.add_middleware(
       <li class="do-toc-item"><a href="#free-forever" class="do-toc-link">Always-Free Tiers (55+)</a></li>
       <li class="do-toc-item"><a href="#vm-setup" class="do-toc-link">Ubuntu VM Setup</a></li>
       <li class="do-toc-item"><a href="#azure-fallback" class="do-toc-link">B1s Fallback & Hybrid Setup</a></li>
-      <li class="do-toc-item"><a href="#junior-quickstart" class="do-toc-link">Cardless Junior Quickstack</a></li>
       <li class="do-toc-item"><a href="#supabase-guide" class="do-toc-link">Supabase Database & Auth</a></li>
       <li class="do-toc-item"><a href="#render-guide" class="do-toc-link">Render Backend APIs</a></li>
       <li class="do-toc-item"><a href="#frontend-guide" class="do-toc-link">Vercel & Netlify Frontend</a></li>
       <li class="do-toc-item"><a href="#cors-guide" class="do-toc-link">Fixing CORS Errors</a></li>
+      <li class="do-toc-item"><a href="#junior-quickstart" class="do-toc-link">Decision Matrix</a></li>
       <li class="do-toc-item"><a href="#stack-blueprint" class="do-toc-link">Production Blueprints</a></li>
       <li class="do-toc-item"><a href="#faq" class="do-toc-link">Frequently Asked Questions</a></li>
     </ul>
@@ -2852,11 +2854,11 @@ app.add_middleware(
     'free-forever': { cat: 'Microsoft Azure', topic: 'Free Forever Allowances' },
     'vm-setup': { cat: 'Microsoft Azure', topic: 'Ubuntu VM Setup' },
     'azure-fallback': { cat: 'Microsoft Azure', topic: 'B1s Fallback & Hybrid Setup' },
-    'junior-quickstart': { cat: 'Architecture & FAQ', topic: 'Decision Matrix' },
     'supabase-guide': { cat: 'Supabase DB & Auth', topic: 'PostgreSQL & Table Editor' },
     'render-guide': { cat: 'Render Backend', topic: 'Web Services & Port Binding' },
     'frontend-guide': { cat: 'Vercel & Netlify', topic: 'Frontend SPA Deployment' },
     'cors-guide': { cat: 'Vercel & Netlify', topic: 'Fixing CORS Errors' },
+    'junior-quickstart': { cat: 'Architecture & FAQ', topic: 'Decision Matrix' },
     'stack-blueprint': { cat: 'Architecture & FAQ', topic: 'Production Blueprints' },
     'faq': { cat: 'Architecture & FAQ', topic: 'Frequently Asked Questions' }
   };
