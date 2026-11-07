@@ -39,7 +39,14 @@ If you require a 100% cloud-hosted VM, Microsoft officially expanded the 12-mont
 If cloud VM capacity is exhausted or you need more than 1 GiB of RAM without paying cloud fees, use the **Hybrid Architecture**:
 > **"Laptop as Engine (CPU/RAM) + Azure as Vault (Storage/Database/CDN)"**
 
-### Visual Architecture Flowchart
+### Visual Flowchart Diagram
+![Hybrid Architecture Flowchart](./hybrid-architecture.svg)
+
+> [!TIP]
+> 🔗 **Open & Download in Mermaid Live Editor:**  
+> [👉 Click here to view, customize, and export this flowchart as PNG / SVG in Mermaid Live](https://mermaid.live/edit#pako:eNqVVn9v2kgQ_SojpDsRXUNsSCJanSoZyC8VEjcmjXTH6bS2B1jV7Fq7a4iv9LvfrNc0NmorNX-gsDs782bmzRu-dBKZYucddJaZ3CVrpgzMJwsB9KeLeKVYvoZxxlEY_feisyjS4SChz6XvHY7hd3jSqPSi8497Z_-eMT6Yp_SZsotFsURvaS_gE9fcSGVfXm1ZVjD75c9Ynb3vPiJLDJyRiUGIuFhlCCFbIQR5ftKKMJMxz7AZJFn69am1tt6vOWYpPKLmqUXaDHHPDN8iXL3kksIFIlWSpxCEH16joEgX4qgUV-nKxexfen6dkj2DCWbkT5UU9U6sFGoNU1aiamGOnoP6MfMh-K9QlKMhIElVFgvaQQyyHSs1XCtEmHNUJ9UxvfP6fbjJZMwyglwmTBsYT-4rBE2ToDDSwYqiKYxRGb7kCTOom1a-58HNCEZMpDuemjXVYSOFWbcgzwshMGuWGfGQ-DiTxISMURp_oZIwVwUBci9cIhTiN5fGtVS4PcrkgPAdsJz3SlmoVG4YFz2W5027uldUo0gmn9FAqKSRicyIGlqbtZLFat18MCpzukANd1EI45v7YF6RQeGOZZn-aYOnMmHZlVhx0eZWHLsr6mpuZA7OBLrP0bQPT3EhTEH1m1h8qk3UezJ8OZ6d6pCYSSXRaPN5KaEbSpq-oXd2fj5ouwhvw5o3b9_WtacjGPYGp9fhjDpIUYVl712bbkWOasu1VK1Z9M4bNzZ2Ytk6Y4LmrM3XCl_8StkpU2yLWX1OyR86oqHGPvTayD8WWLQLiZff3FSX8CwV1QwmDIl9bRWpKh7lmLQ8MAZDS1zbbH8A_iV9-aPuzmMwg25FxoeHGYwV02vUbUhHnYHT0_e2mt8rW3Xnkv3hdZXEj_lUTfknVmSmRYE0rvvoVKCaJKjMoOv3ScZoDp0AHKleGX2ctrqZnLc8VQZwneELj0kII4KKqjkbJDgiZSr9d-RvNAWD7ZhG8w2QsPCRrV9rRAd9W-lbvlqfUh8wrZFG0aQ1yCJRZW7oej6Nah4PBt7lCY3dhPGsrCha5O3ujkjIjqnhkrA3BFQqq_zdCwuhKkUz5kHpww8w4oIpTuPeHXqzkaOFf0H_th7YJQVPeSZZanfDDFPOICCZMN9VBKvI1N-934Pb-TyM3Bqa0uu91fGGUY-s-j14vIrmdgTJ9-tc7Gs5dOY1Zuv2F6yt_4ncCYu8le--KtQBsHtaOX_tx0NhYlmQNtS33XvpRpX0eEcsoA17sneD4LxYXbEu7OJ4dUMkV2WzsXtHtMabCiVJLO1WV1pXagh5TqtR4AHsN1WowgS6FAlMRrQ7mNC0mDlpQO288wY6G1S0EVL6gfKlY9a4qX6qEH0_d77SLaM9F5EDOjSqIBJ3ijylNTfhjKZvUx9__R8r-My_)
+
+### Native GitHub Mermaid Flowchart
 ```mermaid
 flowchart TD
     subgraph Clients["🌐 Clients & Users"]
