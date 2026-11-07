@@ -529,12 +529,17 @@
       color: var(--accent);
     }
 
+    section {
+      margin-bottom: 56px;
+      scroll-margin-top: 90px;
+    }
+
     /* CHAPTER PAGINATION (Next / Prev Cards) */
     .chapter-pagination {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
-      margin: 40px 0 20px;
+      margin: 44px 0 20px;
       padding-top: 28px;
       border-top: 1px solid var(--border);
     }
@@ -542,43 +547,188 @@
     .chapter-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 18px;
+      border-radius: 12px;
+      padding: 16px 20px;
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      transition: all 0.2s;
+      justify-content: center;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chapter-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .chapter-card.prev::before {
+      left: 0;
+      background: #38bdf8;
+    }
+
+    .chapter-card.next::before {
+      right: 0;
+      background: #38bdf8;
     }
 
     .chapter-card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
+      border-color: rgba(56, 189, 248, 0.45);
       background: var(--card-hover);
       transform: translateY(-2px);
+      box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.35);
+    }
+
+    .chapter-card:hover::before {
+      opacity: 1;
     }
 
     .chapter-card.next {
       text-align: right;
+      align-items: flex-end;
       grid-column: 2;
     }
 
     .chapter-card.prev {
       text-align: left;
+      align-items: flex-start;
       grid-column: 1;
+    }
+
+    .chapter-card.single-next {
+      grid-column: 1 / -1;
+      max-width: 420px;
+      margin-left: auto;
+    }
+
+    .chapter-card-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .chapter-card.next .chapter-card-top {
+      flex-direction: row-reverse;
     }
 
     .chapter-card-label {
       font-size: 0.72rem;
       color: var(--text-dim);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
+      letter-spacing: 0.08em;
       font-weight: 700;
     }
 
-    .chapter-card-title {
-      font-size: 0.92rem;
-      color: #fff;
+    .chapter-card-arrow {
+      display: inline-block;
+      transition: transform 0.2s;
+      font-size: 0.95rem;
+      color: #38bdf8;
+    }
+
+    .chapter-card.prev:hover .chapter-card-arrow {
+      transform: translateX(-4px);
+    }
+
+    .chapter-card.next:hover .chapter-card-arrow {
+      transform: translateX(4px);
+    }
+
+    .chapter-card-category {
+      font-size: 0.68rem;
       font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      color: #7dd3fc;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .chapter-card-title {
+      font-size: 0.98rem;
+      color: #ffffff;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .chapter-card-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* SERVICE SPOTLIGHT CARD */
+    .service-spotlight {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(9, 13, 24, 0.95) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 14px;
+      padding: 22px 24px;
+      margin: 18px 0 28px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.4);
+    }
+
+    .service-spotlight::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+    }
+
+    .service-spotlight-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .service-spotlight-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .service-spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .service-spotlight-item {
+      font-size: 0.84rem;
+    }
+
+    .service-spotlight-item strong {
+      display: block;
+      color: #38bdf8;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 3px;
+    }
+
+    .service-spotlight-item span {
+      color: #cbd5e1;
+      line-height: 1.45;
     }
 
     /* HERO */
@@ -1166,6 +1316,33 @@
         As students with the <strong>GitHub Student Developer Pack</strong> or an official university email (e.g., <code>@wmsu.edu.ph</code>), Microsoft provides cloud benefits to host production-ready applications.
       </p>
 
+      <!-- WHAT IS MICROSOFT AZURE SPOTLIGHT -->
+      <div class="service-spotlight">
+        <div class="service-spotlight-header">
+          <div class="service-spotlight-title">
+            <span>☁️</span> What is Microsoft Azure?
+          </div>
+          <span class="badge badge-blue">Enterprise IaaS &amp; PaaS Cloud</span>
+        </div>
+        <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
+          <strong>Microsoft Azure</strong> is Microsoft's global enterprise public cloud computing platform spanning 60+ datacenter regions worldwide. Unlike basic shared web hosts or drag-and-drop website builders, Azure provides raw compute infrastructure (Linux &amp; Windows Virtual Machines), managed cloud databases, object storage, serverless functions, and global Anycast edge networks.
+        </p>
+        <div class="service-spotlight-grid">
+          <div class="service-spotlight-item">
+            <strong>Why Use It for Capstone:</strong>
+            <span>Complete raw server control (root SSH, custom systemd daemons, custom ports, Nginx, Docker, queue workers).</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>What You Get Free:</strong>
+            <span>$200 USD credit (30 days) + 12 months free B1s/B2ats compute (750 hrs/mo) + 32 GB cloud databases + free Static Web Apps.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>Best Suited For:</strong>
+            <span>Senior thesis &amp; capstone systems, live WebSockets (Laravel Reverb), background workers, and 24/7 dedicated production systems.</span>
+          </div>
+        </div>
+      </div>
+
       <div class="card-grid">
         <div class="card">
           <div class="card-icon">💵</div>
@@ -1182,6 +1359,18 @@
           <div class="card-title">Free Static Web Apps</div>
           <p class="card-desc">Free custom domains, unlimited apps, and automatic SSL (HTTPS) certificates forever.</p>
         </div>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#prerequisites" class="chapter-card next single-next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Prerequisites &amp; Student Eligibility</span>
+          <span class="chapter-card-desc">GitHub Student Pack &amp; ₱60–₱70 verification hold details</span>
+        </a>
       </div>
     </section>
 
@@ -1268,6 +1457,27 @@
           </div>
         </div>
       </div>
+
+      <div class="chapter-pagination">
+        <a href="#intro" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Welcome &amp; What You Get</span>
+          <span class="chapter-card-desc">Cloud benefits &amp; student allowances overview</span>
+        </a>
+        <a href="#budget" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Protect Your Card (Budget Alert)</span>
+          <span class="chapter-card-desc">Zero-cost guarantee with billing threshold alerts</span>
+        </a>
+      </div>
     </section>
 
     <!-- SECTION: BUDGET ALERT -->
@@ -1305,6 +1515,27 @@
           <h4>Add Email Notifications</h4>
           <p>Enter your student or personal email address so Azure emails you when spend reaches 50%, 75%, and 90%.</p>
         </div>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#prerequisites" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Prerequisites &amp; Eligibility</span>
+          <span class="chapter-card-desc">GitHub Student Pack &amp; ₱60–₱70 verification hold details</span>
+        </a>
+        <a href="#twelve-months" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">12 Months Free Services</span>
+          <span class="chapter-card-desc">750 hrs B1s VMs, 64 GB SSDs &amp; Flexible Databases</span>
+        </a>
       </div>
     </section>
 
@@ -1376,6 +1607,27 @@
           A 31-day month has $31 \times 24 = 744$ hours. 750 hours allows you to run <strong>exactly 1 instance</strong> running 24/7 for the whole month without incurring costs.
         </div>
       </div>
+
+      <div class="chapter-pagination">
+        <a href="#budget" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Protect Your Card (Budget Alert)</span>
+          <span class="chapter-card-desc">Zero-cost guarantee with billing threshold alerts</span>
+        </a>
+        <a href="#free-forever" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Free Forever (Always-Free 55+)</span>
+          <span class="chapter-card-desc">Static Web Apps, Cosmos DB &amp; Serverless Functions</span>
+        </a>
+      </div>
     </section>
 
     <!-- SECTION: FREE FOREVER -->
@@ -1422,6 +1674,27 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#twelve-months" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">12 Months Free Services</span>
+          <span class="chapter-card-desc">750 hrs B1s VMs, 64 GB SSDs &amp; Flexible Databases</span>
+        </a>
+        <a href="#vm-setup" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Creating Your Ubuntu VM</span>
+          <span class="chapter-card-desc">Deploying Linux server in East Asia with SSH &amp; ports</span>
+        </a>
       </div>
     </section>
 
@@ -1481,12 +1754,22 @@
 
       <div class="chapter-pagination">
         <a href="#free-forever" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Azure Free Forever (55+)</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Free Forever (Always-Free 55+)</span>
+          <span class="chapter-card-desc">Static Web Apps, Cosmos DB &amp; Serverless Functions</span>
         </a>
         <a href="#azure-fallback" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
-          <span class="chapter-card-title">B1s Fallback & Hybrid Setup</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">B1s Fallback &amp; Hybrid Setup</span>
+          <span class="chapter-card-desc">When Standard_B1s is out of stock / quota limit 0</span>
         </a>
       </div>
     </section>
@@ -1966,6 +2249,33 @@ stdout_logfile=/var/log/reverb.log</div>
           <p>
             To allow remote web visitors, judges, and mobile Expo apps to reach your local backend API without port forwarding, router configuration, or static public IPs, install Cloudflare Tunnel:
           </p>
+
+          <!-- WHAT IS CLOUDFLARE TUNNEL SPOTLIGHT -->
+          <div class="service-spotlight" style="border-color: rgba(245, 158, 11, 0.35); margin: 12px 0 16px;">
+            <div class="service-spotlight-header">
+              <div class="service-spotlight-title">
+                <span>🛡️</span> What is Cloudflare Tunnel?
+              </div>
+              <span class="badge badge-amber">Zero Trust Edge Ingress Gateway</span>
+            </div>
+            <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.55; margin-bottom: 0;">
+              <strong>Cloudflare Tunnel</strong> is a lightweight connector daemon (<code>cloudflared</code>) that creates a private, encrypted outbound TLS connection from your local machine directly into Cloudflare's global Anycast edge network. It exposes local ports to custom domains without public static IPs or open router ports.
+            </p>
+            <div class="service-spotlight-grid">
+              <div class="service-spotlight-item">
+                <strong>The Superpower:</strong>
+                <span>Bypasses Carrier-Grade NAT (CGNAT) on Philippine ISPs (Converge, PLDT, Globe, 5G Hotspots) with zero port forwarding.</span>
+              </div>
+              <div class="service-spotlight-item">
+                <strong>What You Get Free:</strong>
+                <span>100% Free forever: unlimited tunnels, free edge SSL certificates, DDoS mitigation, and live WebSocket passthrough.</span>
+              </div>
+              <div class="service-spotlight-item">
+                <strong>Best Suited For:</strong>
+                <span>Hybrid thesis defenses (laptop as high-RAM compute engine + public cloud domain for evaluators).</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2091,12 +2401,22 @@ ingress:
 
       <div class="chapter-pagination">
         <a href="#vm-setup" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Ubuntu VM Setup</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">Creating Your Ubuntu VM</span>
+          <span class="chapter-card-desc">VM provisioning &amp; SSH connection guide</span>
         </a>
         <a href="#supabase-guide" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
-          <span class="chapter-card-title">Supabase Database & Auth</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Supabase DB &amp; Auth</span>
+          </div>
+          <span class="chapter-card-title">Supabase Database &amp; Auth</span>
+          <span class="chapter-card-desc">PostgreSQL database with visual table editor</span>
         </a>
       </div>
     </section>
@@ -2109,6 +2429,33 @@ ingress:
       <p>
         Supabase gives you a production-grade PostgreSQL database with a beginner-friendly spreadsheet-like table editor (no SQL CLI needed), built-in user authentication, and instant connection strings for any backend framework.
       </p>
+
+      <!-- WHAT IS SUPABASE SPOTLIGHT -->
+      <div class="service-spotlight" style="border-color: rgba(16, 185, 129, 0.35);">
+        <div class="service-spotlight-header">
+          <div class="service-spotlight-title">
+            <span>🟢</span> What is Supabase?
+          </div>
+          <span class="badge badge-green">Open-Source Firebase Alternative / Hosted PostgreSQL</span>
+        </div>
+        <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
+          <strong>Supabase</strong> provides a dedicated, production-grade <strong>PostgreSQL</strong> relational database wrapped in an intuitive spreadsheet-like visual dashboard (Table Editor). Along with the database, it bundles built-in User Authentication (email, password, OAuth), Row Level Security (RLS), real-time WebSockets, and file storage buckets.
+        </p>
+        <div class="service-spotlight-grid">
+          <div class="service-spotlight-item">
+            <strong>Why Juniors Love It:</strong>
+            <span>Zero credit card required. You can build tables, edit data visually like Excel, and copy standard PostgreSQL connection URIs in seconds.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>What You Get Free:</strong>
+            <span>500 MB database storage, 50,000 monthly active users, 1 GB file storage, and instant REST API auto-generation.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>Best Suited For:</strong>
+            <span>Prisma, TypeORM, Express, FastAPI, Next.js, and class projects requiring user authentication and relational tables.</span>
+          </div>
+        </div>
+      </div>
 
       <div class="step-item">
         <div class="step-num">1</div>
@@ -2181,12 +2528,22 @@ ingress:
 
       <div class="chapter-pagination">
         <a href="#azure-fallback" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">B1s Fallback & Hybrid Setup</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Microsoft Azure</span>
+          </div>
+          <span class="chapter-card-title">B1s Fallback &amp; Hybrid Setup</span>
+          <span class="chapter-card-desc">When Standard_B1s capacity is depleted</span>
         </a>
         <a href="#render-guide" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Render Backend</span>
+          </div>
           <span class="chapter-card-title">Render Backend Web Services</span>
+          <span class="chapter-card-desc">Deploy Express, FastAPI &amp; Python APIs from Git</span>
         </a>
       </div>
     </section>
@@ -2197,6 +2554,33 @@ ingress:
       <p>
         Render allows juniors to host backend servers (Express, NestJS, FastAPI, Flask, Django) directly from a GitHub repository without configuring Linux servers, Nginx, or SSL certificates.
       </p>
+
+      <!-- WHAT IS RENDER SPOTLIGHT -->
+      <div class="service-spotlight" style="border-color: rgba(168, 85, 247, 0.35);">
+        <div class="service-spotlight-header">
+          <div class="service-spotlight-title">
+            <span>🟣</span> What is Render?
+          </div>
+          <span class="badge badge-purple">Modern Cloud Application Platform (PaaS)</span>
+        </div>
+        <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
+          <strong>Render</strong> is a modern Platform-as-a-Service (PaaS)—the modern successor to classic Heroku. You simply link your GitHub repository, and Render automatically detects your language (Node.js, Python, Go, Rust, Ruby, Docker), builds a container, and deploys it to a secure, public HTTPS URL (<code>https://your-api.onrender.com</code>).
+        </p>
+        <div class="service-spotlight-grid">
+          <div class="service-spotlight-item">
+            <strong>Zero Server Management:</strong>
+            <span>No Linux server updates, no SSH keys, and no manual Certbot SSL renewals. Render builds and restarts containers automatically on git push.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>What You Get Free:</strong>
+            <span>750 free instance hours per month, automatic SSL certificates, custom subdomains, and zero credit card required.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>Best Suited For:</strong>
+            <span>Express, FastAPI, Django, Flask, NestJS REST APIs, and microservices connecting to hosted databases like Supabase.</span>
+          </div>
+        </div>
+      </div>
 
       <div class="step-item" id="render-ports">
         <div class="step-num">1</div>
@@ -2288,12 +2672,22 @@ app.listen(PORT, '0.0.0.0', () => {
 
       <div class="chapter-pagination">
         <a href="#supabase-guide" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Supabase Database & Auth</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Supabase DB &amp; Auth</span>
+          </div>
+          <span class="chapter-card-title">Supabase Database &amp; Auth</span>
+          <span class="chapter-card-desc">PostgreSQL database with visual table editor</span>
         </a>
         <a href="#frontend-guide" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
-          <span class="chapter-card-title">Vercel & Netlify Frontend</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Vercel &amp; Netlify</span>
+          </div>
+          <span class="chapter-card-title">Vercel &amp; Netlify Frontend</span>
+          <span class="chapter-card-desc">Global CDN hosting for React, Vite &amp; static SPAs</span>
         </a>
       </div>
     </section>
@@ -2304,6 +2698,33 @@ app.listen(PORT, '0.0.0.0', () => {
       <p>
         For Single Page Applications (React, Vite, Next.js, Vue, or vanilla HTML/CSS/JS), Vercel and Netlify offer instant global CDN hosting with automatic SSL certificates and continuous deployment.
       </p>
+
+      <!-- WHAT ARE VERCEL & NETLIFY SPOTLIGHT -->
+      <div class="service-spotlight" style="border-color: rgba(56, 189, 248, 0.35);">
+        <div class="service-spotlight-header">
+          <div class="service-spotlight-title">
+            <span>▲</span> What are Vercel &amp; Netlify?
+          </div>
+          <span class="badge badge-blue">Global Frontend Cloud &amp; Edge CDN</span>
+        </div>
+        <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
+          <strong>Vercel</strong> (creators of Next.js) and <strong>Netlify</strong> are edge platforms built specifically for frontend web applications (React, Vite, Next.js, Vue, Svelte, Astro, HTML/CSS/JS). Instead of running a heavy virtual server, they compile your code into static bundles and distribute them across hundreds of global Anycast Edge CDN nodes for sub-second page loads.
+        </p>
+        <div class="service-spotlight-grid">
+          <div class="service-spotlight-item">
+            <strong>Vercel (Git-Connected):</strong>
+            <span>Automatic continuous deployments on every <code>git push</code> with instant shareable preview URLs and automated SSL.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>Netlify Drop (Zero-Git):</strong>
+            <span>Drag-and-drop emergency hosting. Drag your <code>dist</code> folder into the browser and your site is live with HTTPS in 15 seconds.</span>
+          </div>
+          <div class="service-spotlight-item">
+            <strong>Best Suited For:</strong>
+            <span>Single Page Applications (SPAs), web portals, teacher grading interfaces, and admin dashboards connecting to backend APIs.</span>
+          </div>
+        </div>
+      </div>
 
       <div class="card-grid">
         <div class="card" id="vercel-setup">
@@ -2326,6 +2747,27 @@ app.listen(PORT, '0.0.0.0', () => {
             3. Drag the folder directly into the browser. Your site is live with HTTPS in under 15 seconds!
           </p>
         </div>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#render-guide" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Render Backend</span>
+          </div>
+          <span class="chapter-card-title">Render Backend Web Services</span>
+          <span class="chapter-card-desc">Deploy Express, FastAPI &amp; Python APIs from Git</span>
+        </a>
+        <a href="#cors-guide" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Vercel &amp; Netlify</span>
+          </div>
+          <span class="chapter-card-title">Connecting Stack &amp; CORS Fix</span>
+          <span class="chapter-card-desc">Eliminate browser Cross-Origin blocking errors</span>
+        </a>
       </div>
     </section>
 
@@ -2386,12 +2828,22 @@ app.add_middleware(
 
       <div class="chapter-pagination">
         <a href="#frontend-guide" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Vercel & Netlify Frontend</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Vercel &amp; Netlify</span>
+          </div>
+          <span class="chapter-card-title">Vercel &amp; Netlify Frontend</span>
+          <span class="chapter-card-desc">Global CDN hosting for React, Vite &amp; static SPAs</span>
         </a>
         <a href="#junior-quickstart" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
-          <span class="chapter-card-title">Cardless Stack & Decision Matrix</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Architecture &amp; FAQ</span>
+          </div>
+          <span class="chapter-card-title">Cardless Stack &amp; Decision Matrix</span>
+          <span class="chapter-card-desc">Compare Render, Supabase, Vercel, Neon &amp; Azure</span>
         </a>
       </div>
     </section>
@@ -2494,12 +2946,22 @@ app.add_middleware(
 
       <div class="chapter-pagination">
         <a href="#cors-guide" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Connecting Stack & CORS Fix</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Vercel &amp; Netlify</span>
+          </div>
+          <span class="chapter-card-title">Connecting Stack &amp; CORS Fix</span>
+          <span class="chapter-card-desc">Origin headers &amp; middleware fix for Express &amp; FastAPI</span>
         </a>
         <a href="#stack-blueprint" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Architecture &amp; FAQ</span>
+          </div>
           <span class="chapter-card-title">Production Blueprints</span>
+          <span class="chapter-card-desc">Rapid Junior Stack vs Full Capstone vs Hybrid Stack</span>
         </a>
       </div>
     </section>
@@ -2586,12 +3048,22 @@ app.add_middleware(
 
       <div class="chapter-pagination">
         <a href="#junior-quickstart" class="chapter-card prev">
-          <span class="chapter-card-label">← Previous Topic</span>
-          <span class="chapter-card-title">Cardless Stack & Decision Matrix</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Architecture &amp; FAQ</span>
+          </div>
+          <span class="chapter-card-title">Cardless Stack &amp; Decision Matrix</span>
+          <span class="chapter-card-desc">Compare Render, Supabase, Vercel, Neon &amp; Azure</span>
         </a>
         <a href="#faq" class="chapter-card next">
-          <span class="chapter-card-label">Next Topic →</span>
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Architecture &amp; FAQ</span>
+          </div>
           <span class="chapter-card-title">Frequently Asked Questions</span>
+          <span class="chapter-card-desc">Inactivity pauses, card holds &amp; presentation hacks</span>
         </a>
       </div>
     </section>
@@ -2661,6 +3133,27 @@ app.add_middleware(
         <p class="card-desc">
           Yes! An 8 GB RAM Ubuntu VM can host multiple Laravel APIs, React frontends, and databases using Nginx subdomains.
         </p>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#stack-blueprint" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Architecture &amp; FAQ</span>
+          </div>
+          <span class="chapter-card-title">Production Blueprints</span>
+          <span class="chapter-card-desc">Rapid Junior Stack vs Full Capstone vs Hybrid Stack</span>
+        </a>
+        <a href="#intro" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Back to Beginning</span>
+            <span class="chapter-card-arrow">🔝</span>
+            <span class="chapter-card-category">Handbook Start</span>
+          </div>
+          <span class="chapter-card-title">Welcome &amp; Cloud Perks</span>
+          <span class="chapter-card-desc">Return to start of student deployment guide</span>
+        </a>
       </div>
     </section>
 
@@ -2826,7 +3319,7 @@ app.add_middleware(
     updateToggleAllBtn();
   }
 
-  // Keyboard Shortcuts (PHP.net & DO style: / or Ctrl+K focuses search)
+  // Keyboard Shortcuts (PHP.net & DO style: / or Ctrl+K focuses search, [ and ] navigate topics)
   window.addEventListener('keydown', (e) => {
     if ((e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') ||
         ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
@@ -2841,6 +3334,41 @@ app.add_middleware(
       const input = document.getElementById('searchInput');
       if (document.activeElement === input) {
         input.blur();
+      }
+    }
+
+    // Previous / Next Topic Keyboard Navigation ([ for Prev, ] for Next, or Alt+Arrows)
+    if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      const sectionOrder = [
+        'intro', 'prerequisites', 'budget', 'twelve-months', 'free-forever',
+        'vm-setup', 'azure-fallback', 'supabase-guide', 'render-guide',
+        'frontend-guide', 'cors-guide', 'junior-quickstart', 'stack-blueprint', 'faq'
+      ];
+      
+      if (e.key === '[' || (e.altKey && e.key === 'ArrowLeft')) {
+        e.preventDefault();
+        const curr = window.currentSectionId || 'intro';
+        const currIdx = sectionOrder.indexOf(curr);
+        if (currIdx > 0) {
+          const targetId = sectionOrder[currIdx - 1];
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, null, `#${targetId}`);
+          }
+        }
+      } else if (e.key === ']' || (e.altKey && e.key === 'ArrowRight')) {
+        e.preventDefault();
+        const curr = window.currentSectionId || 'intro';
+        const currIdx = sectionOrder.indexOf(curr);
+        if (currIdx >= 0 && currIdx < sectionOrder.length - 1) {
+          const targetId = sectionOrder[currIdx + 1];
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth' });
+            history.pushState(null, null, `#${targetId}`);
+          }
+        }
       }
     }
   });
@@ -2878,6 +3406,7 @@ app.add_middleware(
     });
 
     if (currentId) {
+      window.currentSectionId = currentId;
       // 1. Update Breadcrumbs
       const data = sectionBreadcrumbs[currentId];
       if (data) {
