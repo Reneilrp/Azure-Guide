@@ -403,19 +403,21 @@
       border-radius: 2px;
     }
 
-    /* CENTER MAIN CONTENT (Dynamic Width) */
+    /* CENTER MAIN CONTENT (Spacious Single-Chapter Focus) */
     .do-main-content {
       flex: 1 1 0%;
       min-width: 0;
       width: 100%;
-      max-width: 1080px;
-      padding: 32px 48px 64px;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 36px 48px 80px;
+      overflow-wrap: break-word;
       transition: max-width 0.28s cubic-bezier(0.4, 0, 0.2, 1), padding 0.28s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body.sidebar-collapsed .do-main-content {
-      max-width: 100%;
-      padding: 32px 56px 64px 80px;
+      max-width: 1140px;
+      padding: 36px 56px 80px;
     }
 
     /* BREADCRUMBS (DigitalOcean / PHP Style) */
@@ -451,94 +453,22 @@
       font-weight: 600;
     }
 
-    /* RIGHT TOC SIDEBAR (ON THIS PAGE) */
-    .do-toc-sidebar {
-      width: 250px;
-      padding: 32px 20px 32px 0;
-      position: sticky;
-      top: 60px;
-      height: calc(100vh - 60px);
-      overflow-y: auto;
-      flex-shrink: 0;
+    /* INLINE CODE WORD-BREAK PROTECTION */
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background: rgba(30, 41, 59, 0.7);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
 
-    .do-toc-title {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .do-toc-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      border-left: 1px solid var(--border);
-    }
-
-    .do-toc-item {
-      margin-bottom: 2px;
-    }
-
-    .do-toc-link {
-      display: block;
-      padding: 5px 0 5px 14px;
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.82rem;
-      line-height: 1.4;
-      border-left: 2px solid transparent;
-      margin-left: -1px;
-      transition: all 0.15s;
-    }
-
-    .do-toc-link:hover {
-      color: #fff;
-    }
-
-    .do-toc-link.active {
-      color: var(--accent);
-      border-left-color: var(--accent);
-      font-weight: 600;
-    }
-
-    .do-toc-actions {
-      margin-top: 24px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .do-toc-action-link {
-      color: var(--text-dim);
-      font-size: 0.78rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.15s;
-    }
-    .do-toc-action-link:hover {
-      color: var(--accent);
-    }
-
-    .toc-num {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--text-dim);
-      margin-right: 6px;
-      font-variant-numeric: tabular-nums;
-    }
-    .do-toc-link.active .toc-num {
-      color: var(--accent);
+    .code-box code,
+    .code-body {
+      word-break: normal;
+      overflow-wrap: normal;
     }
 
     /* SINGLE ACTIVE CHAPTER DISPLAY (Option 1: Book Mode) */
@@ -1036,6 +966,9 @@
 
     .callout-content {
       font-size: 0.92rem;
+      min-width: 0;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     .callout-content strong {
@@ -1109,6 +1042,12 @@
       font-weight: 700;
       flex-shrink: 0;
       box-shadow: 0 4px 10px rgba(0, 120, 212, 0.3);
+    }
+
+    .step-details {
+      flex: 1;
+      min-width: 0;
+      overflow-wrap: break-word;
     }
 
     .step-details h4 {
@@ -1188,9 +1127,6 @@
     }
 
     @media (max-width: 1200px) {
-      .do-toc-sidebar {
-        display: none;
-      }
       .do-main-content {
         max-width: 100%;
         padding: 32px 36px 64px;
@@ -3436,33 +3372,6 @@ app.add_middleware(
       </div>
     </section>
   </main>
-
-  <!-- RIGHT TOC SIDEBAR (DigitalOcean "On this page" style) -->
-  <aside class="do-toc-sidebar" id="rightToc">
-    <div class="do-toc-title">
-      <span>📖</span> CHAPTER INDEX
-    </div>
-    <ul class="do-toc-list" id="tocList">
-      <li class="do-toc-item"><a href="#intro" class="do-toc-link active"><span class="toc-num">01</span> Welcome &amp; Perks</a></li>
-      <li class="do-toc-item"><a href="#prerequisites" class="do-toc-link"><span class="toc-num">02</span> Student Eligibility</a></li>
-      <li class="do-toc-item"><a href="#budget" class="do-toc-link"><span class="toc-num">03</span> Budget Protection</a></li>
-      <li class="do-toc-item"><a href="#twelve-months" class="do-toc-link"><span class="toc-num">04</span> 12 Months Free</a></li>
-      <li class="do-toc-item"><a href="#free-forever" class="do-toc-link"><span class="toc-num">05</span> Always-Free Tiers</a></li>
-      <li class="do-toc-item"><a href="#vm-setup" class="do-toc-link"><span class="toc-num">06</span> Ubuntu VM Setup</a></li>
-      <li class="do-toc-item"><a href="#azure-fallback" class="do-toc-link"><span class="toc-num">07</span> B1s Fallback &amp; Hybrid</a></li>
-      <li class="do-toc-item"><a href="#supabase-guide" class="do-toc-link"><span class="toc-num">08</span> Supabase DB &amp; Auth</a></li>
-      <li class="do-toc-item"><a href="#render-guide" class="do-toc-link"><span class="toc-num">09</span> Render Backend APIs</a></li>
-      <li class="do-toc-item"><a href="#frontend-guide" class="do-toc-link"><span class="toc-num">10</span> Vercel &amp; Netlify</a></li>
-      <li class="do-toc-item"><a href="#cors-guide" class="do-toc-link"><span class="toc-num">11</span> Fixing CORS Errors</a></li>
-      <li class="do-toc-item"><a href="#junior-quickstart" class="do-toc-link"><span class="toc-num">12</span> Decision Matrix</a></li>
-      <li class="do-toc-item"><a href="#stack-blueprint" class="do-toc-link"><span class="toc-num">13</span> Stack Blueprints</a></li>
-      <li class="do-toc-item"><a href="#faq" class="do-toc-link"><span class="toc-num">14</span> FAQ &amp; Solutions</a></li>
-    </ul>
-    <div class="do-toc-actions">
-      <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="do-toc-action-link"><span>⬆</span> Top of chapter</a>
-      <a href="https://github.com/Reneilrp/Azure-Guide" target="_blank" rel="noopener noreferrer" class="do-toc-action-link"><span>🐙</span> View repository</a>
-    </div>
-  </aside>
 </div> <!-- do-container -->
 
 <script>
@@ -3671,17 +3580,7 @@ app.add_middleware(
       }
     });
 
-    // 6. Update Right TOC Active Link
-    const tocLinks = document.querySelectorAll('.do-toc-link');
-    tocLinks.forEach(link => {
-      if (link.getAttribute('href') === `#${targetId}`) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-
-    // 7. Update URL Hash
+    // 5. Update URL Hash
     if (updateHistory) {
       const newHash = targetElementId ? `#${targetElementId}` : `#${targetId}`;
       if (window.location.hash !== newHash) {
