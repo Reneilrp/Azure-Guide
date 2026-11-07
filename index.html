@@ -541,121 +541,7 @@
       color: var(--accent);
     }
 
-    /* CHAPTER READER BAR (Option 1: Book Mode) */
-    .chapter-reader-bar {
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px 18px;
-      margin-bottom: 24px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-    }
-
-    .crb-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
-    }
-
-    .crb-badge-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      min-width: 0;
-    }
-
-    .crb-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(0, 120, 212, 0.16);
-      border: 1px solid rgba(0, 120, 212, 0.35);
-      color: #38bdf8;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 3px 9px;
-      border-radius: 6px;
-      white-space: nowrap;
-    }
-
-    .crb-title {
-      color: #f8fafc;
-      font-size: 0.9rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 380px;
-    }
-
-    .crb-nav-controls {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .crb-btn {
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      color: #e2e8f0;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      transition: all 0.16s ease;
-      font-family: inherit;
-    }
-
-    .crb-btn:hover:not(:disabled) {
-      background: rgba(0, 120, 212, 0.25);
-      border-color: rgba(56, 189, 248, 0.4);
-      color: #fff;
-    }
-
-    .crb-btn:disabled,
-    .crb-btn.disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-      border-color: rgba(148, 163, 184, 0.1);
-    }
-
-    .crb-percent {
-      color: var(--text-dim);
-      font-size: 0.8rem;
-      font-weight: 600;
-      font-variant-numeric: tabular-nums;
-      min-width: 38px;
-      text-align: center;
-    }
-
-    .crb-track {
-      width: 100%;
-      height: 4px;
-      background: rgba(30, 41, 59, 0.9);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .crb-progress {
-      height: 100%;
-      background: linear-gradient(90deg, #0078d4, #38bdf8);
-      border-radius: 999px;
-      transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* SINGLE ACTIVE CHAPTER DISPLAY (Option 1) */
+    /* SINGLE ACTIVE CHAPTER DISPLAY (Option 1: Book Mode) */
     .do-main-content > section {
       display: none;
       margin-bottom: 40px;
@@ -676,6 +562,77 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    /* VISUAL SERVICE FLOW BANNERS */
+    .flow-pipeline-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+      margin: 20px 0 28px;
+    }
+
+    .flow-step-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+
+    .flow-step-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .flow-step-badge {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: rgba(0, 120, 212, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: #38bdf8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .flow-step-card.green .flow-step-badge {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #34d399;
+    }
+
+    .flow-step-card.purple .flow-step-badge {
+      background: rgba(168, 85, 247, 0.2);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #c084fc;
+    }
+
+    .flow-step-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .flow-step-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      line-height: 1.3;
+    }
+
+    .flow-step-sub {
+      font-size: 0.74rem;
+      color: var(--text-dim);
+      line-height: 1.3;
     }
 
     /* CHAPTER PAGINATION (Next / Prev Cards) */
@@ -1437,28 +1394,6 @@
         <span id="crumbCategory">Microsoft Azure</span>
         <span class="crumb-sep">/</span>
         <span class="crumb-current" id="crumbCurrent">Welcome & Perks</span>
-      </div>
-
-      <!-- CHAPTER READER BAR (Option 1: Book Mode) -->
-      <div class="chapter-reader-bar" id="chapterReaderBar">
-        <div class="crb-info">
-          <div class="crb-badge-group">
-            <span class="crb-badge" id="chapterBadge">Chapter 1 of 14</span>
-            <span class="crb-title" id="chapterBarTitle">Welcome &amp; Perks</span>
-          </div>
-          <div class="crb-nav-controls">
-            <button type="button" class="crb-btn" id="btnPrevChapter" onclick="prevChapter()" title="Previous Chapter ([ key)" aria-label="Previous Chapter">
-              <span>←</span> Prev
-            </button>
-            <span class="crb-percent" id="chapterPercent">7%</span>
-            <button type="button" class="crb-btn" id="btnNextChapter" onclick="nextChapter()" title="Next Chapter (] key)" aria-label="Next Chapter">
-              Next <span>→</span>
-            </button>
-          </div>
-        </div>
-        <div class="crb-track" role="progressbar" aria-valuemin="1" aria-valuemax="14" aria-valuenow="1" aria-label="Chapter reading progress">
-          <div class="crb-progress" id="chapterProgressBar" style="width: 7.14%;"></div>
-        </div>
       </div>
 
       <div class="hero" id="heroBanner">
@@ -2587,9 +2522,9 @@ ingress:
     <!-- SECTION: SUPABASE DB & AUTH                    -->
     <!-- ============================================== -->
     <section id="supabase-guide" data-platform="supabase">
-      <h2><span>🟢</span> Supabase — Free PostgreSQL Database & Auth</h2>
+      <h2><span>🟢</span> Supabase — Free PostgreSQL Database &amp; Auth</h2>
       <p>
-        Supabase gives you a production-grade PostgreSQL database with a beginner-friendly spreadsheet-like table editor (no SQL CLI needed), built-in user authentication, and instant connection strings for any backend framework.
+        Supabase provides a production-grade PostgreSQL relational database with a spreadsheet-like visual table editor, built-in user authentication, and connection pooling for cloud backends.
       </p>
 
       <!-- WHAT IS SUPABASE SPOTLIGHT -->
@@ -2601,12 +2536,12 @@ ingress:
           <span class="badge badge-green">Open-Source Firebase Alternative / Hosted PostgreSQL</span>
         </div>
         <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
-          <strong>Supabase</strong> provides a dedicated, production-grade <strong>PostgreSQL</strong> relational database wrapped in an intuitive spreadsheet-like visual dashboard (Table Editor). Along with the database, it bundles built-in User Authentication (email, password, OAuth), Row Level Security (RLS), real-time WebSockets, and file storage buckets.
+          <strong>Supabase</strong> provides a dedicated <strong>PostgreSQL</strong> relational database wrapped in an intuitive spreadsheet-like dashboard. Along with SQL tables, it bundles built-in User Authentication (Email, Google, GitHub), Row Level Security (RLS), real-time WebSockets, and file storage buckets.
         </p>
         <div class="service-spotlight-grid">
           <div class="service-spotlight-item">
             <strong>Why Juniors Love It:</strong>
-            <span>Zero credit card required. You can build tables, edit data visually like Excel, and copy standard PostgreSQL connection URIs in seconds.</span>
+            <span>Zero credit card required. Build relational tables, edit rows visually like Excel, and get standard PostgreSQL connection strings in seconds.</span>
           </div>
           <div class="service-spotlight-item">
             <strong>What You Get Free:</strong>
@@ -2614,77 +2549,151 @@ ingress:
           </div>
           <div class="service-spotlight-item">
             <strong>Best Suited For:</strong>
-            <span>Prisma, TypeORM, Express, FastAPI, Next.js, and class projects requiring user authentication and relational tables.</span>
+            <span>Prisma, TypeORM, Express, FastAPI, Django, Laravel, and student projects needing hosted databases without running Linux server daemons.</span>
           </div>
         </div>
       </div>
 
+      <!-- VISUAL 4-STAGE DB LIFECYCLE PIPELINE -->
+      <div class="flow-pipeline-bar">
+        <div class="flow-step-card green">
+          <div class="flow-step-badge">1</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Project &amp; Region</span>
+            <span class="flow-step-sub">Singapore (ap-southeast-1)</span>
+          </div>
+        </div>
+        <div class="flow-step-card green">
+          <div class="flow-step-badge">2</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Table Editor &amp; RLS</span>
+            <span class="flow-step-sub">Visual schema + Policy bypass</span>
+          </div>
+        </div>
+        <div class="flow-step-card green">
+          <div class="flow-step-badge">3</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">IPv4 Pooler URI</span>
+            <span class="flow-step-sub">Port 6543 (Prevents Render drops)</span>
+          </div>
+        </div>
+        <div class="flow-step-card green">
+          <div class="flow-step-badge">4</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Connect Backend</span>
+            <span class="flow-step-sub">Prisma / Express / Python ORM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: SIGN UP & REGION -->
       <div class="step-item">
         <div class="step-num">1</div>
         <div class="step-details">
           <h4>Sign up with GitHub (Zero Card Required)</h4>
           <p>
-            Go to <a href="https://supabase.com" target="_blank" style="color: var(--accent);">supabase.com</a>, click <strong>Start your project</strong>, and sign in with your GitHub account. No credit card or billing information is required.
+            Go to <a href="https://supabase.com" target="_blank" style="color: var(--accent);">supabase.com</a>, click <strong>Start your project</strong>, and authenticate with your GitHub account. No credit card or billing information is required.
           </p>
         </div>
       </div>
 
+      <!-- STEP 2: PROJECT & REGION SETUP -->
       <div class="step-item" id="supabase-setup">
         <div class="step-num">2</div>
         <div class="step-details">
-          <h4>Create a New Project & Database</h4>
+          <h4>Create a New Project &amp; Set Region</h4>
           <p>
-            Click <strong>New Project</strong>. Choose your free organization, assign a project name (e.g., <code>student-capstone-db</code>), and generate a strong <strong>Database Password</strong> (keep this password saved!).
+            Click <strong>New Project</strong>. Choose your free organization, assign a project name (e.g., <code>capstone-db</code>), and generate a strong <strong>Database Password</strong> (save this in a secure note!).
           </p>
           <div class="callout callout-info" style="margin-top: 10px;">
-            <div class="callout-icon">💡</div>
+            <div class="callout-icon">🌏</div>
             <div class="callout-content">
-              <strong>Region Recommendation:</strong> Select <strong>Singapore (ap-southeast-1)</strong> or the region geographically closest to you to minimize database query latency.
+              <strong>Crucial Regional Choice:</strong> Select <strong>Singapore (ap-southeast-1)</strong> or the region closest to your campus. Choosing US or Europe adds 250ms–350ms of latency to every single database query!
             </div>
           </div>
         </div>
       </div>
 
-      <div class="step-item" id="supabase-connection">
+      <!-- STEP 3: TABLE EDITOR & THE RLS TRAP -->
+      <div class="step-item" id="supabase-tables">
         <div class="step-num">3</div>
         <div class="step-details">
-          <h4>Grab Your Connection String for Render / Backend</h4>
+          <h4>Visual Table Editor &amp; The #1 Junior Trap: Row Level Security (RLS)</h4>
           <p>
-            To connect Prisma, TypeORM, Mongoose/Postgres, Sequelize, or Python SQLAlchemy to Supabase:
+            Click the <strong>Table Editor</strong> (grid icon in sidebar) &rarr; <strong>New Table</strong>. Define your columns (e.g. <code>id</code> uuid/int8, <code>title</code> text, <code>created_at</code> timestamptz).
           </p>
-          <p>
-            Go to <strong>Project Settings</strong> (gear icon at the bottom left) ➡️ <strong>Database</strong> ➡️ scroll down to <strong>Connection string</strong> ➡️ select <strong>URI</strong>:
-          </p>
-          <div class="code-box">
-            <div class="code-header">
-              <span>PostgreSQL URI Connection String</span>
-              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          
+          <div class="callout callout-warning" style="margin-top: 12px;">
+            <div class="callout-icon">⚠️</div>
+            <div class="callout-content">
+              <strong>The RLS "Silent Empty Array" Trap:</strong><br>
+              Supabase automatically checks <strong>"Enable Row Level Security (RLS)"</strong> by default on new tables. If enabled without policies, queries return <code>200 OK</code> with an <strong>empty array <code>[]</code></strong>!
+              <br><br>
+              <strong>How to Handle RLS:</strong>
+              <ul style="margin: 6px 0 0 16px;">
+                <li><strong>If connecting from Backend (Node / Express / Python / Prisma):</strong> Your backend connects using the <code>postgres</code> superuser role via the connection URI, which <strong>automatically bypasses RLS</strong>. No extra policy needed!</li>
+                <li><strong>If connecting from Frontend (@supabase/supabase-js directly):</strong> You must add a policy. Click <em>Add RLS Policy &rarr; Enable read access for all users</em> (<code>FOR SELECT USING (true)</code>), or uncheck RLS for student prototypes.</li>
+              </ul>
             </div>
-            <div class="code-body">postgresql://postgres.[PROJECT-REF]:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres</div>
           </div>
-          <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">
-            💡 <em>Replace <code>[YOUR-PASSWORD]</code> with the password you set during step 2.</em>
-          </p>
         </div>
       </div>
 
-      <div class="step-item" id="supabase-tables">
+      <!-- STEP 4: IPv4 POOLER CONNECTION STRING -->
+      <div class="step-item" id="supabase-connection">
         <div class="step-num">4</div>
         <div class="step-details">
-          <h4>Visual Table Editor & Mock Data</h4>
+          <h4>Grab Your IPv4 Connection Pooler URI (The Render Gotcha)</h4>
           <p>
-            Click the <strong>Table Editor</strong> (grid icon) in the Supabase sidebar. You can create tables, define columns (<code>text</code>, <code>int8</code>, <code>boolean</code>, <code>uuid</code>), add primary keys, and insert rows manually without writing raw SQL.
+            Supabase direct connections on port <code>5432</code> use <strong>IPv6</strong> by default. However, free cloud platforms like Render do <strong>not support outbound IPv6</strong>! If you use the direct URI, your backend will fail to connect with <code>ENOTFOUND</code> or timeout.
+          </p>
+          <p>
+            <strong>The Fix:</strong> Always use the <strong>IPv4 Connection Pooler (Port 6543)</strong>:
+          </p>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px; font-size: 0.9rem;">
+            <li>Click <strong>Connect</strong> at the top of your Supabase project dashboard.</li>
+            <li>Select <strong>Transaction Pooler</strong> (or <strong>Session Pooler</strong> for Prisma/TypeORM).</li>
+            <li>Select <strong>Mode: URI</strong> and make sure <strong>Port 6543</strong> is visible:</li>
+          </ol>
+          <div class="code-box">
+            <div class="code-header">
+              <span>Supabase IPv4 Connection Pooler URI (Port 6543)</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">postgresql://postgres.[PROJECT-REF]:[YOUR-PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require</div>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-top: 4px;">
+            💡 <em>Replace <code>[YOUR-PASSWORD]</code> with your database password. This is the exact string you paste into Render's <code>DATABASE_URL</code>!</em>
           </p>
         </div>
       </div>
 
+      <!-- ARCHITECTURE RULE: BACKEND ORM VS FRONTEND CLIENT -->
+      <div class="card-grid" style="margin: 20px 0;">
+        <div class="card">
+          <div class="card-title">Backend Architecture (ORM / Driver)</div>
+          <p class="card-desc">
+            <strong>Express, FastAPI, Django, Laravel, Prisma, TypeORM:</strong>
+            Connect via the PostgreSQL Pooler URI (port 6543). Keep this connection string in your backend <code>.env</code> file. <strong>Never</strong> expose this string in frontend React or Vue code!
+          </p>
+        </div>
+        <div class="card">
+          <div class="card-title">Frontend Architecture (Client SDK)</div>
+          <p class="card-desc">
+            <strong>React, Vite, Vue, Next.js:</strong>
+            Use <code>@supabase/supabase-js</code> with public keys (<code>VITE_SUPABASE_URL</code> + <code>VITE_SUPABASE_ANON_KEY</code>). Use this for built-in user authentication (Google login) and real-time database subscriptions.
+          </p>
+        </div>
+      </div>
+
+      <!-- STEP 5: 7-DAY INACTIVITY AUTO-PAUSE HACK -->
       <div class="callout callout-warning" id="supabase-pause">
-        <div class="callout-icon">⚠️</div>
+        <div class="callout-icon">⚡</div>
         <div class="callout-content">
-          <strong>Crucial Junior Gotcha: The 7-Day Inactivity Pause</strong>
-          Supabase pauses free-tier databases if no queries occur for <strong>7 consecutive days</strong> to preserve shared server capacity.
+          <strong>Crucial Junior Gotcha: The 7-Day Inactivity Auto-Pause</strong>
+          Supabase pauses free-tier databases if no queries occur for <strong>7 consecutive days</strong> to conserve shared cloud server capacity.
           <br><br>
-          <strong>Presentation Hack:</strong> If you haven't opened your project in a week, log into the Supabase dashboard <strong>15 minutes before your demo</strong>. If your project status shows <em>"Paused"</em>, simply click <strong>Restore Project</strong>. It will be back online in about 60 to 90 seconds with zero data loss!
+          <strong>Presentation Hack:</strong> If you haven't opened your project in a week, open your Supabase dashboard <strong>15 minutes before your professor tests the project</strong>. If it displays <em>"Paused"</em>, click <strong>Restore Project</strong>. Your database is fully back online in 60 to 90 seconds with zero data loss!
         </div>
       </div>
 
@@ -2714,7 +2723,7 @@ ingress:
     <section id="render-guide" data-platform="render">
       <h2><span>🟣</span> Render — Free Backend APIs (Node / Python / Go)</h2>
       <p>
-        Render allows juniors to host backend servers (Express, NestJS, FastAPI, Flask, Django) directly from a GitHub repository without configuring Linux servers, Nginx, or SSL certificates.
+        Render allows juniors to host backend servers (Express, NestJS, FastAPI, Flask, Django) directly from a GitHub repository without managing Linux servers, Nginx configurations, or SSL certificates.
       </p>
 
       <!-- WHAT IS RENDER SPOTLIGHT -->
@@ -2726,7 +2735,7 @@ ingress:
           <span class="badge badge-purple">Modern Cloud Application Platform (PaaS)</span>
         </div>
         <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
-          <strong>Render</strong> is a modern Platform-as-a-Service (PaaS)—the modern successor to classic Heroku. You simply link your GitHub repository, and Render automatically detects your language (Node.js, Python, Go, Rust, Ruby, Docker), builds a container, and deploys it to a secure, public HTTPS URL (<code>https://your-api.onrender.com</code>).
+          <strong>Render</strong> is a modern Platform-as-a-Service (PaaS)—the modern successor to classic Heroku. You simply link your GitHub repository, and Render automatically detects your language (Node.js, Python, Go, Docker), builds a container, and deploys it to a secure, public HTTPS URL (<code>https://your-api.onrender.com</code>).
         </p>
         <div class="service-spotlight-grid">
           <div class="service-spotlight-item">
@@ -2744,12 +2753,44 @@ ingress:
         </div>
       </div>
 
+      <!-- VISUAL 4-STAGE BACKEND LIFECYCLE PIPELINE -->
+      <div class="flow-pipeline-bar">
+        <div class="flow-step-card purple">
+          <div class="flow-step-badge">1</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Dynamic Port</span>
+            <span class="flow-step-sub">0.0.0.0 + process.env.PORT</span>
+          </div>
+        </div>
+        <div class="flow-step-card purple">
+          <div class="flow-step-badge">2</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Git Auto-Deploy</span>
+            <span class="flow-step-sub">Free Web Service from Repo</span>
+          </div>
+        </div>
+        <div class="flow-step-card purple">
+          <div class="flow-step-badge">3</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Link Supabase DB</span>
+            <span class="flow-step-sub">DATABASE_URL (IPv4 Pooler)</span>
+          </div>
+        </div>
+        <div class="flow-step-card purple">
+          <div class="flow-step-badge">4</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Cold-Start Hack</span>
+            <span class="flow-step-sub">/api/health ping 2 mins before</span>
+          </div>
+        </div>
+      </div>
+
       <div class="step-item" id="render-ports">
         <div class="step-num">1</div>
         <div class="step-details">
-          <h4>Prepare Your Code (Dynamic Port & 0.0.0.0 Binding)</h4>
+          <h4>Prepare Your Code (Dynamic Port &amp; 0.0.0.0 Binding)</h4>
           <p>
-            Render injects a dynamic <code>PORT</code> environment variable into your container. Your code <strong>must</strong> read this variable and listen on all interfaces (<code>0.0.0.0</code>):
+            Render injects a dynamic <code>PORT</code> environment variable into your container. Your code <strong>must</strong> read this variable and listen on all interfaces (<code>0.0.0.0</code>) instead of hardcoding <code>localhost</code> or <code>3000</code>:
           </p>
           <div class="code-box">
             <div class="code-header">
@@ -2795,17 +2836,19 @@ app.listen(PORT, '0.0.0.0', () => {
       <div class="step-item" id="render-env">
         <div class="step-num">3</div>
         <div class="step-details">
-          <h4>Configure Environment Variables (Link Supabase)</h4>
+          <h4>Configure Environment Variables (Link Supabase Database)</h4>
           <p>
-            In the <strong>Environment</strong> section, add your secrets:
+            In the <strong>Environment</strong> section of your Render Web Service dashboard, add your secrets:
           </p>
           <ul style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
-            <li><code>DATABASE_URL</code> = Paste your Supabase URI connection string</li>
-            <li><code>JWT_SECRET</code> = Any private secret key</li>
+            <li><code>DATABASE_URL</code> = Paste the Supabase IPv4 Pooler URI (port 6543) from Chapter 8:
+              <br><code style="font-size: 0.78rem;">postgresql://postgres.[REF]:[PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require</code>
+            </li>
+            <li><code>JWT_SECRET</code> = Any long private random string</li>
             <li><code>NODE_ENV</code> = <code>production</code></li>
           </ul>
           <p>
-            Click <strong>Deploy Web Service</strong>. In 2 to 3 minutes, Render issues a free live HTTPS URL:
+            Click <strong>Deploy Web Service</strong>. In 2 to 3 minutes, Render issues a live public HTTPS URL:
             <br>
             <code>https://&lt;your-app&gt;.onrender.com</code>
           </p>
@@ -2816,9 +2859,9 @@ app.listen(PORT, '0.0.0.0', () => {
         <div class="callout-icon">⚡</div>
         <div class="callout-content">
           <strong>The Render "Cold Start" Wake-up Hack (Must Read for Juniors)</strong>
-          Free Render instances automatically spin down to sleep mode after <strong>15 minutes of inactivity</strong>. When a new request arrives, Render needs <strong>40 to 50 seconds</strong> to spin the container back up.
+          Free Render instances spin down to sleep mode after <strong>15 minutes of inactivity</strong>. When a new request arrives, Render takes <strong>40 to 50 seconds</strong> to spin the container back up.
           <br><br>
-          <strong>Presentation Hack:</strong> Open your backend health URL (e.g. <code>https://my-api.onrender.com/api/health</code>) in your browser or phone <strong>2 minutes before your professor tests the project</strong>. Once woken, the API responds with zero lag throughout your presentation!
+          <strong>Presentation Hack:</strong> Open your backend health URL (e.g. <code>https://my-api.onrender.com/api/health</code>) on your phone <strong>2 minutes before your professor tests the project</strong>. Once awake, the API responds with zero lag throughout your presentation!
         </div>
       </div>
 
@@ -2826,9 +2869,9 @@ app.listen(PORT, '0.0.0.0', () => {
         <div class="callout-icon">📁</div>
         <div class="callout-content">
           <strong>Warning on File Uploads (Ephemeral Filesystem):</strong>
-          Render free instances have ephemeral disks. If your app saves uploaded images to a local folder like <code>./uploads</code> with Multer, those files will disappear on redeploy or spin-down.
+          Render free instances have ephemeral disks. If your app saves uploaded images to a local folder like <code>./uploads</code> with Multer, those files disappear on redeploy or container restart.
           <br>
-          <strong>Cardless Free Solution:</strong> Use <strong>Supabase Storage</strong> (1 GB free bucket) or <strong>Cloudinary</strong> (25 GB free tier) to store uploaded images and keep only image URLs in your database.
+          <strong>Cardless Free Solution:</strong> Use <strong>Supabase Storage</strong> (1 GB free bucket) or <strong>Cloudinary</strong> (25 GB free tier) to store uploaded images, and store only the public image URL strings in your PostgreSQL database!
         </div>
       </div>
 
@@ -2856,9 +2899,9 @@ app.listen(PORT, '0.0.0.0', () => {
 
     <!-- SECTION: FRONTEND -->
     <section id="frontend-guide" data-platform="frontend">
-      <h2><span>▲</span> Vercel & Netlify — Free Frontend Hosting</h2>
+      <h2><span>▲</span> Vercel &amp; Netlify — Free Frontend Hosting</h2>
       <p>
-        For Single Page Applications (React, Vite, Next.js, Vue, or vanilla HTML/CSS/JS), Vercel and Netlify offer instant global CDN hosting with automatic SSL certificates and continuous deployment.
+        For Single Page Applications (React, Vite, Next.js, Vue, or vanilla HTML/CSS/JS), Vercel and Netlify offer instant global Edge CDN hosting with automated SSL certificates, continuous deployment, and preview URLs.
       </p>
 
       <!-- WHAT ARE VERCEL & NETLIFY SPOTLIGHT -->
@@ -2870,33 +2913,59 @@ app.listen(PORT, '0.0.0.0', () => {
           <span class="badge badge-blue">Global Frontend Cloud &amp; Edge CDN</span>
         </div>
         <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
-          <strong>Vercel</strong> (creators of Next.js) and <strong>Netlify</strong> are edge platforms built specifically for frontend web applications (React, Vite, Next.js, Vue, Svelte, Astro, HTML/CSS/JS). Instead of running a heavy virtual server, they compile your code into static bundles and distribute them across hundreds of global Anycast Edge CDN nodes for sub-second page loads.
+          <strong>Vercel</strong> (creators of Next.js) and <strong>Netlify</strong> compile your frontend code into static assets (HTML, CSS, JS bundles) and distribute them across hundreds of global Anycast Edge CDN nodes for sub-second page loads worldwide.
         </p>
         <div class="service-spotlight-grid">
           <div class="service-spotlight-item">
             <strong>Vercel (Git-Connected):</strong>
-            <span>Automatic continuous deployments on every <code>git push</code> with instant shareable preview URLs and automated SSL.</span>
+            <span>Automatic continuous deployment on every <code>git push</code> with instant preview URLs and automated SSL.</span>
           </div>
           <div class="service-spotlight-item">
             <strong>Netlify Drop (Zero-Git):</strong>
-            <span>Drag-and-drop emergency hosting. Drag your <code>dist</code> folder into the browser and your site is live with HTTPS in 15 seconds.</span>
+            <span>Emergency drag-and-drop hosting. Drag your local <code>dist</code> folder into the browser and your site is live with HTTPS in 15 seconds.</span>
           </div>
           <div class="service-spotlight-item">
             <strong>Best Suited For:</strong>
-            <span>Single Page Applications (SPAs), web portals, teacher grading interfaces, and admin dashboards connecting to backend APIs.</span>
+            <span>React, Vite, Next.js, Vue, Svelte, and teacher grading interfaces connecting to backend APIs.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISUAL FRONTEND PIPELINE BANNER -->
+      <div class="flow-pipeline-bar">
+        <div class="flow-step-card">
+          <div class="flow-step-badge">1</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Build Settings</span>
+            <span class="flow-step-sub">npm run build &rarr; dist directory</span>
+          </div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-badge">2</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Environment Variable</span>
+            <span class="flow-step-sub">VITE_API_BASE_URL (Render URL)</span>
+          </div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-badge">3</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">SPA Routing Fix</span>
+            <span class="flow-step-sub">_redirects or vercel.json rewrite</span>
           </div>
         </div>
       </div>
 
       <div class="card-grid">
         <div class="card" id="vercel-setup">
-          <div class="card-title">Option A: Vercel (Recommended for React & Vite)</div>
+          <div class="card-title">Option A: Vercel (Recommended for React &amp; Vite)</div>
           <p class="card-desc">
             1. Visit <a href="https://vercel.com" target="_blank" style="color: var(--accent);">vercel.com</a> and sign in with GitHub.<br>
-            2. Click <strong>Add New... ➡️ Project</strong> and select your frontend repo.<br>
-            3. In <strong>Environment Variables</strong>, add your Render API URL:
-            <br><code>VITE_API_URL = https://your-backend.onrender.com</code><br>
-            4. Click <strong>Deploy</strong>. Live in ~30 seconds with automatic preview URLs on every git push.
+            2. Click <strong>Add New... &rarr; Project</strong> and import your frontend repo.<br>
+            3. Framework preset: Select <strong>Vite</strong> or <strong>Next.js</strong>.<br>
+            4. In <strong>Environment Variables</strong>, add your live Render API URL:<br>
+            <code>VITE_API_BASE_URL = https://your-backend.onrender.com</code><br>
+            5. Click <strong>Deploy</strong>. Live in ~30 seconds with automatic HTTPS!
           </p>
         </div>
 
@@ -2904,10 +2973,33 @@ app.listen(PORT, '0.0.0.0', () => {
           <div class="card-title">Option B: Netlify Drop (Emergency 60-Second Deploy)</div>
           <p class="card-desc">
             Need to deploy immediately without setting up Git?<br>
-            1. Run <code>npm run build</code> locally to create the production <code>dist</code> or <code>build</code> folder.<br>
-            2. Open <a href="https://app.netlify.com/drop" target="_blank" style="color: var(--accent);">app.netlify.com/drop</a>.<br>
-            3. Drag the folder directly into the browser. Your site is live with HTTPS in under 15 seconds!
+            1. Run <code>npm run build</code> locally to generate your production <code>dist</code> or <code>build</code> folder.<br>
+            2. Open <a href="https://app.netlify.com/drop" target="_blank" style="color: var(--accent);">app.netlify.com/drop</a> in your browser.<br>
+            3. Drag the folder directly into the window. Live with HTTPS in under 15 seconds!
           </p>
+        </div>
+      </div>
+
+      <!-- CRUCIAL SPA REFRESH 404 GOTCHA -->
+      <div class="callout callout-warning" style="margin-top: 18px;">
+        <div class="callout-icon">🚨</div>
+        <div class="callout-content">
+          <strong>The #1 Student Frontend Blocker: The SPA Route 404 on Refresh</strong><br>
+          If your project uses React Router, Vue Router, or React Pages, navigating works while clicking links—but as soon as someone presses <kbd>F5</kbd> (Refresh) on <code>/dashboard</code> or <code>/login</code>, the screen throws a browser <strong>404 Not Found</strong>!
+          <br><br>
+          <strong>Why:</strong> The CDN server looks for a physical file named <code>dashboard.html</code> which does not exist in an SPA.
+          <br><br>
+          <strong>The 10-Second Copy-Paste Fix:</strong>
+          <ul style="margin: 6px 0 0 16px;">
+            <li><strong>For Netlify:</strong> Create a file named <code>public/_redirects</code> (no file extension) containing:<br>
+              <code>/*    /index.html   200</code>
+            </li>
+            <li><strong>For Vercel:</strong> Create a file named <code>vercel.json</code> in your project root containing:
+              <pre style="margin: 6px 0; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 6px; font-size: 0.8rem; color: #38bdf8;">{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}</pre>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -2935,15 +3027,40 @@ app.listen(PORT, '0.0.0.0', () => {
 
     <!-- SECTION: CORS -->
     <section id="cors-guide" data-platform="frontend">
-      <h2><span>🔌</span> Connecting the Stack & Fixing CORS Errors</h2>
+      <h2><span>🔌</span> Connecting the 3-Tier Stack &amp; Fixing CORS Errors</h2>
       <p>
-        The #1 issue junior developers face when deploying frontend (Vercel) and backend (Render) on different domains is the infamous <strong>Cross-Origin Resource Sharing (CORS)</strong> error in the browser console:
+        The #1 issue junior developers face when deploying frontend (Vercel) and backend (Render) on separate domains is the browser <strong>Cross-Origin Resource Sharing (CORS)</strong> security block.
       </p>
+
+      <!-- VISUAL 3-TIER ARCHITECTURE DATA PIPELINE -->
+      <div class="card" style="margin: 20px 0; background: rgba(15, 23, 42, 0.7); border-color: rgba(56, 189, 248, 0.35);">
+        <div class="card-title" style="color: #38bdf8;">🌐 Complete Student 3-Tier Production Data Pipeline</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 14px;">
+          <div style="background: rgba(30, 41, 59, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-weight: 700; color: #38bdf8; font-size: 0.85rem;">1. FRONTEND TIER</div>
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;"><strong>Vercel / Netlify</strong></div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 2px;">Calls <code>VITE_API_BASE_URL</code></div>
+            <div style="font-size: 0.72rem; color: #94a3b8; font-family: monospace; margin-top: 4px;">https://app.vercel.app</div>
+          </div>
+          <div style="background: rgba(30, 41, 59, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-weight: 700; color: #c084fc; font-size: 0.85rem;">2. BACKEND API TIER</div>
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;"><strong>Render Web Service</strong></div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 2px;">Answers JSON + Injects CORS header</div>
+            <div style="font-size: 0.72rem; color: #94a3b8; font-family: monospace; margin-top: 4px;">https://api.onrender.com</div>
+          </div>
+          <div style="background: rgba(30, 41, 59, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border);">
+            <div style="font-weight: 700; color: #34d399; font-size: 0.85rem;">3. DATABASE TIER</div>
+            <div style="font-size: 0.8rem; color: #cbd5e1; margin-top: 4px;"><strong>Supabase PostgreSQL</strong></div>
+            <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 2px;">IPv4 Pooler URI (Port 6543)</div>
+            <div style="font-size: 0.72rem; color: #94a3b8; font-family: monospace; margin-top: 4px;">pooler.supabase.com:6543</div>
+          </div>
+        </div>
+      </div>
 
       <div class="callout callout-warning" style="margin-top: 10px;">
         <div class="callout-icon">🚫</div>
         <div class="callout-content">
-          <strong>The Classic Junior Error:</strong>
+          <strong>The Classic Junior Browser Error:</strong><br>
           <code>Access to XMLHttpRequest at 'https://my-api.onrender.com/api/users' from origin 'https://my-app.vercel.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.</code>
         </div>
       </div>
@@ -2981,7 +3098,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Or specify ["https://my-frontend.vercel.app"]
+    allow_origins=["*"], // Or specify ["https://my-frontend.vercel.app"]
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -3318,10 +3435,6 @@ app.add_middleware(
         </a>
       </div>
     </section>
-
-    <footer>
-      Crafted with ❤️ for Computer Science & IT Students • Powered by Microsoft Azure, Supabase, Render & GitHub Education
-    </footer>
   </main>
 
   <!-- RIGHT TOC SIDEBAR (DigitalOcean "On this page" style) -->
@@ -3537,46 +3650,7 @@ app.add_middleware(
 
     // 4. Update Chapter Reader Bar
     const currIdx = sectionOrder.indexOf(targetId);
-    const total = sectionOrder.length;
-    const percent = Math.round(((currIdx + 1) / total) * 100);
-
-    const badgeEl = document.getElementById('chapterBadge');
-    const titleEl = document.getElementById('chapterBarTitle');
-    const percentEl = document.getElementById('chapterPercent');
-    const progressEl = document.getElementById('chapterProgressBar');
-    const btnPrev = document.getElementById('btnPrevChapter');
-    const btnNext = document.getElementById('btnNextChapter');
-
-    if (badgeEl) badgeEl.innerText = `Chapter ${currIdx + 1} of ${total}`;
-    if (titleEl) titleEl.innerText = data.topic;
-    if (percentEl) percentEl.innerText = `${percent}%`;
-    if (progressEl) {
-      progressEl.style.width = `${percent}%`;
-      const track = progressEl.parentElement;
-      if (track) track.setAttribute('aria-valuenow', currIdx + 1);
-    }
-
-    if (btnPrev) {
-      if (currIdx === 0) {
-        btnPrev.disabled = true;
-        btnPrev.classList.add('disabled');
-      } else {
-        btnPrev.disabled = false;
-        btnPrev.classList.remove('disabled');
-      }
-    }
-
-    if (btnNext) {
-      if (currIdx === total - 1) {
-        btnNext.disabled = true;
-        btnNext.classList.add('disabled');
-      } else {
-        btnNext.disabled = false;
-        btnNext.classList.remove('disabled');
-      }
-    }
-
-    // 5. Update Left Sidebar Tree active class & auto-expand group
+    // 4. Update Left Sidebar Tree active class & auto-expand group
     const treeLinks = document.querySelectorAll('.do-tree-link');
     treeLinks.forEach(link => {
       const href = link.getAttribute('href');
