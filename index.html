@@ -2752,10 +2752,12 @@ app.listen(PORT, '0.0.0.0', () => {
       <div class="step-item">
         <div class="step-num">2</div>
         <div class="step-details">
-          <h4>Create a New Web Service on Render</h4>
+          <h4>Choose Web Services in Render's Service Picker</h4>
           <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
             <li>Go to <a href="https://render.com" target="_blank" style="color: var(--accent);">render.com</a> and sign in with GitHub (no card required).</li>
-            <li>Click <strong>New +</strong> at the top right and select <strong>Web Service</strong>.</li>
+            <li>On the first <strong>Create a new Service</strong> screen, choose the <strong>Web Services</strong> card and click <strong>New Web Service</strong>. This is the correct option for an Express, FastAPI, Flask, Django, or Go API.</li>
+            <li>Do not choose <strong>Static Sites</strong> for a backend API. <strong>Background Workers</strong> are for queue or scheduled processing without an HTTP endpoint, while <strong>Private Services</strong> are only reachable by other Render services.</li>
+            <li>If you are already on the dashboard, use <strong>New +</strong> → <strong>Web Service</strong> to open the same setup flow.</li>
             <li>Connect your GitHub backend repository.</li>
             <li>Set up the build parameters:
               <ul style="margin-left: 20px; margin-top: 6px;">
