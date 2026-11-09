@@ -4,7 +4,7 @@
 
 ## 🎓 Quick Links & Free Portals
 * [GitHub Student Developer Pack](https://education.github.com/pack) — Apply with your student ID or school email.
-* [Azure for Students Portal](https://azure.microsoft.com/en-us/free/students?WT.mc_id=academic-9938-cxa) — Direct claim link for $200 free credits + 12 months free services.
+* [Azure for Students Portal](https://azure.microsoft.com/en-us/free/students?WT.mc_id=academic-9938-cxa) — Direct claim link for $100 free credits (valid for 1 year) + 12 months free services.
 * [Render](https://render.com) — Free Web Services for Node.js, Python, and Go APIs (zero card required).
 * [Supabase](https://supabase.com) — Free 500 MB PostgreSQL database, Auth, and Table Editor (zero card required).
 * [Vercel](https://vercel.com) — Free global edge hosting for React, Vite, Next.js, and static SPAs.
@@ -33,7 +33,7 @@ Deployable with 1-click to **Azure Static Web Apps**, **Vercel**, or **GitHub Pa
   * Copy-pasteable CORS middleware snippets for Express and FastAPI to eliminate browser origin blocking.
 
 ### 🏛️ 2. Azure Student Cloud & Capstone Architecture (12 Months)
-* **Prerequisites & Verification**: Step-by-step instructions on applying for the GitHub Student Pack and activating Azure. Includes key tips on bank card verification (MariBank, Maya, GCash) requiring **₱60 – ₱70 PHP** for the temporary **$1.01 USD** authorization hold (which is refunded immediately).
+* **Prerequisites & Verification**: Step-by-step instructions on applying for the GitHub Student Pack and activating **Azure for Students** ($100 credit for 1 year) vs. the **Standard Azure Free Account** ($200 credit for 1 month). Includes key tips on bank card verification (MariBank, Maya, GCash) requiring **₱60 – ₱70 PHP** for the temporary **$1.01 USD** authorization hold (which is refunded immediately).
 * **12 Months Free Services Guide**: Deep-dive on B1s VMs (750 hrs/month), 2x 64 GB SSDs, MySQL & PostgreSQL Flexible Servers. Crucial tips on selecting **East Asia** (Hong Kong) and **x64** architecture to bypass Southeast Asia quota limits.
 * **Always-Free Tiers (55+ Services)**: Azure Static Web Apps with custom domains, Cosmos DB (25 GB), and App Service.
 * **🚨 Fallback Setup When `Standard_B1s` Fails or Quota is 0**:

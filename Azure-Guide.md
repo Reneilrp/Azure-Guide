@@ -5,9 +5,9 @@
 
 ## 1. Executive Summary & The Problem
 
-When developing capstone, thesis, or commercial projects using Microsoft Azure's **Free Account** or **Azure for Students**:
-- You typically start with a **$100 to $200 credit** valid for 30 days.
-- After the initial credit period ends, you are entitled to **12 Months of Free Services** and **65+ Always-Free Services**.
+When developing capstone, thesis, or commercial projects using Microsoft Azure's **Azure for Students** or **Standard Free Account**:
+- **Azure for Students** provides a **$100 USD credit valid for 1 full year (12 months)** with no credit card required. (By contrast, the **Standard Azure Free Account** gives a **$200 USD credit valid for only 1 month / 30 days** and requires card verification).
+- Alongside your credits, you are entitled to **12 Months of Free Services** and **65+ Always-Free Services**.
 - Traditionally, developers rely on the **`Standard_B1s`** Linux Virtual Machine (750 hours/month free).
 
 ### The "B1s Unavailable" Bottleneck
