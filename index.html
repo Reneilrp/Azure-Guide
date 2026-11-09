@@ -9,26 +9,37 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #090d16;
-      --sidebar-bg: #0d1322;
-      --card-bg: #131b2e;
-      --card-hover: #18233c;
-      --border: #1e293b;
-      --border-focus: #38bdf8;
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --primary: #0078d4;
-      --accent: #38bdf8;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
+      --bg: #0b1120;
+      --sidebar-bg: #101827;
+      --card-bg: #111827;
+      --card-hover: #1d2a40;
+      --surface-raised: #172033;
+      --border: #263449;
+      --border-strong: #3b4d68;
+      --border-focus: #8bcbff;
+      --text: #f8fafc;
+      --text-muted: #a7b4c7;
+      --text-dim: #718096;
+      --primary: #4f9cf9;
+      --accent: #69b7ff;
+      --focus: #8bcbff;
+      --success: #39d98a;
+      --warning: #f6c453;
+      --danger: #ff6b6b;
+      --purple: #b794f4;
       --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    button, a, input { -webkit-tap-highlight-color: transparent; }
 
     body {
       background-color: var(--bg);
@@ -73,8 +84,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       border-radius: 7px;
@@ -177,7 +188,7 @@
       width: 100%;
       background: rgba(9, 13, 22, 0.85);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 9px;
       padding: 8px 48px 8px 36px;
       color: #fff;
       font-size: 0.85rem;
@@ -188,8 +199,8 @@
 
     .do-search-input:focus {
       border-color: var(--accent);
-      background: #090d16;
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+      background: var(--bg);
+      box-shadow: 0 0 0 3px rgba(105, 183, 255, 0.16);
     }
 
     .do-search-icon {
@@ -214,6 +225,16 @@
       padding: 2px 6px;
       border-radius: 4px;
       color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .search-status {
+      position: absolute;
+      right: 10px;
+      top: calc(100% + 6px);
+      z-index: 20;
+      color: var(--text-muted);
+      font-size: 0.72rem;
       pointer-events: none;
     }
 
@@ -321,6 +342,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      min-height: 44px;
       padding: 9px 12px;
       color: #e2e8f0;
       font-family: var(--font);
@@ -370,6 +392,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      min-height: 40px;
       padding: 7px 10px;
       color: var(--text-muted);
       text-decoration: none;
@@ -388,7 +411,7 @@
 
     .do-tree-link.active {
       color: var(--accent);
-      background: rgba(56, 189, 248, 0.12);
+      background: rgba(79, 156, 249, 0.14);
       font-weight: 600;
     }
 
@@ -399,7 +422,7 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: var(--accent);
+      background: var(--primary);
       border-radius: 2px;
     }
 
@@ -481,6 +504,32 @@
     .do-main-content > section.active-chapter {
       display: block;
       animation: chapterFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reading-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      margin: -10px 0 24px;
+    }
+
+    .reading-progress-track {
+      height: 4px;
+      flex: 1;
+      max-width: 220px;
+      overflow: hidden;
+      background: var(--surface-raised);
+      border-radius: 999px;
+    }
+
+    .reading-progress-bar {
+      height: 100%;
+      width: 0;
+      background: var(--primary);
+      border-radius: inherit;
+      transition: width 0.2s ease;
     }
 
     @keyframes chapterFadeIn {
@@ -979,7 +1028,7 @@
 
     /* CODE BLOCKS */
     .code-box {
-      background: #060911;
+      background: #080d18;
       border: 1px solid var(--border);
       border-radius: 10px;
       margin: 16px 0;
@@ -1001,7 +1050,7 @@
     .code-body {
       padding: 14px 16px;
       font-size: 0.88rem;
-      color: #38bdf8;
+      color: var(--accent);
       overflow-x: auto;
       white-space: pre;
     }
@@ -1011,7 +1060,9 @@
       border: 1px solid var(--border);
       color: var(--text-muted);
       border-radius: 6px;
-      padding: 3px 8px;
+      min-width: 56px;
+      min-height: 36px;
+      padding: 6px 10px;
       font-size: 0.75rem;
       cursor: pointer;
       font-family: var(--font);
@@ -1021,6 +1072,11 @@
     .copy-btn:hover {
       background: rgba(255, 255, 255, 0.05);
       color: #fff;
+    }
+
+    .copy-btn.copied {
+      color: var(--success);
+      border-color: rgba(57, 217, 138, 0.45);
     }
 
     /* STEPS LIST */
@@ -1126,6 +1182,17 @@
       pointer-events: auto;
     }
 
+    body.drawer-open { overflow: hidden; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
     @media (max-width: 1200px) {
       .do-main-content {
         max-width: 100%;
@@ -1204,8 +1271,9 @@
     <!-- GLOBAL OMNIBAR SEARCH (DigitalOcean & PHP style) -->
     <div class="do-search-box">
       <span class="do-search-icon">🔍</span>
-      <input type="text" id="searchInput" class="do-search-input" placeholder="Search topics, B1s Fallback, Supabase, CORS... (Press / to focus)" oninput="filterTree(this.value)">
+      <input type="search" id="searchInput" class="do-search-input" aria-label="Search documentation" aria-controls="doTree" aria-describedby="searchStatus" placeholder="Search topics, B1s Fallback, Supabase, CORS... (Press / to focus)" oninput="filterTree(this.value)">
       <span class="do-search-kbd">/</span>
+      <span class="search-status" id="searchStatus" role="status" aria-live="polite"></span>
     </div>
 
     <div class="do-header-right">
@@ -1233,7 +1301,7 @@
   <!-- 3-COLUMN APP CONTAINER -->
   <div class="do-container">
     <!-- LEFT SIDEBAR (Product Tree with Accordions) -->
-    <aside class="do-sidebar" id="sidebar">
+    <aside class="do-sidebar" id="sidebar" aria-label="Documentation navigation">
       <div class="do-sidebar-actions">
         <span class="sidebar-section-title">Navigation Menu</span>
         <button class="sidebar-burger-btn" id="sidebarBurgerBtn" onclick="toggleSidebarCollapse()" title="Collapse Menu Bar (Ctrl+B)" aria-label="Collapse Menu Bar">
@@ -1248,7 +1316,7 @@
       <nav class="do-tree" id="doTree">
         <!-- GROUP 1: AZURE -->
         <div class="do-tree-group open" id="group-azure">
-          <button class="do-tree-header" onclick="toggleGroup('group-azure')">
+          <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-azure')">
             <span class="do-tree-title"><span>☁️</span> Microsoft Azure</span>
             <span class="do-caret">▸</span>
           </button>
@@ -1265,7 +1333,7 @@
 
         <!-- GROUP 2: SUPABASE -->
         <div class="do-tree-group open" id="group-supabase">
-          <button class="do-tree-header" onclick="toggleGroup('group-supabase')">
+          <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-supabase')">
             <span class="do-tree-title"><span>🟢</span> Supabase DB & Auth</span>
             <span class="do-caret">▸</span>
           </button>
@@ -1280,7 +1348,7 @@
 
         <!-- GROUP 3: RENDER -->
         <div class="do-tree-group open" id="group-render">
-          <button class="do-tree-header" onclick="toggleGroup('group-render')">
+          <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-render')">
             <span class="do-tree-title"><span>🟣</span> Render Backend</span>
             <span class="do-caret">▸</span>
           </button>
@@ -1295,7 +1363,7 @@
 
         <!-- GROUP 4: FRONTEND -->
         <div class="do-tree-group open" id="group-frontend">
-          <button class="do-tree-header" onclick="toggleGroup('group-frontend')">
+          <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-frontend')">
             <span class="do-tree-title"><span>▲</span> Vercel & Netlify</span>
             <span class="do-caret">▸</span>
           </button>
@@ -1308,7 +1376,7 @@
 
         <!-- GROUP 5: ARCHITECTURE & FAQ -->
         <div class="do-tree-group open" id="group-architecture">
-          <button class="do-tree-header" onclick="toggleGroup('group-architecture')">
+          <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-architecture')">
             <span class="do-tree-title"><span>🏗️</span> Architecture & FAQ</span>
             <span class="do-caret">▸</span>
           </button>
@@ -1330,6 +1398,12 @@
         <span id="crumbCategory">Microsoft Azure</span>
         <span class="crumb-sep">/</span>
         <span class="crumb-current" id="crumbCurrent">Welcome & Perks</span>
+      </div>
+      <div class="reading-progress" aria-label="Reading progress">
+        <span id="chapterProgressText">Chapter 1 of 14</span>
+        <span class="reading-progress-track" aria-hidden="true">
+          <span class="reading-progress-bar" id="chapterProgressBar"></span>
+        </span>
       </div>
 
       <div class="hero" id="heroBanner">
@@ -3383,7 +3457,9 @@ app.add_middleware(
   function toggleGroup(groupId) {
     const group = document.getElementById(groupId);
     if (group) {
-      group.classList.toggle('open');
+      const isOpen = group.classList.toggle('open');
+      const toggle = group.querySelector('.do-tree-header');
+      if (toggle) toggle.setAttribute('aria-expanded', String(isOpen));
       updateToggleAllBtn();
     }
   }
@@ -3397,6 +3473,8 @@ app.add_middleware(
       } else {
         g.classList.add('open');
       }
+      const toggle = g.querySelector('.do-tree-header');
+      if (toggle) toggle.setAttribute('aria-expanded', String(!allOpen));
     });
     updateToggleAllBtn();
   }
@@ -3418,6 +3496,8 @@ app.add_middleware(
       const collapsedBtn = document.getElementById('collapsedBurgerBtn');
       const isOpen = sidebar.classList.toggle('open');
       if (backdrop) backdrop.classList.toggle('active', isOpen);
+      document.body.classList.toggle('drawer-open', isOpen);
+      sidebar.setAttribute('aria-hidden', String(!isOpen));
       if (collapsedBtn) {
         collapsedBtn.style.opacity = isOpen ? '0' : '1';
         collapsedBtn.style.pointerEvents = isOpen ? 'none' : 'auto';
@@ -3440,6 +3520,8 @@ app.add_middleware(
       const collapsedBtn = document.getElementById('collapsedBurgerBtn');
       if (sidebar) sidebar.classList.remove('open');
       if (backdrop) backdrop.classList.remove('active');
+      document.body.classList.remove('drawer-open');
+      if (sidebar) sidebar.setAttribute('aria-hidden', 'true');
       if (collapsedBtn) {
         collapsedBtn.style.opacity = '1';
         collapsedBtn.style.pointerEvents = 'auto';
@@ -3468,9 +3550,35 @@ app.add_middleware(
   // Code Copy
   function copyCode(btn) {
     const text = btn.parentElement.nextElementSibling.innerText;
-    navigator.clipboard.writeText(text);
-    btn.innerText = 'Copied!';
-    setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+    const showCopied = () => {
+      btn.innerText = 'Copied';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.innerText = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(showCopied).catch(() => {
+        btn.innerText = 'Copy failed';
+        setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+      });
+      return;
+    }
+    const fallback = document.createElement('textarea');
+    fallback.value = text;
+    fallback.style.position = 'fixed';
+    fallback.style.opacity = '0';
+    document.body.appendChild(fallback);
+    fallback.select();
+    const copied = document.execCommand('copy');
+    fallback.remove();
+    if (copied) {
+      showCopied();
+    } else {
+      btn.innerText = 'Copy failed';
+      setTimeout(() => { btn.innerText = 'Copy'; }, 2000);
+    }
   }
 
   // Global Omnibar Search Filter (DO & PHP style)
@@ -3478,14 +3586,17 @@ app.add_middleware(
     const q = query.toLowerCase().trim();
     const links = document.querySelectorAll('.do-tree-link');
     const groups = document.querySelectorAll('.do-tree-group');
+    const status = document.getElementById('searchStatus');
 
     if (!q) {
       links.forEach(l => l.style.display = 'flex');
+      if (status) status.textContent = '';
       updateToggleAllBtn();
       return;
     }
 
     // Auto-open groups when searching
+    let matchCount = 0;
     groups.forEach(group => {
       let hasMatch = false;
       const groupLinks = group.querySelectorAll('.do-tree-link');
@@ -3494,6 +3605,7 @@ app.add_middleware(
         if (text.includes(q)) {
           link.style.display = 'flex';
           hasMatch = true;
+          matchCount += 1;
         } else {
           link.style.display = 'none';
         }
@@ -3501,7 +3613,14 @@ app.add_middleware(
       if (hasMatch) {
         group.classList.add('open');
       }
+      const toggle = group.querySelector('.do-tree-header');
+      if (toggle) toggle.setAttribute('aria-expanded', String(hasMatch));
     });
+    if (status) {
+      status.textContent = matchCount
+        ? `${matchCount} topic${matchCount === 1 ? '' : 's'} found`
+        : 'No topics found';
+    }
     updateToggleAllBtn();
   }
 
@@ -3561,6 +3680,10 @@ app.add_middleware(
 
     // 4. Update Chapter Reader Bar
     const currIdx = sectionOrder.indexOf(targetId);
+    const progressText = document.getElementById('chapterProgressText');
+    const progressBar = document.getElementById('chapterProgressBar');
+    if (progressText) progressText.textContent = `Chapter ${currIdx + 1} of ${sectionOrder.length}`;
+    if (progressBar) progressBar.style.width = `${((currIdx + 1) / sectionOrder.length) * 100}%`;
     // 4. Update Left Sidebar Tree active class & auto-expand group
     const treeLinks = document.querySelectorAll('.do-tree-link');
     treeLinks.forEach(link => {
@@ -3689,6 +3812,8 @@ app.add_middleware(
       const input = document.getElementById('searchInput');
       if (document.activeElement === input) {
         input.blur();
+      } else if (window.innerWidth <= 860) {
+        closeSidebarOnMobile();
       }
     }
 
