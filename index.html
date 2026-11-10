@@ -3239,15 +3239,37 @@ const pool = new Pool({
                 <li><strong>Instance Type:</strong> <span class="badge badge-green">Free</span></li>
               </ul>
             </li>
-            <li>Under <strong>Environment Variables</strong>, copy and paste the <strong>Internal Database URL</strong> from Render Postgres:
-              <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
+            <li>Under <strong>Environment Variables</strong>, configure the connection between your Web Service and Postgres.
+              <p style="margin: 8px 0 6px; font-size: 0.9rem; color: #f8fafc;">
+                <strong>Option A: Single URL (Easiest)</strong> — Copy the <strong>Internal Database URL</strong> from Render Postgres:
+              </p>
+              <div class="code-box" style="margin-top: 6px; margin-bottom: 12px;">
                 <div class="code-header">
-                  <span>Render Web Service — Environment Variables</span>
+                  <span>Render Web Service — Option A: Single Connection String</span>
                   <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 </div>
-                <div class="code-body">DATABASE_URL=postgresql://caleesi_user:PASSWORD@dpg-xxxxxxxxxxxxxxxxxxxx-a/caleesi
-NODE_ENV=production</div>
+                <div class="code-body">DATABASE_URL = postgresql://caleesi:PASSWORD@dpg-xxxxxxxxxxxx-a/caleesi_db
+NODE_ENV = production</div>
               </div>
+
+              <p style="margin: 8px 0 6px; font-size: 0.9rem; color: #f8fafc;">
+                <strong>Option B: Individual Database Variables</strong> — If your backend or juniors prefer individual keys (matching Render Postgres Connection details):
+              </p>
+              <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
+                <div class="code-header">
+                  <span>Render Web Service — Option B: Individual Database Environment Variables</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-body">DB_HOST = dpg-xxxxxxxxxxxx-a (Internal Database Host from Render Postgres)
+DB_PORT = 5432
+DB_DATABASE = caleesi_db (Database Name from Render Postgres)
+DB_USERNAME = caleesi (Username from Render Postgres)
+DB_PASSWORD = PASSWORD (Password from Render Postgres)
+NODE_ENV = production</div>
+              </div>
+              <p style="font-size: 0.82rem; color: #a7b4c7; margin-top: 4px;">
+                💡 <em>Note: On Render, always copy the <strong>Internal Host / Internal Database URL</strong> (e.g. <code>dpg-xxxx-a</code> without <code>.singapore-postgres.render.com</code>) so traffic routes over Render's free, zero-latency private network.</em>
+              </p>
             </li>
             <li>Click <strong>Deploy Web Service</strong>. In 1–2 minutes, copy your live backend URL (e.g. <code>https://caleesi-api.onrender.com</code>).</li>
           </ol>
