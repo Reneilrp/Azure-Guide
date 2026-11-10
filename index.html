@@ -1349,15 +1349,31 @@
         <!-- GROUP 3: RENDER -->
         <div class="do-tree-group open" id="group-render">
           <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-render')">
-            <span class="do-tree-title"><span>🟣</span> Render Backend</span>
+            <span class="do-tree-title"><span>🟣</span> Render Backend &amp; DB</span>
             <span class="do-caret">▸</span>
           </button>
           <div class="do-tree-children">
             <a href="#render-guide" class="do-tree-link"><span>🚀</span> Web Service Deploy</a>
+            <a href="#render-postgres" class="do-tree-link"><span>🗄️</span> Render Postgres DB</a>
             <a href="#render-ports" class="do-tree-link"><span>⚙️</span> Dynamic Port Binding</a>
             <a href="#render-env" class="do-tree-link"><span>🔑</span> Environment Variables</a>
             <a href="#render-coldstart" class="do-tree-link"><span>⚡</span> Cold-Start Demo Hack</a>
             <a href="#render-storage" class="do-tree-link"><span>📁</span> Ephemeral Storage</a>
+          </div>
+        </div>
+
+        <!-- GROUP 4: FULL-STACK DEPLOYMENT -->
+        <div class="do-tree-group open" id="group-fullstack">
+          <button class="do-tree-header" aria-expanded="true" onclick="toggleGroup('group-fullstack')">
+            <span class="do-tree-title"><span>🌐</span> Full-Stack Deployment</span>
+            <span class="do-caret">▸</span>
+          </button>
+          <div class="do-tree-children">
+            <a href="#fullstack-guide" class="do-tree-link"><span>🔗</span> Render + Postgres + Vercel</a>
+            <a href="#fullstack-db" class="do-tree-link"><span>1️⃣</span> Step 1: Render Postgres</a>
+            <a href="#fullstack-api" class="do-tree-link"><span>2️⃣</span> Step 2: Express on Render</a>
+            <a href="#fullstack-web" class="do-tree-link"><span>3️⃣</span> Step 3: Vercel Frontend</a>
+            <a href="#fullstack-cors" class="do-tree-link"><span>4️⃣</span> Step 4: CORS &amp; Warm-Up</a>
           </div>
         </div>
 
@@ -2731,9 +2747,9 @@ ingress:
 
     <!-- SECTION: RENDER -->
     <section id="render-guide" data-platform="render">
-      <h2><span>🟣</span> Render — Free Backend APIs (Node / Python / Go)</h2>
+      <h2><span>🟣</span> Render — Free Backend Web Services &amp; Managed PostgreSQL</h2>
       <p>
-        Render allows juniors to host backend servers (Express, NestJS, FastAPI, Flask, Django) directly from a GitHub repository without managing Linux servers, Nginx configurations, or SSL certificates.
+        Render allows juniors to deploy both <strong>Backend Web Services</strong> (Express, NestJS, FastAPI, Flask, Django, Go) and <strong>Managed PostgreSQL Databases</strong> (for Laravel, Node, or Python apps like <code>caleesi</code>) directly from a browser—with zero Linux server maintenance and no credit card required.
       </p>
 
       <!-- WHAT IS RENDER SPOTLIGHT -->
@@ -2742,26 +2758,28 @@ ingress:
           <div class="service-spotlight-title">
             <span>🟣</span> What is Render?
           </div>
-          <span class="badge badge-purple">Modern Cloud Application Platform (PaaS)</span>
+          <span class="badge badge-purple">Modern Cloud Application &amp; Database Platform (PaaS)</span>
         </div>
         <p style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; margin-bottom: 0;">
-          <strong>Render</strong> is a modern Platform-as-a-Service (PaaS)—the modern successor to classic Heroku. You simply link your GitHub repository, and Render automatically detects your language (Node.js, Python, Go, Docker), builds a container, and deploys it to a secure, public HTTPS URL (<code>https://your-api.onrender.com</code>).
+          <strong>Render</strong> is a modern Platform-as-a-Service (PaaS)—the modern successor to classic Heroku. On the <strong>Create a new Service</strong> screen (or <strong>New +</strong> menu), you can launch either a <strong>Web Service</strong> (public HTTPS API container) or a managed <strong>Postgres</strong> database (<code>dpg-xxxx-a</code>) in under 60 seconds.
         </p>
         <div class="service-spotlight-grid">
           <div class="service-spotlight-item">
-            <strong>Zero Server Management:</strong>
-            <span>No Linux server updates, no SSH keys, and no manual Certbot SSL renewals. Render builds and restarts containers automatically on git push.</span>
+            <strong>Web Service vs. Postgres:</strong>
+            <span>Choose <strong>Web Service</strong> to host your API code from GitHub, or choose <strong>Postgres</strong> to provision a managed cloud PostgreSQL 16 database with Internal &amp; External connection URLs.</span>
           </div>
           <div class="service-spotlight-item">
             <strong>What You Get Free:</strong>
-            <span>750 free instance hours per month, automatic SSL certificates, custom subdomains, and zero credit card required.</span>
+            <span>750 free Web Service hours/month + 1 Free Managed PostgreSQL instance (1 GB storage, 97-hour/month compute, zero credit card required).</span>
           </div>
           <div class="service-spotlight-item">
             <strong>Best Suited For:</strong>
-            <span>Express, FastAPI, Django, Flask, NestJS REST APIs, and microservices connecting to hosted databases like Supabase.</span>
+            <span>Laravel (<code>pgsql</code> migrations), Express/Prisma, FastAPI/SQLAlchemy, and student demos needing instant cloud PostgreSQL or REST APIs.</span>
           </div>
         </div>
       </div>
+
+      <h3 style="color: #b794f4; margin-top: 28px; margin-bottom: 12px;">Track A: Deploying a Backend API (Render Web Service)</h3>
 
       <!-- VISUAL 4-STAGE BACKEND LIFECYCLE PIPELINE -->
       <div class="flow-pipeline-bar">
@@ -2782,8 +2800,8 @@ ingress:
         <div class="flow-step-card purple">
           <div class="flow-step-badge">3</div>
           <div class="flow-step-info">
-            <span class="flow-step-title">Link Supabase DB</span>
-            <span class="flow-step-sub">DATABASE_URL (IPv4 Pooler)</span>
+            <span class="flow-step-title">Link Cloud DB</span>
+            <span class="flow-step-sub">Render Postgres or Supabase</span>
           </div>
         </div>
         <div class="flow-step-card purple">
@@ -2848,13 +2866,13 @@ app.listen(PORT, '0.0.0.0', () => {
       <div class="step-item" id="render-env">
         <div class="step-num">3</div>
         <div class="step-details">
-          <h4>Configure Environment Variables (Link Supabase Database)</h4>
+          <h4>Configure Environment Variables (Link Render Postgres or Supabase)</h4>
           <p>
             In the <strong>Environment</strong> section of your Render Web Service dashboard, add your secrets:
           </p>
           <ul style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
-            <li><code>DATABASE_URL</code> = Paste the Supabase IPv4 Pooler URI (port 6543) from Chapter 8:
-              <br><code style="font-size: 0.78rem;">postgresql://postgres.[REF]:[PASSWORD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require</code>
+            <li><code>DATABASE_URL</code> = Paste either your <strong>Render Internal Database URL</strong> (from Track B below) or the Supabase IPv4 Pooler URI (port 6543):
+              <br><code style="font-size: 0.78rem;">postgresql://caleesi_user:[PASSWORD]@dpg-xxxx-a/caleesi</code>
             </li>
             <li><code>JWT_SECRET</code> = Any long private random string</li>
             <li><code>NODE_ENV</code> = <code>production</code></li>
@@ -2864,6 +2882,173 @@ app.listen(PORT, '0.0.0.0', () => {
             <br>
             <code>https://&lt;your-app&gt;.onrender.com</code>
           </p>
+        </div>
+      </div>
+
+      <!-- ================================================================ -->
+      <!-- TRACK B: RENDER MANAGED POSTGRESQL STEP-BY-STEP PROCESS          -->
+      <!-- ================================================================ -->
+      <div id="render-postgres" style="margin-top: 38px; padding-top: 28px; border-top: 1px solid var(--border);">
+        <h3 style="color: #38bdf8; margin-bottom: 10px;">Track B: Provisioning Render Managed PostgreSQL (<code>New +</code> &rarr; <code>Postgres</code>)</h3>
+        <p style="color: var(--text-muted); margin-bottom: 18px;">
+          Instead of choosing <strong>Web Service</strong>, you can use Render purely as a <strong>Managed Cloud PostgreSQL Database</strong> (or pair it with your local Laravel / Node / Python backend). Follow this exact step-by-step workflow to provision and connect Render Postgres:
+        </p>
+
+        <!-- VISUAL 4-STAGE RENDER POSTGRES PIPELINE -->
+        <div class="flow-pipeline-bar">
+          <div class="flow-step-card">
+            <div class="flow-step-badge">1</div>
+            <div class="flow-step-info">
+              <span class="flow-step-title">Choose Postgres</span>
+              <span class="flow-step-sub">New + &rarr; Postgres (Not Web)</span>
+            </div>
+          </div>
+          <div class="flow-step-card">
+            <div class="flow-step-badge">2</div>
+            <div class="flow-step-info">
+              <span class="flow-step-title">Region &amp; Tier</span>
+              <span class="flow-step-sub">Singapore + Free (1 GB)</span>
+            </div>
+          </div>
+          <div class="flow-step-card">
+            <div class="flow-step-badge">3</div>
+            <div class="flow-step-info">
+              <span class="flow-step-title">Connection URLs</span>
+              <span class="flow-step-sub">Internal vs. External + SSL</span>
+            </div>
+          </div>
+          <div class="flow-step-card">
+            <div class="flow-step-badge">4</div>
+            <div class="flow-step-info">
+              <span class="flow-step-title">Migrate Schema</span>
+              <span class="flow-step-sub">Laravel artisan / Prisma / ORM</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-details">
+            <h4>Choose "Postgres" Instead of "Web Service" in the Service Picker</h4>
+            <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+              <li>Sign in to <a href="https://dashboard.render.com" target="_blank" style="color: var(--accent);">dashboard.render.com</a> with your GitHub account.</li>
+              <li>Click the <strong>New +</strong> button in the top navigation bar and select <strong>Postgres</strong> (or on the <strong>Create a new Service</strong> welcome screen, locate the <strong>Postgres</strong> card and click <strong>New Postgres</strong>).</li>
+              <li>Fill in your database configuration:
+                <ul style="margin-left: 20px; margin-top: 6px;">
+                  <li><strong>Name:</strong> <code>caleesi-postgres</code> (identifies the instance in your Render dashboard)</li>
+                  <li><strong>Database:</strong> <code>caleesi</code> (your SQL database name; auto-generated if left blank)</li>
+                  <li><strong>User:</strong> <code>caleesi_user</code> (auto-generated if left blank)</li>
+                  <li><strong>Region:</strong> Select <strong>Singapore (Southeast Asia)</strong> for the lowest query latency in Asia-Pacific (~35ms vs. 250ms+ in Oregon/Ohio).</li>
+                  <li><strong>PostgreSQL Version:</strong> <code>16</code> (default recommended)</li>
+                  <li><strong>Instance Type:</strong> Scroll down and select <span class="badge badge-green">Free</span> (<strong>$0/month</strong>, 1 GB storage, 256 MB RAM, zero credit card required).</li>
+                </ul>
+              </li>
+              <li>Click <strong>Create Database</strong>. Wait 45–60 seconds until the status badge changes from <em>Creating</em> to <span class="badge badge-green">Available</span>.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-details">
+            <h4>Internal vs. External Database URL (The #1 Render Postgres Rule)</h4>
+            <p>
+              Scroll down to the <strong>Connections</strong> panel on your Render Postgres dashboard. Render provides two distinct connection URLs—picking the wrong one is the most common mistake juniors make:
+            </p>
+            <div class="card-grid" style="margin: 14px 0;">
+              <div class="card">
+                <div class="card-title">🔒 Internal Database URL</div>
+                <p class="card-desc">
+                  <code>postgresql://user:pass@dpg-xxxx-a/caleesi</code><br><br>
+                  <strong>When to use:</strong> ONLY when your backend is ALSO hosted on Render (e.g., a Render Web Service) in the <strong>exact same region (Singapore)</strong>. Travels over Render's private VPC network with 0ms overhead and zero bandwidth cost.
+                </p>
+              </div>
+              <div class="card">
+                <div class="card-title">🌐 External Database URL</div>
+                <p class="card-desc">
+                  <code>postgresql://user:pass@dpg-xxxx-a.singapore-postgres.render.com/caleesi</code><br><br>
+                  <strong>When to use:</strong> Whenever you connect from <strong>your local laptop</strong> (running <code>php artisan migrate</code>, local WSL2 server, DBeaver, pgAdmin, or TablePlus) or from a backend hosted outside Render. <strong>Requires SSL!</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-details">
+            <h4>Connect a Laravel Backend (e.g., <code>caleesi</code>) &amp; Run Migrations</h4>
+            <p>
+              Laravel 11/12 supports PostgreSQL out of the box via the <code>pgsql</code> driver. When connecting from your local machine or external server using the <strong>External Database URL</strong>, you <strong>must</strong> set <code>DB_SSLMODE=require</code> (or append <code>?sslmode=require</code>), otherwise Render rejects the connection with <code>SSL/TLS required</code>:
+            </p>
+            <div class="code-box">
+              <div class="code-header">
+                <span>Laravel — backend/.env (Render External PostgreSQL Connection)</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+              </div>
+              <div class="code-body">DB_CONNECTION=pgsql
+DB_HOST=dpg-xxxxxxxxxxxxxxxxxxxx-a.singapore-postgres.render.com
+DB_PORT=5432
+DB_DATABASE=caleesi
+DB_USERNAME=caleesi_user
+DB_PASSWORD=your_render_generated_password
+DB_SSLMODE=require
+
+# Or alternatively, paste the External Database URL directly into DB_URL:
+# DB_URL="postgresql://caleesi_user:your_password@dpg-xxxx-a.singapore-postgres.render.com/caleesi?sslmode=require"</div>
+            </div>
+            <p style="margin-top: 12px;">
+              Once saved in <code>backend/.env</code>, verify the connection and push your database tables straight to Render from your terminal:
+            </p>
+            <div class="code-box">
+              <div class="code-header">
+                <span>Terminal — Clear Config Cache &amp; Run Laravel Migrations on Render Postgres</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+              </div>
+              <div class="code-body">cd backend
+php artisan config:clear
+php artisan migrate --seed</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-details">
+            <h4>Connect Node.js (Express / Prisma) or Python (FastAPI / SQLAlchemy)</h4>
+            <p>
+              If your juniors are using Node.js or Python instead of Laravel, append <code>?sslmode=require</code> to the Render Database URL in your <code>.env</code> file:
+            </p>
+            <div class="code-box">
+              <div class="code-header">
+                <span>Node.js (pg / Prisma) &amp; Python (SQLAlchemy) — .env &amp; SSL Setup</span>
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+              </div>
+              <div class="code-body"># 1. In your .env file (use External URL locally, or Internal URL inside Render):
+DATABASE_URL="postgresql://caleesi_user:your_password@dpg-xxxx-a.singapore-postgres.render.com/caleesi?sslmode=require"
+
+# 2. Node.js (node-postgres / pg Pool configuration):
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false } // Required for Render External Postgres connections
+});</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-warning">
+          <div class="callout-icon">⏳</div>
+          <div class="callout-content">
+            <strong>Crucial Junior Gotcha: Render Free Postgres 30-Day Expiration Policy</strong>
+            Unlike Render Web Services (which sleep after 15 minutes of inactivity but never expire), <strong>Render's Free PostgreSQL tier expires 30 days after creation</strong> (followed by a 14-day grace period to export your data before deletion).
+            <br><br>
+            <strong>When to use Render Postgres vs. Supabase / Azure:</strong>
+            <ul style="margin: 6px 0 0 18px;">
+              <li><strong>Use Render Free Postgres:</strong> Ideal for 1–4 week class sprints, database migration labs, and live defense demos where you want a clean, fast 1 GB PostgreSQL instance in Singapore without RLS policy hurdles.</li>
+              <li><strong>Before Day 30:</strong> Run <code>pg_dump "$EXTERNAL_DATABASE_URL" &gt; backup.sql</code> to back up your schema and data, or use <strong>Supabase / Neon / Azure Flexible Server</strong> for multi-month semester storage.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -2897,6 +3082,184 @@ app.listen(PORT, '0.0.0.0', () => {
           <span class="chapter-card-title">Supabase Database &amp; Auth</span>
           <span class="chapter-card-desc">PostgreSQL database with visual table editor</span>
         </a>
+        <a href="#fullstack-guide" class="chapter-card next">
+          <div class="chapter-card-top">
+            <span class="chapter-card-label">Next Topic</span>
+            <span class="chapter-card-arrow">→</span>
+            <span class="chapter-card-category">Full-Stack Deployment</span>
+          </div>
+          <span class="chapter-card-title">Render + Postgres + Vercel</span>
+          <span class="chapter-card-desc">Deploy complete 3-tier full-stack architecture</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION: FULL-STACK DEPLOYMENT -->
+    <section id="fullstack-guide" data-platform="fullstack">
+      <h2><span>🌐</span> Full-Stack 3-Tier Deployment (Render Postgres + Express + Vercel)</h2>
+      <p>
+        The complete, cardless blueprint for hosting a production-style 3-tier web application ($0 forever): <strong>Render Managed PostgreSQL</strong> for the database, a <strong>Render Web Service</strong> running Express.js for the API, and <strong>Vercel</strong> for the React / Vite frontend.
+      </p>
+
+      <!-- ARCHITECTURE DIAGRAM / CARD -->
+      <div class="card" style="margin: 20px 0; background: rgba(15, 23, 42, 0.7); border-color: rgba(57, 217, 138, 0.35);">
+        <div class="card-title" style="color: #39d98a;">📐 3-Tier Zero-Card Architecture Overview</div>
+        <div style="font-family: monospace; font-size: 0.85rem; color: #cbd5e1; line-height: 1.8; margin-top: 10px;">
+          [1. Vercel Frontend (React/Vite)] &rarr; https://caleesi.vercel.app<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr; HTTPS REST API (CORS enabled)<br>
+          [2. Render Web Service (Express API)] &rarr; https://caleesi-api.onrender.com (Singapore)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr; Private VPC Network (0ms overhead, port 5432)<br>
+          [3. Render Managed Postgres] &rarr; dpg-xxxx-a (Singapore)
+        </div>
+      </div>
+
+      <!-- VISUAL 4-STAGE FULL-STACK PIPELINE -->
+      <div class="flow-pipeline-bar">
+        <div class="flow-step-card green">
+          <div class="flow-step-badge">1</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Render Postgres</span>
+            <span class="flow-step-sub">Singapore + Copy Internal URL</span>
+          </div>
+        </div>
+        <div class="flow-step-card purple">
+          <div class="flow-step-badge">2</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Render Web Service</span>
+            <span class="flow-step-sub">Express API + Auto Tables</span>
+          </div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-badge">3</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Vercel Frontend</span>
+            <span class="flow-step-sub">Set VITE_API_BASE_URL</span>
+          </div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-badge">4</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">CORS &amp; Warm-Up</span>
+            <span class="flow-step-sub">Allow *.vercel.app + Ping</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: DATABASE -->
+      <div class="step-item" id="fullstack-db">
+        <div class="step-num">1</div>
+        <div class="step-details">
+          <h4>Step 1: Provision Render Managed PostgreSQL &amp; Copy the INTERNAL URL</h4>
+          <p>
+            Always deploy <strong>Bottom-Up</strong>: Create the database first so its credentials are ready when deploying the backend.
+          </p>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li>On <a href="https://dashboard.render.com" target="_blank" style="color: var(--accent);">dashboard.render.com</a>, click <strong>New + &rarr; Postgres</strong>.</li>
+            <li>Configure: <strong>Name:</strong> <code>caleesi-db</code>, <strong>Database:</strong> <code>caleesi</code>, <strong>Region:</strong> <code>Singapore (Southeast Asia)</code>, <strong>Plan:</strong> <span class="badge badge-green">Free</span>.</li>
+            <li>Click <strong>Create Database</strong> and wait ~60s until status is <span class="badge badge-green">Available</span>.</li>
+            <li>Scroll down to <strong>Connections</strong> and copy the <strong>Internal Database URL</strong>:</li>
+          </ol>
+          <div class="code-box">
+            <div class="code-header">
+              <span>Render Postgres — Internal Database URL (Private Network)</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">postgresql://caleesi_user:PASSWORD@dpg-xxxxxxxxxxxxxxxxxxxx-a/caleesi</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: EXPRESS BACKEND -->
+      <div class="step-item" id="fullstack-api">
+        <div class="step-num">2</div>
+        <div class="step-details">
+          <h4>Step 2: Deploy Express.js Web Service on Render (No Dockerfile Required!)</h4>
+          <p>
+            Unlike PHP / Laravel which requires a Dockerfile, an Express backend uses Render's <strong>native Node runtime</strong>:
+          </p>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li>Click <strong>New + &rarr; Web Service</strong> and connect your GitHub repository.</li>
+            <li>Configure the service parameters:
+              <ul style="margin-left: 20px; margin-top: 6px;">
+                <li><strong>Root Directory:</strong> <code>backend-express</code></li>
+                <li><strong>Region:</strong> <strong>Singapore (Southeast Asia)</strong> <em>(Must match your Postgres region!)</em></li>
+                <li><strong>Runtime:</strong> <code>Node</code></li>
+                <li><strong>Build Command:</strong> <code>npm install</code></li>
+                <li><strong>Start Command:</strong> <code>npm start</code></li>
+                <li><strong>Instance Type:</strong> <span class="badge badge-green">Free</span></li>
+              </ul>
+            </li>
+            <li>In the <strong>Environment Variables</strong> tab, add:</li>
+          </ol>
+          <div class="code-box">
+            <div class="code-header">
+              <span>Render Web Service — Environment Variables</span>
+              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+            </div>
+            <div class="code-body">DATABASE_URL=postgresql://caleesi_user:PASSWORD@dpg-xxxxxxxxxxxxxxxxxxxx-a/caleesi
+FRONTEND_URL=https://caleesi.vercel.app
+NODE_ENV=production</div>
+          </div>
+          <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.88rem;">
+            When the service starts, Express automatically connects to PostgreSQL, creates the tables and initial seed data, and listens on Render's dynamic <code>$PORT</code>. Note your live backend URL (e.g. <code>https://caleesi-api.onrender.com</code>).
+          </p>
+        </div>
+      </div>
+
+      <!-- STEP 3: VERCEL FRONTEND -->
+      <div class="step-item" id="fullstack-web">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Step 3: Deploy the React / Vite Frontend on Vercel</h4>
+          <p>
+            Deploy the client SPA to Vercel's global Edge CDN and point it to your live Render backend:
+          </p>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li>In your code, ensure <code>api.ts</code> reads <code>import.meta.env.VITE_API_BASE_URL</code>:
+              <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
+                <div class="code-header">
+                  <span>frontend/src/lib/api.ts</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-body">const rawBase = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
+const apiBase = rawBase ? (rawBase.endsWith('/api') ? rawBase : `${rawBase}/api`) : '/api';</div>
+              </div>
+            </li>
+            <li>On <a href="https://vercel.com" target="_blank" style="color: var(--accent);">vercel.com</a>, click <strong>Add New... &rarr; Project</strong> and import your repo.</li>
+            <li>Set <strong>Framework Preset:</strong> <code>Vite</code>, <strong>Root Directory:</strong> <code>frontend</code>.</li>
+            <li>Under <strong>Environment Variables</strong>, add:<br>
+              <code>VITE_API_BASE_URL = https://caleesi-api.onrender.com/api</code>
+            </li>
+            <li>Click <strong>Deploy</strong>. In ~45 seconds, your frontend is live with automatic global HTTPS!</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- STEP 4: CORS & COLD START -->
+      <div class="step-item" id="fullstack-cors">
+        <div class="step-num">4</div>
+        <div class="step-details">
+          <h4>Step 4: Verify Cross-Origin Requests &amp; Cold-Start Warm-Up</h4>
+          <p>
+            The two essential steps to ensure your live defense demo goes smoothly:
+          </p>
+          <ul style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li><strong>CORS Handling:</strong> The Express server has <code>cors()</code> pre-configured to automatically allow your <code>*.vercel.app</code> domain, avoiding browser blocked-origin errors.</li>
+            <li><strong>Pre-Defense Warm-Up:</strong> Render free Web Services sleep after 15 minutes of inactivity. Open <code>https://caleesi-api.onrender.com/api/health</code> in your phone browser <strong>2 minutes before your presentation</strong> so the instance is hot and responsive when you demonstrate.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chapter-pagination">
+        <a href="#render-guide" class="chapter-card prev">
+          <div class="chapter-card-top">
+            <span class="chapter-card-arrow">←</span>
+            <span class="chapter-card-label">Previous Topic</span>
+            <span class="chapter-card-category">Render Backend &amp; DB</span>
+          </div>
+          <span class="chapter-card-title">Render Web Services &amp; DB</span>
+          <span class="chapter-card-desc">Individual backend &amp; Postgres service guides</span>
+        </a>
         <a href="#frontend-guide" class="chapter-card next">
           <div class="chapter-card-top">
             <span class="chapter-card-label">Next Topic</span>
@@ -2907,6 +3270,7 @@ app.listen(PORT, '0.0.0.0', () => {
           <span class="chapter-card-desc">Global CDN hosting for React, Vite &amp; static SPAs</span>
         </a>
       </div>
+    </section>
     </section>
 
     <!-- SECTION: FRONTEND -->
@@ -3184,12 +3548,20 @@ app.add_middleware(
           </thead>
           <tbody>
             <tr>
-              <td><strong>Render</strong></td>
+              <td><strong>Render (Web Service)</strong></td>
               <td>Backend Web Service</td>
               <td><span class="badge badge-green">❌ No Card</span></td>
               <td>Sleeps after 15m idle (~45s wake)</td>
               <td>750 free instance hours / month</td>
               <td>Express, FastAPI, Flask, NestJS APIs</td>
+            </tr>
+            <tr>
+              <td><strong>Render (Postgres)</strong></td>
+              <td>Managed PostgreSQL DB</td>
+              <td><span class="badge badge-green">❌ No Card</span></td>
+              <td>Active 24/7 (Expires after 30 days)</td>
+              <td>1 GB storage, 256 MB RAM (PG 16)</td>
+              <td>Laravel migrations (<code>caleesi</code>), short sprints &amp; demos</td>
             </tr>
             <tr>
               <td><strong>Supabase</strong></td>
@@ -3274,13 +3646,13 @@ app.add_middleware(
         <div class="card">
           <div class="card-title">2. Backend API: Render Web Service</div>
           <p class="card-desc">
-            Host your Express or FastAPI backend with automatic HTTPS. Configure <code>DATABASE_URL</code> in environment variables.
+            Host your Laravel (Docker), Express, or FastAPI backend with automatic HTTPS. Configure <code>DATABASE_URL</code> or <code>DB_URL</code> in environment variables.
           </p>
         </div>
         <div class="card">
-          <div class="card-title">3. Database: Supabase PostgreSQL</div>
+          <div class="card-title">3. Database: Render Postgres or Supabase</div>
           <p class="card-desc">
-            500 MB hosted Postgres with visual table editor, instant REST API, and built-in Auth. Unpause in 1-click if inactive.
+            Use <strong>Render Managed Postgres</strong> (1 GB in Singapore via 0ms private Internal URL) for fast 30-day sprints, or <strong>Supabase Postgres</strong> (500 MB + visual table editor).
           </p>
         </div>
       </div>
@@ -3634,7 +4006,8 @@ app.add_middleware(
     'vm-setup': { cat: 'Microsoft Azure', topic: 'Ubuntu VM Setup' },
     'azure-fallback': { cat: 'Microsoft Azure', topic: 'B1s Fallback & Hybrid Setup' },
     'supabase-guide': { cat: 'Supabase DB & Auth', topic: 'PostgreSQL & Table Editor' },
-    'render-guide': { cat: 'Render Backend', topic: 'Web Services & Port Binding' },
+    'render-guide': { cat: 'Render Backend & DB', topic: 'Web Services & Managed PostgreSQL' },
+    'fullstack-guide': { cat: 'Full-Stack Deployment', topic: 'Render Postgres + Express + Vercel' },
     'frontend-guide': { cat: 'Vercel & Netlify', topic: 'Frontend SPA Deployment' },
     'cors-guide': { cat: 'Vercel & Netlify', topic: 'Fixing CORS Errors' },
     'junior-quickstart': { cat: 'Architecture & FAQ', topic: 'Decision Matrix' },
@@ -3645,7 +4018,7 @@ app.add_middleware(
   const sectionOrder = [
     'intro', 'prerequisites', 'budget', 'twelve-months', 'free-forever',
     'vm-setup', 'azure-fallback', 'supabase-guide', 'render-guide',
-    'frontend-guide', 'cors-guide', 'junior-quickstart', 'stack-blueprint', 'faq'
+    'fullstack-guide', 'frontend-guide', 'cors-guide', 'junior-quickstart', 'stack-blueprint', 'faq'
   ];
 
   // Option 1: True Chapter / Book Mode Navigation Engine
