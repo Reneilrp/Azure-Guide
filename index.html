@@ -1369,11 +1369,12 @@
             <span class="do-caret">▸</span>
           </button>
           <div class="do-tree-children">
-            <a href="#fullstack-guide" class="do-tree-link"><span>🔗</span> Render + Postgres + Vercel</a>
+            <a href="#fullstack-guide" class="do-tree-link"><span>🔗</span> Overview &amp; Architecture</a>
             <a href="#fullstack-db" class="do-tree-link"><span>1️⃣</span> Step 1: Render Postgres</a>
-            <a href="#fullstack-api" class="do-tree-link"><span>2️⃣</span> Step 2: Express on Render</a>
-            <a href="#fullstack-web" class="do-tree-link"><span>3️⃣</span> Step 3: Vercel Frontend</a>
-            <a href="#fullstack-cors" class="do-tree-link"><span>4️⃣</span> Step 4: CORS &amp; Warm-Up</a>
+            <a href="#fullstack-dump" class="do-tree-link"><span>2️⃣</span> Step 2: Push backup.sql</a>
+            <a href="#fullstack-api" class="do-tree-link"><span>3️⃣</span> Step 3: Express Backend</a>
+            <a href="#fullstack-web" class="do-tree-link"><span>4️⃣</span> Step 4: Vercel Frontend</a>
+            <a href="#fullstack-cors" class="do-tree-link"><span>5️⃣</span> Step 5: Pre-Defense Check</a>
           </div>
         </div>
 
@@ -3098,49 +3099,56 @@ const pool = new Pool({
     <section id="fullstack-guide" data-platform="fullstack">
       <h2><span>🌐</span> Full-Stack 3-Tier Deployment (Render Postgres + Express + Vercel)</h2>
       <p>
-        The complete, cardless blueprint for hosting a production-style 3-tier web application ($0 forever): <strong>Render Managed PostgreSQL</strong> for the database, a <strong>Render Web Service</strong> running Express.js for the API, and <strong>Vercel</strong> for the React / Vite frontend.
+        The complete, cardless reference for hosting a full-stack web project ($0 forever): <strong>Render Managed PostgreSQL</strong> for your database, a <strong>Render Web Service</strong> running Express.js for the API, and <strong>Vercel</strong> for the React / Vite frontend.
       </p>
 
       <!-- ARCHITECTURE DIAGRAM / CARD -->
       <div class="card" style="margin: 20px 0; background: rgba(15, 23, 42, 0.7); border-color: rgba(57, 217, 138, 0.35);">
-        <div class="card-title" style="color: #39d98a;">📐 3-Tier Zero-Card Architecture Overview</div>
+        <div class="card-title" style="color: #39d98a;">📐 3-Tier Architecture Data Pipeline</div>
         <div style="font-family: monospace; font-size: 0.85rem; color: #cbd5e1; line-height: 1.8; margin-top: 10px;">
           [1. Vercel Frontend (React/Vite)] &rarr; https://caleesi.vercel.app<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr; HTTPS REST API (CORS enabled)<br>
           [2. Render Web Service (Express API)] &rarr; https://caleesi-api.onrender.com (Singapore)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr; Private VPC Network (0ms overhead, port 5432)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&darr; Private VPC Network (0ms latency, port 5432)<br>
           [3. Render Managed Postgres] &rarr; dpg-xxxx-a (Singapore)
         </div>
       </div>
 
-      <!-- VISUAL 4-STAGE FULL-STACK PIPELINE -->
+      <!-- VISUAL 5-STAGE FULL-STACK PIPELINE -->
       <div class="flow-pipeline-bar">
         <div class="flow-step-card green">
           <div class="flow-step-badge">1</div>
           <div class="flow-step-info">
             <span class="flow-step-title">Render Postgres</span>
-            <span class="flow-step-sub">Singapore + Copy Internal URL</span>
+            <span class="flow-step-sub">Singapore Free DB</span>
+          </div>
+        </div>
+        <div class="flow-step-card green">
+          <div class="flow-step-badge">2</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Push backup.sql</span>
+            <span class="flow-step-sub">psql External URL</span>
           </div>
         </div>
         <div class="flow-step-card purple">
-          <div class="flow-step-badge">2</div>
-          <div class="flow-step-info">
-            <span class="flow-step-title">Render Web Service</span>
-            <span class="flow-step-sub">Express API + Auto Tables</span>
-          </div>
-        </div>
-        <div class="flow-step-card">
           <div class="flow-step-badge">3</div>
           <div class="flow-step-info">
-            <span class="flow-step-title">Vercel Frontend</span>
-            <span class="flow-step-sub">Set VITE_API_BASE_URL</span>
+            <span class="flow-step-title">Render Web Service</span>
+            <span class="flow-step-sub">Express API + Internal URL</span>
           </div>
         </div>
         <div class="flow-step-card">
           <div class="flow-step-badge">4</div>
           <div class="flow-step-info">
-            <span class="flow-step-title">CORS &amp; Warm-Up</span>
-            <span class="flow-step-sub">Allow *.vercel.app + Ping</span>
+            <span class="flow-step-title">Vercel Frontend</span>
+            <span class="flow-step-sub">VITE_API_BASE_URL</span>
+          </div>
+        </div>
+        <div class="flow-step-card">
+          <div class="flow-step-badge">5</div>
+          <div class="flow-step-info">
+            <span class="flow-step-title">Pre-Defense Check</span>
+            <span class="flow-step-sub">Warm-Up &amp; CORS verify</span>
           </div>
         </div>
       </div>
@@ -3149,36 +3157,78 @@ const pool = new Pool({
       <div class="step-item" id="fullstack-db">
         <div class="step-num">1</div>
         <div class="step-details">
-          <h4>Step 1: Provision Render Managed PostgreSQL &amp; Copy the INTERNAL URL</h4>
+          <h4>Step 1: Provision Render Managed PostgreSQL</h4>
           <p>
-            Always deploy <strong>Bottom-Up</strong>: Create the database first so its credentials are ready when deploying the backend.
+            Always deploy <strong>Bottom-Up</strong>: Provision the database first so its credentials and host are ready.
           </p>
           <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
-            <li>On <a href="https://dashboard.render.com" target="_blank" style="color: var(--accent);">dashboard.render.com</a>, click <strong>New + &rarr; Postgres</strong>.</li>
-            <li>Configure: <strong>Name:</strong> <code>caleesi-db</code>, <strong>Database:</strong> <code>caleesi</code>, <strong>Region:</strong> <code>Singapore (Southeast Asia)</code>, <strong>Plan:</strong> <span class="badge badge-green">Free</span>.</li>
-            <li>Click <strong>Create Database</strong> and wait ~60s until status is <span class="badge badge-green">Available</span>.</li>
-            <li>Scroll down to <strong>Connections</strong> and copy the <strong>Internal Database URL</strong>:</li>
+            <li>Go to <a href="https://dashboard.render.com" target="_blank" style="color: var(--accent);">dashboard.render.com</a> and sign in.</li>
+            <li>Click the blue <strong>New +</strong> button at the top right and select <strong>Postgres</strong>.</li>
+            <li>Configure:
+              <ul style="margin-left: 20px; margin-top: 6px;">
+                <li><strong>Name:</strong> <code>caleesi-db</code></li>
+                <li><strong>Database:</strong> <code>caleesi</code></li>
+                <li><strong>User:</strong> <code>caleesi_user</code></li>
+                <li><strong>Region:</strong> <strong>Singapore (Southeast Asia)</strong> <em>(Crucial for lowest latency in Asia-Pacific)</em></li>
+                <li><strong>PostgreSQL Version:</strong> <code>16</code></li>
+                <li><strong>Instance Type:</strong> Select <span class="badge badge-green">Free</span> ($0/month, 1 GB storage)</li>
+              </ul>
+            </li>
+            <li>Click <strong>Create Database</strong> and wait 45–60s until status turns <span class="badge badge-green">Available</span>.</li>
           </ol>
-          <div class="code-box">
-            <div class="code-header">
-              <span>Render Postgres — Internal Database URL (Private Network)</span>
-              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            </div>
-            <div class="code-body">postgresql://caleesi_user:PASSWORD@dpg-xxxxxxxxxxxxxxxxxxxx-a/caleesi</div>
-          </div>
         </div>
       </div>
 
-      <!-- STEP 2: EXPRESS BACKEND -->
-      <div class="step-item" id="fullstack-api">
+      <!-- STEP 2: PUSH BACKUP.SQL -->
+      <div class="step-item" id="fullstack-dump">
         <div class="step-num">2</div>
         <div class="step-details">
-          <h4>Step 2: Deploy Express.js Web Service on Render (No Dockerfile Required!)</h4>
+          <h4>Step 2: Push <code>backup.sql</code> to Render via <code>psql</code></h4>
           <p>
-            Unlike PHP / Laravel which requires a Dockerfile, an Express backend uses Render's <strong>native Node runtime</strong>:
+            Now send your local SQL dump directly into your newly created cloud database:
           </p>
           <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
-            <li>Click <strong>New + &rarr; Web Service</strong> and connect your GitHub repository.</li>
+            <li>On your Render Postgres dashboard, scroll to <strong>Connections</strong> and copy the <strong>External Database URL</strong>:
+              <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
+                <div class="code-header">
+                  <span>External Database URL format</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-body">postgresql://caleesi_user:SECRET_PASSWORD@dpg-xxxxxxxxxxxx-a.singapore-postgres.render.com/caleesi</div>
+              </div>
+            </li>
+            <li>Open your terminal where <code>backup.sql</code> is saved and pipe it into Render (make sure to append <code>?sslmode=require</code>):
+              <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
+                <div class="code-header">
+                  <span>Terminal — Import backup.sql into Render Postgres</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-body">psql "YOUR_EXTERNAL_DATABASE_URL?sslmode=require" &lt; backup.sql</div>
+              </div>
+            </li>
+            <li>Verify your tables landed in Render:
+              <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
+                <div class="code-header">
+                  <span>Terminal — Verify Tables</span>
+                  <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <div class="code-body">psql "YOUR_EXTERNAL_DATABASE_URL?sslmode=require" -c "\dt"</div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- STEP 3: EXPRESS BACKEND -->
+      <div class="step-item" id="fullstack-api">
+        <div class="step-num">3</div>
+        <div class="step-details">
+          <h4>Step 3: Deploy Express.js Web Service on Render (No Dockerfile Required!)</h4>
+          <p>
+            Deploy your Node.js / Express backend using Render's <strong>native Node runtime</strong>:
+          </p>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li>In Render, click <strong>New + &rarr; Web Service</strong> and connect your GitHub repository.</li>
             <li>Configure the service parameters:
               <ul style="margin-left: 20px; margin-top: 6px;">
                 <li><strong>Root Directory:</strong> <code>backend-express</code></li>
@@ -3189,63 +3239,56 @@ const pool = new Pool({
                 <li><strong>Instance Type:</strong> <span class="badge badge-green">Free</span></li>
               </ul>
             </li>
-            <li>In the <strong>Environment Variables</strong> tab, add:</li>
-          </ol>
-          <div class="code-box">
-            <div class="code-header">
-              <span>Render Web Service — Environment Variables</span>
-              <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            </div>
-            <div class="code-body">DATABASE_URL=postgresql://caleesi_user:PASSWORD@dpg-xxxxxxxxxxxxxxxxxxxx-a/caleesi
-FRONTEND_URL=https://caleesi.vercel.app
-NODE_ENV=production</div>
-          </div>
-          <p style="margin-top: 8px; color: var(--text-muted); font-size: 0.88rem;">
-            When the service starts, Express automatically connects to PostgreSQL, creates the tables and initial seed data, and listens on Render's dynamic <code>$PORT</code>. Note your live backend URL (e.g. <code>https://caleesi-api.onrender.com</code>).
-          </p>
-        </div>
-      </div>
-
-      <!-- STEP 3: VERCEL FRONTEND -->
-      <div class="step-item" id="fullstack-web">
-        <div class="step-num">3</div>
-        <div class="step-details">
-          <h4>Step 3: Deploy the React / Vite Frontend on Vercel</h4>
-          <p>
-            Deploy the client SPA to Vercel's global Edge CDN and point it to your live Render backend:
-          </p>
-          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
-            <li>In your code, ensure <code>api.ts</code> reads <code>import.meta.env.VITE_API_BASE_URL</code>:
+            <li>Under <strong>Environment Variables</strong>, copy and paste the <strong>Internal Database URL</strong> from Render Postgres:
               <div class="code-box" style="margin-top: 6px; margin-bottom: 8px;">
                 <div class="code-header">
-                  <span>frontend/src/lib/api.ts</span>
+                  <span>Render Web Service — Environment Variables</span>
                   <button class="copy-btn" onclick="copyCode(this)">Copy</button>
                 </div>
-                <div class="code-body">const rawBase = (import.meta.env.VITE_API_BASE_URL || '').trim().replace(/\/+$/, '');
-const apiBase = rawBase ? (rawBase.endsWith('/api') ? rawBase : `${rawBase}/api`) : '/api';</div>
+                <div class="code-body">DATABASE_URL=postgresql://caleesi_user:PASSWORD@dpg-xxxxxxxxxxxxxxxxxxxx-a/caleesi
+NODE_ENV=production</div>
               </div>
             </li>
-            <li>On <a href="https://vercel.com" target="_blank" style="color: var(--accent);">vercel.com</a>, click <strong>Add New... &rarr; Project</strong> and import your repo.</li>
-            <li>Set <strong>Framework Preset:</strong> <code>Vite</code>, <strong>Root Directory:</strong> <code>frontend</code>.</li>
-            <li>Under <strong>Environment Variables</strong>, add:<br>
-              <code>VITE_API_BASE_URL = https://caleesi-api.onrender.com/api</code>
-            </li>
-            <li>Click <strong>Deploy</strong>. In ~45 seconds, your frontend is live with automatic global HTTPS!</li>
+            <li>Click <strong>Deploy Web Service</strong>. In 1–2 minutes, copy your live backend URL (e.g. <code>https://caleesi-api.onrender.com</code>).</li>
           </ol>
         </div>
       </div>
 
-      <!-- STEP 4: CORS & COLD START -->
-      <div class="step-item" id="fullstack-cors">
+      <!-- STEP 4: VERCEL FRONTEND -->
+      <div class="step-item" id="fullstack-web">
         <div class="step-num">4</div>
         <div class="step-details">
-          <h4>Step 4: Verify Cross-Origin Requests &amp; Cold-Start Warm-Up</h4>
+          <h4>Step 4: Deploy the React / Vite Frontend on Vercel</h4>
           <p>
-            The two essential steps to ensure your live defense demo goes smoothly:
+            Deploy the client SPA to Vercel's global Edge CDN and link your live Render backend:
+          </p>
+          <ol style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
+            <li>On <a href="https://vercel.com" target="_blank" style="color: var(--accent);">vercel.com</a>, click <strong>Add New... &rarr; Project</strong> and import your repo.</li>
+            <li>Set <strong>Framework Preset:</strong> <code>Vite</code>, <strong>Root Directory:</strong> <code>frontend</code>.</li>
+            <li>Under <strong>Environment Variables</strong>, add:
+              <br><code>VITE_API_BASE_URL = https://caleesi-api.onrender.com/api</code>
+            </li>
+            <li>Click <strong>Deploy</strong>. In ~45 seconds, your frontend is live with automatic HTTPS!</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- STEP 5: PRE-DEFENSE CHECK -->
+      <div class="step-item" id="fullstack-cors">
+        <div class="step-num">5</div>
+        <div class="step-details">
+          <h4>Step 5: Pre-Defense Presentation Check</h4>
+          <p>
+            Two final items to guarantee a seamless live demonstration:
           </p>
           <ul style="margin-left: 20px; color: var(--text-muted); margin-bottom: 12px;">
-            <li><strong>CORS Handling:</strong> The Express server has <code>cors()</code> pre-configured to automatically allow your <code>*.vercel.app</code> domain, avoiding browser blocked-origin errors.</li>
-            <li><strong>Pre-Defense Warm-Up:</strong> Render free Web Services sleep after 15 minutes of inactivity. Open <code>https://caleesi-api.onrender.com/api/health</code> in your phone browser <strong>2 minutes before your presentation</strong> so the instance is hot and responsive when you demonstrate.</li>
+            <li><strong>Wake Up Backend Container (Cold Start):</strong> Free Render instances sleep after 15 minutes of inactivity. Open <code>https://caleesi-api.onrender.com/api/health</code> in your phone or browser tab <strong>2 minutes before your presentation</strong> so your backend responds with zero lag.</li>
+            <li><strong>Test Logins:</strong> Verify you can sign in on your live Vercel app using the default seeded accounts:
+              <ul style="margin-left: 20px; margin-top: 4px;">
+                <li><strong>Parent:</strong> <code>daenerys@dragonstone.com</code> / <code>password</code></li>
+                <li><strong>Godparent:</strong> <code>james@casterly.com</code> / <code>password</code></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
