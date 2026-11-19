@@ -1321,13 +1321,13 @@
             <span class="do-caret">▸</span>
           </button>
           <div class="do-tree-children">
-            <a href="#intro" class="do-tree-link active"><span>🌟</span> Welcome & Perks</a>
-            <a href="#prerequisites" class="do-tree-link"><span>📋</span> Eligibility & Card Hold</a>
+            <a href="#intro" class="do-tree-link active"><span>🌟</span> Welcome &amp; Perks</a>
+            <a href="#prerequisites" class="do-tree-link"><span>📋</span> Eligibility &amp; Card Hold</a>
             <a href="#budget" class="do-tree-link"><span>🛡️</span> Budget Alert Setup</a>
-            <a href="#twelve-months" class="do-tree-link"><span>⏱️</span> 12 Months Free</a>
+            <a href="#twelve-months" class="do-tree-link"><span>⏱️</span> 12 Months Free (x86 &amp; ARM64 VMs)</a>
             <a href="#free-forever" class="do-tree-link"><span>♾️</span> Free Forever (55+)</a>
             <a href="#vm-setup" class="do-tree-link"><span>💻</span> Ubuntu VM Setup</a>
-            <a href="#azure-fallback" class="do-tree-link"><span>⚡</span> B1s Fallback & Hybrid Setup</a>
+            <a href="#azure-fallback" class="do-tree-link"><span>⚡</span> B1s Fallback &amp; Policy Allowed Regions</a>
           </div>
         </div>
 
@@ -1676,19 +1676,39 @@
             <tr>
               <th>Service</th>
               <th>Monthly Free Quota</th>
-              <th>Description</th>
+              <th>Description &amp; Architecture</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>Linux VM (Ubuntu)</strong></td>
-              <td><span class="badge badge-green">750 hrs/month</span> Standard_B1s</td>
-              <td>Run 1 Ubuntu server continuously 24/7 all month.</td>
+              <td><strong>Linux VM: Basv2 Series (AMD x86_64)</strong></td>
+              <td><span class="badge badge-green">750 hrs/month</span> <code>Standard_B2ats_v2</code></td>
+              <td>2 vCPUs, 1 GiB RAM. Burstable AMD EPYC 7763v. Modern drop-in upgrade for B1s.</td>
             </tr>
             <tr>
-              <td><strong>Windows VM</strong></td>
-              <td><span class="badge badge-green">750 hrs/month</span> Standard_B1s</td>
-              <td>Windows Server instance 24/7 all month.</td>
+              <td><strong>Linux VM: Bpsv2 Series (Ampere ARM64)</strong></td>
+              <td><span class="badge badge-purple">750 hrs/month</span> <code>Standard_B2pts_v2</code></td>
+              <td>2 vCPUs, 1 GiB RAM. Ultra-efficient ARM64 Ampere Altra processor.</td>
+            </tr>
+            <tr>
+              <td><strong>Linux VM: B-Series (Intel x86_64)</strong></td>
+              <td><span class="badge badge-blue">750 hrs/month</span> <code>Standard_B1s</code></td>
+              <td>1 vCPU, 1 GiB RAM. Classic Intel Xeon cloud compute.</td>
+            </tr>
+            <tr>
+              <td><strong>Windows VM: Basv2 Series (AMD x86_64)</strong></td>
+              <td><span class="badge badge-green">750 hrs/month</span> <code>Standard_B2ats_v2</code></td>
+              <td>Windows Server instance with 2 vCPUs on AMD x86_64 architecture.</td>
+            </tr>
+            <tr>
+              <td><strong>Windows VM: Bpsv2 Series (Ampere ARM64)</strong></td>
+              <td><span class="badge badge-purple">750 hrs/month</span> <code>Standard_B2pts_v2</code></td>
+              <td>Windows Server instance with 2 vCPUs on Ampere Altra ARM64 architecture.</td>
+            </tr>
+            <tr>
+              <td><strong>Windows VM: B-Series (Intel x86_64)</strong></td>
+              <td><span class="badge badge-blue">750 hrs/month</span> <code>Standard_B1s</code></td>
+              <td>Windows Server instance with 1 vCPU on Intel x86_64 architecture.</td>
             </tr>
             <tr>
               <td><strong>Managed Disks</strong></td>
@@ -1722,6 +1742,74 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- AZURE FREE SERVICES DASHBOARD PREVIEW -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 20px; margin: 24px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.2rem;">📊</span>
+            <div>
+              <strong style="color: #f8fafc; font-size: 0.95rem;">Azure Portal "Free Services" Real-Time Tracker</strong>
+              <div style="color: #94a3b8; font-size: 0.8rem;">Search <strong>"Free Services"</strong> in the Azure Portal search bar to view your live quota and usage meters</div>
+            </div>
+          </div>
+          <span class="badge badge-blue">Portal Blade: Free Services</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+          <!-- Meter 1: ARM64 Linux -->
+          <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 8px; padding: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <span style="font-weight: 600; color: #e2e8f0; font-size: 0.85rem;">Virtual Machines, Bpsv2 Series, B2pts v2</span>
+              <span class="badge badge-purple" style="font-size: 0.7rem;">ARM64 Linux</span>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.78rem; margin-bottom: 6px;">2 vCPUs · 1 GiB RAM · Ampere Altra</div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #34d399; font-family: monospace;">
+              <span>0% 0 / 750 (1 Hour)</span>
+              <span style="color: #94a3b8;">Not in use</span>
+            </div>
+          </div>
+
+          <!-- Meter 2: x86_64 Linux -->
+          <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 8px; padding: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <span style="font-weight: 600; color: #e2e8f0; font-size: 0.85rem;">Virtual Machines, Basv2 Series, B2ats v2</span>
+              <span class="badge badge-green" style="font-size: 0.7rem;">x86_64 Linux</span>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.78rem; margin-bottom: 6px;">2 vCPUs · 1 GiB RAM · AMD EPYC</div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #34d399; font-family: monospace;">
+              <span>0% 0 / 750 (1 Hour)</span>
+              <span style="color: #94a3b8;">Not in use</span>
+            </div>
+          </div>
+
+          <!-- Meter 3: x86_64 Windows -->
+          <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 8px; padding: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <span style="font-weight: 600; color: #e2e8f0; font-size: 0.85rem;">Virtual Machines, Basv2 Series Windows, B2ats v2</span>
+              <span class="badge badge-green" style="font-size: 0.7rem;">x86_64 Windows</span>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.78rem; margin-bottom: 6px;">2 vCPUs · 1 GiB RAM · AMD EPYC</div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #34d399; font-family: monospace;">
+              <span>0% 0 / 750 (1 Hour)</span>
+              <span style="color: #94a3b8;">Not in use</span>
+            </div>
+          </div>
+
+          <!-- Meter 4: ARM64 Windows -->
+          <div style="background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 8px; padding: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px;">
+              <span style="font-weight: 600; color: #e2e8f0; font-size: 0.85rem;">Virtual Machines, Bpsv2 Series Windows, B2pts v2</span>
+              <span class="badge badge-purple" style="font-size: 0.7rem;">ARM64 Windows</span>
+            </div>
+            <div style="color: #94a3b8; font-size: 0.78rem; margin-bottom: 6px;">2 vCPUs · 1 GiB RAM · Ampere Altra</div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #34d399; font-family: monospace;">
+              <span>0% 0 / 750 (1 Hour)</span>
+              <span style="color: #94a3b8;">Not in use</span>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="callout callout-info">
@@ -1832,12 +1920,26 @@
       <div class="step-item">
         <div class="step-num">1</div>
         <div class="step-details">
-          <h4>Select Region & Image</h4>
+          <h4>Verify Allowed Regions &amp; Select Image</h4>
+          
+          <div class="callout callout-info" style="margin: 8px 0 14px;">
+            <div class="callout-icon">🛡️</div>
+            <div class="callout-content">
+              <strong>Pre-Flight Check: Verify Allowed Regions in Azure Policy</strong><br>
+              Before picking a datacenter, verify which regions your subscription permits to prevent <code>RequestDisallowedByPolicy</code> errors:<br>
+              <strong>Azure Portal &rarr; Search "Policy" &rarr; Under Authoring, click Assignments &rarr; Select "Allowed resource deployment regions" &rarr; Parameters tab</strong>.<br>
+              Review the <em>Allowed locations</em> list to confirm your target region is authorized.
+            </div>
+          </div>
+
           <p>
-            • <strong>Region:</strong> Select <strong>(Asia Pacific) East Asia</strong> (Hong Kong).<br>
-            • <strong>Image:</strong> Choose <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong>.<br>
-            • <strong>VM Architecture:</strong> Select <strong>x64</strong> (do <em>not</em> select ARM64).
+            • <strong>Region:</strong> Select an authorized datacenter, such as <strong>(Asia Pacific) East Asia</strong> (Hong Kong).<br>
+            • <strong>VM Architecture &amp; Image:</strong> Match the architecture to your chosen free VM size:
           </p>
+          <ul style="margin: 6px 0 10px 18px; line-height: 1.6; font-size: 0.9rem; color: #cbd5e1;">
+            <li><strong>For x86_64 VMs (<code>Standard_B2ats_v2</code> AMD or <code>Standard_B1s</code> Intel):</strong> Select Architecture: <strong>x64</strong> &rarr; Image: <strong>Ubuntu Server 24.04 LTS - x64 Gen2</strong>.</li>
+            <li><strong>For ARM64 VMs (<code>Standard_B2pts_v2</code> Ampere):</strong> Select Architecture: <strong>Arm64</strong> &rarr; Image: <strong>Ubuntu Server 24.04 LTS - Arm64 Gen2</strong>.</li>
+          </ul>
 
           <div class="callout callout-warning" style="margin: 10px 0 0;">
             <div class="callout-icon">🌏</div>
@@ -1892,8 +1994,8 @@
             <span class="chapter-card-arrow">→</span>
             <span class="chapter-card-category">Microsoft Azure</span>
           </div>
-          <span class="chapter-card-title">B1s Fallback &amp; Hybrid Setup</span>
-          <span class="chapter-card-desc">When Standard_B1s is out of stock / quota limit 0</span>
+          <span class="chapter-card-title">B1s Fallback &amp; Policy Allowed Regions</span>
+          <span class="chapter-card-desc">When B1s is out of stock, quota is 0, or regions restricted</span>
         </a>
       </div>
     </section>
@@ -1911,8 +2013,9 @@
       <div class="callout callout-warning">
         <div class="callout-icon">🚨</div>
         <div class="callout-content">
-          <strong>The 4 Common "B1s Unavailable" Bottlenecks:</strong>
+          <strong>The 5 Common Azure Deployment Bottlenecks:</strong>
           <ul style="margin: 8px 0 0; padding-left: 18px; line-height: 1.6;">
+            <li><strong>Azure Policy Regional Restrictions (<code>RequestDisallowedByPolicy</code>):</strong> Subscriptions (especially student, education, or school accounts) often enforce an Azure Policy restricting resource deployment regions. Deploying in an unapproved region aborts immediately with <code>RequestDisallowedByPolicy</code>.</li>
             <li><strong>Capacity Depletion:</strong> In regions like <code>eastasia</code> (Hong Kong), <code>southeastasia</code> (Singapore), and <code>japaneast</code>, <code>Standard_B1s</code> is frequently grayed out or displays <em>"Size not available in this region"</em> due to high global cloud demand.</li>
             <li><strong>Student Quota Limits (0 vCPUs):</strong> Certain student subscriptions have their regional vCPU quota set to <code>0</code> specifically for the classic <code>Standard BS Family</code>.</li>
             <li><strong>Portal Pricing Display Confusion:</strong> The VM catalog displays retail pricing (e.g., <code>~$10.40/month</code>) instead of <code>$0.00</code>. Azure deducts the 750 free hours credit automatically on your monthly statement rather than zeroing out catalog cards.</li>
@@ -1921,44 +2024,116 @@
         </div>
       </div>
 
+      <!-- STEP-BY-STEP POLICY VERIFICATION GUIDE -->
+      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 12px; padding: 20px; margin: 20px 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 1.25rem;">🔍</span>
+            <div>
+              <strong style="color: #f8fafc; font-size: 0.95rem;">How to Check Allowed Regions in Azure Policy</strong>
+              <div style="color: #94a3b8; font-size: 0.8rem;">Identify which global datacenters your subscription is permitted to deploy into</div>
+            </div>
+          </div>
+          <span class="badge badge-purple">Policy Navigation</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: #cbd5e1; line-height: 1.6;">
+          <div style="display: flex; gap: 10px; align-items: baseline;">
+            <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">1</span>
+            <div>In the top search bar of the <strong>Azure Portal</strong>, type <strong>Policy</strong> and click on the <strong>Policy</strong> service.</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: baseline;">
+            <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">2</span>
+            <div>In the left navigation menu under the <strong>Authoring</strong> section, select <strong>Assignments</strong>.</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: baseline;">
+            <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">3</span>
+            <div>Find the policy assignment named <strong>Allowed resource deployment regions</strong> (or <strong>Allowed locations</strong>) and click on it.</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: baseline;">
+            <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">4</span>
+            <div>Click on the <strong>Parameters</strong> tab at the top of the assignment blade.</div>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: baseline;">
+            <span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; font-weight: 700; border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; flex-shrink: 0;">5</span>
+            <div>Inspect the <strong>Allowed locations</strong> dropdown / checklist. Every region checked (e.g. <code>East Asia</code>, <code>Southeast Asia</code>) is an authorized deployment zone. Any region <em>not</em> checked will trigger <code>RequestDisallowedByPolicy</code> upon deployment.</div>
+          </div>
+        </div>
+      </div>
+
       <!-- FALLBACK 1: NEWER 12-MONTH FREE VM SIZES -->
-      <h3 style="color: #38bdf8; margin-top: 36px;">Option 1: Newer 12-Month Free Cloud VM Sizes</h3>
+      <h3 style="color: #38bdf8; margin-top: 36px;">Option 1: 12-Month Free Cloud VM Sizes (Linux &amp; Windows, x86_64 &amp; ARM64)</h3>
       <p>
-        If you require a 100% cloud-hosted virtual machine, Microsoft officially expanded the 12-month free compute tier beyond <code>Standard_B1s</code> to include newer modern architectures:
+        If you require a 100% cloud-hosted virtual machine, Microsoft officially expanded the 12-month free compute tier beyond <code>Standard_B1s</code> to include modern burstable architectures across both x86_64 and ARM64. You can monitor your active 750-hour consumption at any time in the <strong>Free Services</strong> portal blade.
       </p>
 
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>VM Size</th>
-              <th>Processor Architecture</th>
+              <th>Azure Portal Name</th>
+              <th>Architecture</th>
+              <th>OS Platform</th>
               <th>vCPUs</th>
               <th>RAM</th>
               <th>12-Month Free Quota</th>
+              <th>Portal Tracker Status</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><code>Standard_B2ats_v2</code></td>
-              <td><span class="badge badge-purple">AMD EPYC 7763v (x86_64)</span></td>
+              <td><code>Virtual Machines, Basv2 Series, B2ats v2</code></td>
+              <td><span class="badge badge-purple">AMD EPYC (x86_64)</span></td>
+              <td>Linux (Ubuntu x64)</td>
               <td>2 vCPUs</td>
               <td>1 GiB</td>
-              <td><span class="badge badge-green">750 hrs / month Free</span></td>
+              <td><span class="badge badge-green">750 hrs / month</span></td>
+              <td><code>0% 0 / 750 (1 Hour) Not in use</code></td>
             </tr>
             <tr>
-              <td><code>Standard_B2pts_v2</code></td>
+              <td><code>Virtual Machines, Bpsv2 Series, B2pts v2</code></td>
               <td><span class="badge badge-amber">Ampere Altra (ARM64)</span></td>
+              <td>Linux (Ubuntu Arm64)</td>
               <td>2 vCPUs</td>
               <td>1 GiB</td>
-              <td><span class="badge badge-green">750 hrs / month Free</span></td>
+              <td><span class="badge badge-green">750 hrs / month</span></td>
+              <td><code>0% 0 / 750 (1 Hour) Not in use</code></td>
             </tr>
             <tr>
-              <td><code>Standard_B1s</code></td>
+              <td><code>Virtual Machines, B1s</code></td>
               <td><span class="badge badge-blue">Intel Xeon (x86_64)</span></td>
+              <td>Linux (Ubuntu x64)</td>
               <td>1 vCPU</td>
               <td>1 GiB</td>
-              <td><span class="badge badge-green">750 hrs / month Free</span></td>
+              <td><span class="badge badge-green">750 hrs / month</span></td>
+              <td><code>0% 0 / 750 (1 Hour) Not in use</code></td>
+            </tr>
+            <tr>
+              <td><code>Virtual Machines, Basv2 Series Windows, B2ats v2</code></td>
+              <td><span class="badge badge-purple">AMD EPYC (x86_64)</span></td>
+              <td>Windows Server x64</td>
+              <td>2 vCPUs</td>
+              <td>1 GiB</td>
+              <td><span class="badge badge-green">750 hrs / month</span></td>
+              <td><code>0% 0 / 750 (1 Hour) Not in use</code></td>
+            </tr>
+            <tr>
+              <td><code>Virtual Machines, Bpsv2 Series Windows, B2pts v2</code></td>
+              <td><span class="badge badge-amber">Ampere Altra (ARM64)</span></td>
+              <td>Windows Server Arm64</td>
+              <td>2 vCPUs</td>
+              <td>1 GiB</td>
+              <td><span class="badge badge-green">750 hrs / month</span></td>
+              <td><code>0% 0 / 750 (1 Hour) Not in use</code></td>
+            </tr>
+            <tr>
+              <td><code>Virtual Machines, B1s Windows</code></td>
+              <td><span class="badge badge-blue">Intel Xeon (x86_64)</span></td>
+              <td>Windows Server x64</td>
+              <td>1 vCPU</td>
+              <td>1 GiB</td>
+              <td><span class="badge badge-green">750 hrs / month</span></td>
+              <td><code>0% 0 / 750 (1 Hour) Not in use</code></td>
             </tr>
           </tbody>
         </table>
@@ -1967,7 +2142,10 @@
       <div class="callout callout-info" style="margin-top: 14px;">
         <div class="callout-icon">💡</div>
         <div class="callout-content">
-          <strong>Pro-Tip for Sizing Picker:</strong> If <code>Standard_B1s</code> is grayed out or unavailable in East Asia, search for <strong><code>B2ats_v2</code></strong> (AMD). It provides <strong>2 burstable vCPUs</strong> instead of 1, runs on standard x86_64 Linux, and qualifies for the exact same 750 free monthly hours.
+          <strong>Key Takeaway &amp; Architecture Matching:</strong><br>
+          • <strong>Drop-in Replacement:</strong> If <code>Standard_B1s</code> is grayed out or unavailable in East Asia, pick <strong><code>B2ats_v2</code></strong> (AMD). It provides <strong>2 burstable vCPUs</strong> instead of 1, runs on standard x86_64 Linux, and qualifies for the exact same 750 free monthly hours.<br>
+          • <strong>ARM64 Notice:</strong> If you select <strong><code>B2pts_v2</code></strong>, you MUST choose an ARM64 image (such as <code>Ubuntu Server 24.04 LTS - Arm64 Gen2</code>). Attempting to pair an ARM64 VM with an x64 image will fail validation.<br>
+          • <strong>Quota &amp; Usage Tracking:</strong> In the Azure Portal search bar, type <strong>Free Services</strong> to monitor your live meters anytime.
         </div>
       </div>
 
@@ -2731,8 +2909,8 @@ ingress:
             <span class="chapter-card-label">Previous Topic</span>
             <span class="chapter-card-category">Microsoft Azure</span>
           </div>
-          <span class="chapter-card-title">B1s Fallback &amp; Hybrid Setup</span>
-          <span class="chapter-card-desc">When Standard_B1s capacity is depleted</span>
+          <span class="chapter-card-title">B1s Fallback &amp; Policy Allowed Regions</span>
+          <span class="chapter-card-desc">Allowed deployment regions &amp; alternative free compute</span>
         </a>
         <a href="#render-guide" class="chapter-card next">
           <div class="chapter-card-top">
@@ -3335,7 +3513,6 @@ NODE_ENV = production</div>
           <span class="chapter-card-desc">Global CDN hosting for React, Vite &amp; static SPAs</span>
         </a>
       </div>
-    </section>
     </section>
 
     <!-- SECTION: FRONTEND -->
@@ -4066,10 +4243,10 @@ app.add_middleware(
     'intro': { cat: 'Microsoft Azure', topic: 'Welcome & Perks' },
     'prerequisites': { cat: 'Microsoft Azure', topic: 'Prerequisites & Eligibility' },
     'budget': { cat: 'Microsoft Azure', topic: 'Budget Alert Protection' },
-    'twelve-months': { cat: 'Microsoft Azure', topic: '12 Months Free Compute' },
+    'twelve-months': { cat: 'Microsoft Azure', topic: '12 Months Free (x86 & ARM64)' },
     'free-forever': { cat: 'Microsoft Azure', topic: 'Free Forever Allowances' },
     'vm-setup': { cat: 'Microsoft Azure', topic: 'Ubuntu VM Setup' },
-    'azure-fallback': { cat: 'Microsoft Azure', topic: 'B1s Fallback & Hybrid Setup' },
+    'azure-fallback': { cat: 'Microsoft Azure', topic: 'B1s Fallback & Policy Allowed Regions' },
     'supabase-guide': { cat: 'Supabase DB & Auth', topic: 'PostgreSQL & Table Editor' },
     'render-guide': { cat: 'Render Backend & DB', topic: 'Web Services & Managed PostgreSQL' },
     'fullstack-guide': { cat: 'Full-Stack Deployment', topic: 'Render Postgres + Express + Vercel' },

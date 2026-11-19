@@ -10,27 +10,59 @@ When developing capstone, thesis, or commercial projects using Microsoft Azure's
 - Alongside your credits, you are entitled to **12 Months of Free Services** and **65+ Always-Free Services**.
 - Traditionally, developers rely on the **`Standard_B1s`** Linux Virtual Machine (750 hours/month free).
 
-### The "B1s Unavailable" Bottleneck
+### The "B1s Unavailable" & Regional Deployment Bottlenecks
 In many regional datacenters—especially in the Asia-Pacific region (`eastasia` / Hong Kong, `southeastasia` / Singapore, `japaneast`):
 1. **Capacity Depletion:** `Standard_B1s` instances are frequently grayed out or marked *"Size not available in this region"* due to high global demand.
 2. **Quota Restrictions:** Student subscriptions often have their vCPU quota limit set to `0` for the specific classic `Standard BS Family`.
-3. **Portal Pricing Confusion:** The Azure Portal VM size selector displays the gross retail price (e.g. `~$10.40/month`) instead of `$0.00`. (Azure applies the 750 free hours credit on your monthly invoice rather than showing zero in the catalog).
-4. **Memory Constraint:** Even when available, `B1s` offers only **1 GiB of RAM**, which struggles to support modern multi-service stacks (e.g., Nginx + PHP 8.3-FPM + MySQL + Laravel Reverb WebSockets + Queue Workers).
+3. **Azure Policy Regional Restrictions (`RequestDisallowedByPolicy`):** Subscriptions (especially Azure for Students or institution-managed accounts) often enforce an Azure Policy restricting deployments to a curated list of regions. Deploying in an unapproved region immediately aborts with `RequestDisallowedByPolicy`.
+4. **Portal Pricing Confusion:** The Azure Portal VM size selector displays the gross retail price (e.g. `~$10.40/month`) instead of `$0.00`. (Azure applies the 750 free hours credit on your monthly invoice rather than showing zero in the catalog).
+5. **Memory Constraint:** Even when available, `B1s` offers only **1 GiB of RAM**, which struggles to support modern multi-service stacks (e.g., Nginx + PHP 8.3-FPM + MySQL + Laravel Reverb WebSockets + Queue Workers).
 
 ---
 
-## 2. Cloud Alternative: Newer 12-Month Free VM Sizes
+### How to Check Your Subscription's Allowed Regions via Azure Policy
 
-If you require a 100% cloud-hosted VM, Microsoft officially expanded the 12-month free compute tier beyond `Standard_B1s` to include:
+Before attempting to create any Virtual Machine, database, or storage account, check which regions your subscription is actually permitted to deploy into:
 
-| VM Size | Processor Architecture | vCPUs | RAM | 12-Month Free Quota |
-|---|---|---|---|---|
-| **`Standard_B2ats_v2`** | AMD EPYC 7763v (x86_64) | 2 | 1 GiB | 750 hours / month |
-| **`Standard_B2pts_v2`** | Ampere Altra (ARM64) | 2 | 1 GiB | 750 hours / month |
-| **`Standard_B1s`** | Intel Xeon (x86_64) | 1 | 1 GiB | 750 hours / month |
+1. In the top search bar of the **Azure Portal**, type **`Policy`** and select **Policy**.
+2. In the left navigation menu under the **Authoring** section, click on **`Assignments`**.
+3. In the assignments table, locate the policy assignment named **`Allowed resource deployment regions`** (or **`Allowed locations`**).
+4. Click directly on the assignment name to open its details, or select **Edit assignment**.
+5. Switch to the **`Parameters`** tab.
+6. Review the **`Allowed locations`** checklist:
+   - This dropdown displays every single datacenter location authorized for your subscription (e.g., `East Asia`, `Southeast Asia`, `East US`, etc.).
+   - **Crucial Rule:** Only select regions that are checked/included in this list when provisioning resources. Selecting any region outside this list will trigger the error:
+     ```text
+     RequestDisallowedByPolicy: Resource 'your-resource-name' was disallowed by policy.
+     Policy: 'Allowed resource deployment regions'
+     ```
+
+---
+
+## 2. Cloud Alternative: 12-Month Free VM Sizes (Linux & Windows, x86_64 & ARM64)
+
+Microsoft officially provides **750 hours/month** of free compute across both **x86_64** and **ARM64** architectures, for both **Linux** and **Windows Server**.
+
+You can verify your available free quotas and track real-time consumption directly in the Azure Portal:
+> **Azure Portal &rarr; Search "Free Services" &rarr; View Compute / Virtual Machines**
+
+### Active Free Virtual Machine Offerings
+
+| Azure Free Services Portal Name | Architecture | OS Support | vCPUs | RAM | Free Monthly Quota | Portal Status Display |
+|---|---|---|---|---|---|---|
+| **`Virtual Machines, Basv2 Series, B2ats v2`** | AMD EPYC 7763v (x86_64) | Linux (Ubuntu, Debian, etc.) | 2 | 1 GiB | 750 hrs / month | `0% 0 / 750 (1 Hour) Not in use` |
+| **`Virtual Machines, Bpsv2 Series, B2pts v2`** | Ampere Altra (ARM64) | Linux (Ubuntu, Debian, etc.) | 2 | 1 GiB | 750 hrs / month | `0% 0 / 750 (1 Hour) Not in use` |
+| **`Virtual Machines, B1s`** | Intel Xeon (x86_64) | Linux (Ubuntu, Debian, etc.) | 1 | 1 GiB | 750 hrs / month | `0% 0 / 750 (1 Hour) Not in use` |
+| **`Virtual Machines, Basv2 Series Windows, B2ats v2`** | AMD EPYC 7763v (x86_64) | Windows Server | 2 | 1 GiB | 750 hrs / month | `0% 0 / 750 (1 Hour) Not in use` |
+| **`Virtual Machines, Bpsv2 Series Windows, B2pts v2`** | Ampere Altra (ARM64) | Windows Server | 2 | 1 GiB | 750 hrs / month | `0% 0 / 750 (1 Hour) Not in use` |
+| **`Virtual Machines, B1s Windows`** | Intel Xeon (x86_64) | Windows Server | 1 | 1 GiB | 750 hrs / month | `0% 0 / 750 (1 Hour) Not in use` |
 
 > [!TIP]
-> If `B1s` is unavailable in your selected region, search for **`B2ats_v2`** (AMD) in the VM size picker. It provides 2 burstable vCPUs instead of 1, while qualifying for the same 750 hours/month free tier.
+> **Picking the Right Architecture & OS Image:**
+> - **For x86_64 (`B2ats_v2` / `B1s`):** Select **x64** architecture and choose an x64 OS image like `Ubuntu Server 24.04 LTS - x64 Gen2` or `Windows Server 2025 Datacenter - x64 Gen2`.
+> - **For ARM64 (`B2pts_v2`):** Select **Arm64** architecture and choose an Arm64 OS image like `Ubuntu Server 24.04 LTS - Arm64 Gen2` or `Windows Server 2025 Datacenter Azure Edition - Arm64 Gen2`.
+> - **Why B2ats_v2 / B2pts_v2?** Both provide **2 burstable vCPUs** (double the single vCPU on `B1s`), making them significantly faster for package installation, Composer builds, and application startup.
+> - **750 Hours Rule:** 750 hours is sufficient to run exactly **1 VM continuously 24/7** for an entire 31-day month ($31 \times 24 = 744\text{ hours}$).
 
 ---
 

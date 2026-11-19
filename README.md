@@ -38,7 +38,7 @@ When defense day arrives, `Standard_B1s` is grayed out in Asia-Pacific, 1 GiB VM
 | Track | What you use | What you get |
 |---|---|---|
 | **1. Rapid Demo (Zero Card)** | **Supabase** + **Render** + **Vercel / Netlify** | Instant PostgreSQL, Node/Python/Go web services, and global CDN hosting using only a GitHub login — zero billing info required |
-| **2. 12-Month Cloud (Azure)** | **Azure for Students** (`$100` credit + free tiers) | 750 hrs/mo burstable VMs (`B2ats_v2`, `B2pts_v2`, `B1s`), 32 GB MySQL/PostgreSQL Flexible Server, and 55+ Always-Free services |
+| **2. 12-Month Cloud (Azure)** | **Azure for Students** (`$100` credit + free tiers) | 750 hrs/mo burstable VMs (x86_64 AMD `B2ats_v2`, ARM64 Ampere `B2pts_v2`, Intel `B1s` for Linux & Windows), 32 GB MySQL/PostgreSQL Flexible Server, and 55+ Always-Free services |
 | **3. Hybrid Capstone Engine** | **Local WSL2** + **Cloudflare Tunnel** + **Azure Vault** | 8–16+ GB local RAM for heavy backends/WebSockets exposed over HTTPS with zero port forwarding, backed by Azure MySQL & Blob Storage |
 
 All three tracks are documented step by step in [`index.html`](./index.html) and [`Azure-Guide.md`](./Azure-Guide.md), complete with copy-pasteable configs, `.env` templates, and architecture blueprints.
@@ -63,7 +63,8 @@ Look up the exact blocker you hit during setup or right before your presentation
 
 | Blocker you hit | The fix in this guide |
 |---|---|
-| `Standard_B1s is grayed out or quota is 0` | Switch region to **East Asia (Hong Kong)** and pick **`Standard_B2ats_v2`** (AMD, 2 vCPUs) or **`Standard_B2pts_v2`** (ARM64, 2 vCPUs) — both qualify for 750 hrs/mo free |
+| `RequestDisallowedByPolicy / Region not permitted` | Check **Azure Policy &rarr; Authoring &rarr; Assignments &rarr; Allowed resource deployment regions &rarr; Parameters** tab to view your subscription's exact authorized datacenters |
+| `Standard_B1s is grayed out or quota is 0` | Switch region to an allowed region (e.g. **East Asia**) and pick **`Standard_B2ats_v2`** (AMD x86_64, 2 vCPUs) or **`Standard_B2pts_v2`** (ARM64, 2 vCPUs) — both qualify for 750 hrs/mo free |
 | `Azure card verification fails on MariBank / Maya / GCash` | Keep **₱60 – ₱70 PHP** loaded to cover the temporary **$1.01 USD** authorization hold (refunded immediately) and choose **Azure for Students** ($100 / 1 yr) over the 30-day trial |
 | `Render backend freezes for 50s on the first request` | Ping the health endpoint 2 minutes before your panel defense to warm up the container, and bind to `0.0.0.0:$PORT` |
 | `Supabase database paused right before demo day` | Trigger the 1-click project restore in the Supabase dashboard at least 30 minutes prior to presentation |
@@ -79,7 +80,7 @@ Look up the exact blocker you hit during setup or right before your presentation
 ## Features
 
 - **zero-card decision matrix** — side-by-side comparison of Render, Supabase, Vercel, Netlify, Neon, and Azure free tiers.
-- **12-month Azure playbook** — deep dive into `B2ats_v2` / `B2pts_v2` / `B1s` compute, 2× 64 GB SSDs, MySQL/PostgreSQL Flexible Servers, and regional quota workarounds.
+- **12-month Azure playbook** — deep dive into `B2ats_v2` (AMD x86_64) / `B2pts_v2` (ARM64) / `B1s` (Intel) compute, Azure Policy region verification (`Allowed resource deployment regions`), 2× 64 GB SSDs, MySQL/PostgreSQL Flexible Servers, and regional quota workarounds.
 - **hybrid WSL2 + Cloudflare blueprint** — production supervisor configs for PHP 8.3-FPM, Laravel Reverb WebSockets, Queue workers, and `~/.cloudflared/config.yml` ingress rules.
 - **interactive omnibar search** — press `/` or `Ctrl+K` inside the web guide to filter sections, code snippets, and troubleshooting tips in real time.
 - **collapsible reading workspace** — toggle the left navigation sidebar via the top button, edge dock pill, or `Ctrl+B` / `Cmd+B` with automatic scrollspy and breadcrumb tracking.
